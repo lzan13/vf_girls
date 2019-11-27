@@ -112,9 +112,9 @@ class HomeBody extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                         color: Color(0x54363636),
-                        offset: Offset(0.0, 4.0),
-                        blurRadius: 15.0,
-                        spreadRadius: 2.0),
+                        offset: Offset(0.0, 5.0),
+                        blurRadius: 20.0,
+                        spreadRadius: 1.0),
                   ],
                   gradient: LinearGradient(
                       colors: [

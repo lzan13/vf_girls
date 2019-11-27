@@ -82,6 +82,13 @@ class FTContent extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
+        boxShadow: [
+          BoxShadow(
+              color: Color(0x54363636),
+              offset: Offset(0.0, 5.0),
+              blurRadius: 20.0,
+              spreadRadius: 1.0),
+        ],
         color: bgColor,
       ),
       padding: const EdgeInsets.only(left: 4.0, right: 4.0),
@@ -90,8 +97,6 @@ class FTContent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-
-//        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Offstage(
             offstage: hideIcon,
