@@ -2,5 +2,8 @@
   "app_name": "VFLibrary",
   "settings": "Settings",
   "tab_home": "Home",
-  "tab_mine": "Mine"
+  "tab_mine": "Mine",
+  "language_auto": "Auto",
+  "language_en": "English",
+  "language_zh_cn": "简体中文"
 }

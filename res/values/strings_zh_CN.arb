@@ -2,6 +2,9 @@
   "appName" : "VFLibrary",
   "settings": "设置",
   "tab_home": "首页",
-  "tab_mine": "我的"
+  "tab_mine": "我的",
+  "language_auto": "自动",
+  "language_en": "English",
+  "language_zh_cn": "简体中文"
 
 }

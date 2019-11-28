@@ -23,6 +23,12 @@ dependencies:
   oktoast: ^2.2.0
   # 状态管理
   provider: ^3.1.0+1
+  # 路径
+  path_provider: ^1.4.5
+  # 本地存储
+  localstorage: ^3.0.1+4
+  # SharedPreferences
+  shared_preferences: ^0.5.4+6
 
 # 开发时需要的依赖库
 dev_dependencies:

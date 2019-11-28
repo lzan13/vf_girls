@@ -17,7 +17,7 @@ class StartApp extends StatelessWidget {
       // 使用 Provider 需要在外层包括
       child: MaterialApp(
         // 国际化配置
-//        locale: ,
+        locale: localModel.loacl,
         localizationsDelegates: const [
           S.delegate,
 //          RefreshLocalizations.delegate, //下拉刷新
