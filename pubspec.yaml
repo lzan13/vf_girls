@@ -15,14 +15,14 @@ dependencies:
 
   # 图标库
   cupertino_icons: ^0.1.2
+
   # 网络请求
   dio: ^3.0.6
   # JSON 解析
   json_annotation: ^3.0.0
-  # Toast
-  oktoast: ^2.2.0
-  # 状态管理
-  provider: ^3.1.0+1
+  # 加载网页
+  webview_flutter: ^0.3.16
+
   # 路径
   path_provider: ^1.4.5
   # 本地存储
@@ -30,17 +30,38 @@ dependencies:
   # SharedPreferences
   shared_preferences: ^0.5.4+6
 
+  # Toast
+  oktoast: ^2.2.0
+  # 轮播 Banner
+  flutter_swiper: ^1.1.6
+  # 下拉刷新
+  pull_to_refresh: ^1.5.7
+
+  # 状态管理
+  provider: ^3.1.0+1
+
 # 开发时需要的依赖库
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.7.2
+  build_runner: ^1.7.1
   json_serializable: ^3.2.3
 
 
 flutter:
 
   uses-material-design: true
+
+  fonts:
+    - family: iconfont
+      fonts:
+        - asset: assets/fonts/iconfont.ttf
+    - family: kuaile # 站酷 快乐字体  https://fonts.google.com/?selection.family=Noto+Sans+SC&subset=chinese-simplified
+      fonts:
+        - asset: assets/fonts/ZCOOLKuaiLe-Regular.ttf
+  assets:
+    - assets/images/
+    - assets/animations/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
