@@ -1,0 +1,34 @@
+{
+  "app_name": "VFLibrary",
+
+  "font_by_sys": "By system",
+  "font_kuai_le": "ZCool kuai le",
+
+  "welcome_to_loft": "Welcome to my attic",
+
+  "language_by_sys": "By System",
+  "language_en": "English",
+  "language_zh_cn": "简体中文",
+
+  "refresh_finish": "刷新完成",
+  "refresh_failed": "刷新失败",
+  "refresh_release": "释放刷新",
+  "refresh_to_pull": "拉动刷新",
+  "refresh_update_at": "更新于 %T",
+  "refreshed": "刷新完成",
+  "refreshing": "正在刷新...",
+  "load_finish": "加载完成",
+  "load_failed": "加载失败",
+  "load_release": "释放加载",
+  "load_to_push": "拉动加载",
+  "load_no_more": "没有更多数据",
+  "loaded": "加载完成",
+  "loading": "正在加载...",
+
+  "settings": "Settings",
+  "skip": "Skip",
+  "tab_home": "Home",
+  "tab_explore": "Explore",
+  "tab_mine": "Mine"
+
+}

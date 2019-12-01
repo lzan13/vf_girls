@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:vf_library/config/resource_manager.dart';
-import 'package:vf_library/generated/i18n.dart';
 import 'package:vf_library/router/router_manger.dart';
 
 class Splash extends StatefulWidget {
@@ -122,7 +122,7 @@ class AnimatedCountdown extends AnimatedWidget {
   Widget build(BuildContext context) {
     var value = animation.value + 1;
     return Text(
-      (value == 0 ? '' : '$value | ') + S.of(context).skip,
+      (value == 0 ? '' : '$value | ') + FlutterI18n.translate(context, "skip"),
       style: TextStyle(color: Colors.white),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
-import '../config/storage_manager.dart';
-import '../generated/i18n.dart';
+import 'package:vf_library/config/storage_manager.dart';
+
 
 class LocaleModel extends ChangeNotifier {
 //  static const localeNameList = ['auto', '中文', 'English'];
@@ -36,11 +37,11 @@ class LocaleModel extends ChangeNotifier {
   static String localeName(index, context) {
     switch (index) {
       case 0:
-        return S.of(context).language_by_sys;
+        return FlutterI18n.translate(context, "language_by_sys");
       case 1:
-        return S.of(context).language_en;
+        return FlutterI18n.translate(context, "language_en");
       case 2:
-        return S.of(context).language_zh_cn;
+        return FlutterI18n.translate(context, "language_zh_cn");
       default:
         return '';
     }

@@ -1,0 +1,34 @@
+{
+  "appName" : "VFLibrary",
+
+  "font_by_sys": "跟随系统",
+  "font_kuai_le": "站酷快乐体",
+
+  "welcome_to_loft": "欢迎来到我的阁楼",
+
+  "language_auto": "跟随系统",
+  "language_en": "English",
+  "language_zh_cn": "简体中文",
+
+  "refresh_finish": "刷新完成",
+  "refresh_failed": "刷新失败",
+  "refresh_release": "释放刷新",
+  "refresh_to_pull": "拉动刷新",
+  "refresh_update_at": "更新于 %T",
+  "refreshed": "刷新完成",
+  "refreshing": "正在刷新...",
+  "load_finish": "加载完成",
+  "load_failed": "加载失败",
+  "load_release": "释放加载",
+  "load_to_push": "拉动加载",
+  "load_no_more": "没有更多数据",
+  "loaded": "加载完成",
+  "loading": "正在加载...",
+
+  "settings": "设置",
+  "skip": "跳过",
+  "tab_home": "首页",
+  "tab_explore": "发现",
+  "tab_mine": "我的"
+
+}

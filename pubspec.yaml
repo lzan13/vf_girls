@@ -15,6 +15,8 @@ dependencies:
 
   # 图标库
   cupertino_icons: ^0.1.2
+  # 国际化
+  flutter_i18n: ^0.8.2
 
   # 网络请求
   dio: ^3.0.6
@@ -35,7 +37,9 @@ dependencies:
   # 轮播 Banner
   flutter_swiper: ^1.1.6
   # 下拉刷新
-  pull_to_refresh: ^1.5.7
+  #  pull_to_refresh: ^1.5.7
+  # 下拉刷新
+  flutter_easyrefresh: ^2.0.4
 
   # 状态管理
   provider: ^3.1.0+1
@@ -60,8 +64,10 @@ flutter:
       fonts:
         - asset: assets/fonts/ZCOOLKuaiLe-Regular.ttf
   assets:
-    - assets/images/
     - assets/animations/
+    - assets/fonts/
+    - assets/images/
+    - assets/langs/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

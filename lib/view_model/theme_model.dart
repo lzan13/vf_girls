@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:vf_library/generated/i18n.dart';
 import 'package:vf_library/config/storage_manager.dart';
 import 'package:vf_library/config/helper/theme_helper.dart';
 
@@ -130,9 +130,9 @@ class ThemeModel extends ChangeNotifier{
   static String fontName(index, context) {
     switch (index) {
       case 0:
-        return S.of(context).font_by_sys;
+        return FlutterI18n.translate(context, "font_by_sys");
       case 1:
-        return S.of(context).font_kuai_le;
+        return FlutterI18n.translate(context, "font_kuai_le");
       default:
         return '';
     }
