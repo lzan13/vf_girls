@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:vf_library/common/toast.dart';
 
 import 'home/home.dart';
 import 'explore/explore.dart';
 import 'mine/mine.dart';
-
 
 class AppTab extends StatefulWidget {
   AppTab({Key key}) : super(key: key);
@@ -16,9 +16,12 @@ class AppTab extends StatefulWidget {
   AppTabState createState() => AppTabState();
 }
 
-class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin{
+class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
   // 页面控制
   TabController _tabController;
+
+  // 上次点击时间
+  DateTime lastTapAt;
 
   // 初始化
   @override
@@ -63,24 +66,36 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[Home(), Explore(), Mine()],
+      body: WillPopScope(
+        onWillPop: () async {
+          if (lastTapAt == null ||
+              DateTime.now().difference(lastTapAt) > Duration(seconds: 1)) {
+            // 两次点击间隔超过阀值则重新计时
+            lastTapAt = DateTime.now();
+            FToast.show(FlutterI18n.translate(context, "back_again"));
+            return false;
+          }
+          return true;
+        },
+        child: TabBarView(
+          controller: _tabController,
+          children: <Widget>[HomePage(), ExplorePage(), MinePage()],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _tabController.index,
         type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.black,
+        fixedColor: Colors.green,
         onTap: _onBottomNavigationBarTap,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
+              icon: Icon(Icons.home),
               title: Text(FlutterI18n.translate(context, 'tab_home'))),
           BottomNavigationBarItem(
-              icon: Icon(Icons.style),
+              icon: Icon(Icons.explore),
               title: Text(FlutterI18n.translate(context, 'tab_explore'))),
           BottomNavigationBarItem(
-              icon: Icon(Icons.more_vert),
+              icon: Icon(Icons.account_circle),
               title: Text(FlutterI18n.translate(context, 'tab_mine'))),
         ],
       ),

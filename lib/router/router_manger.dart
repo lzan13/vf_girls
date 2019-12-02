@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:vf_library/router/route_anim.dart';
 
 import 'package:vf_library/ui/splash.dart';
 import 'package:vf_library/ui/app_tab.dart';
 import 'package:vf_library/ui/mine/mine_loft.dart';
+import 'package:vf_library/ui/user/user.dart';
+import 'package:vf_library/ui/common/not_fount.dart';
 
 /*
  * 路由名
@@ -27,6 +30,11 @@ class RouteName {
   static const String signIn = 'signIn';
   static const String signUp = 'signUp';
 
+  // 用户信息
+  static const String user = 'user';
+
+  static const String empty = 'empty';
+
   static const String articleDetail = 'articleDetail';
   static const String structureList = 'structureList';
   static const String favouriteList = 'favouriteList';
@@ -46,6 +54,8 @@ class Router {
         return NoAnimRouteBuilder(AppTab());
       case RouteName.mineLoft:
         return SlideTopRouteBuilder(MineLoft());
+      case RouteName.user:
+        return CupertinoPageRoute(builder: (_) => UserPage());
 //      case RouteName.login:
 //        return CupertinoPageRoute(
 //            fullscreenDialog: true, builder: (_) => LoginPage());
@@ -79,14 +89,37 @@ class Router {
 //      case RouteName.coinRankingList:
 //        return CupertinoPageRoute(builder: (_) => CoinRankingListPage());
       default:
-        return CupertinoPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(
-                    child: Text('No route defined for ${settings.name}'),
-                  ),
-                ));
+        return CupertinoPageRoute(builder: (_) => NotFoundPage(settings.name));
+//        Scaffold(
+//          body: Center(
+//            child: Text(FlutterI18n.translate(context, "hide_not_fount_page")+' ${settings.name}'),
+//          ),
+//        )
     }
   }
+
+  static void toAppTab(context) {
+    Navigator.of(context).pushReplacementNamed(RouteName.appTab);
+  }
+
+  static void toMineLoft(context) {
+    Navigator.of(context).pushReplacementNamed(RouteName.mineLoft);
+  }
+
+  static void toSetting(context) {
+    Navigator.of(context).pushReplacementNamed(RouteName.settings);
+  }
+
+  static void toUser(context) {
+//    Navigator.of(context).pushReplacementNamed(RouteName.user);
+    Navigator.pushNamed(context, RouteName.user);
+  }
+
+  static void toEmpty(context) {
+//    Navigator.of(context).pushReplacementNamed(RouteName.user);
+    Navigator.pushNamed(context, RouteName.empty);
+  }
+
 }
 
 /// Pop路由

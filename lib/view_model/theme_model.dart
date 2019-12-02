@@ -29,7 +29,7 @@ class ThemeModel extends ChangeNotifier{
 
     /// 获取主题色
     _themeColor = Colors.primaries[
-    StorageManager.sharedPreferences.getInt(kThemeColorIndex) ?? 5];
+    StorageManager.sharedPreferences.getInt(kThemeColorIndex) ?? 9];
 
     /// 获取字体
     _fontIndex = StorageManager.sharedPreferences.getInt(kFontIndex) ?? 0;

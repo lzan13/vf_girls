@@ -5,6 +5,6 @@ vf_library
 
 
 ### 前言
-项目使用`master`通道最新版`1.12.16-pre.32`，dart版本`2.7.0`，需要使用`Flutter channel master`切换下通道，否则可能`Flutter`版本不支持
+项目使用`stable`通道最新版`1.9.1+hotfix.6`，dart版本`2.5.0`
 
-国际化使用`Flutter I18n`插件实现，项目只提交了`*.arb`语言文件，需要`AndroidStudio`安装插件进行生成对应代码
+国际化使用`flutter_i18n`读取本地`assets/xxx/*json` 文件实现，不需要`AndroidStudio`安装插件

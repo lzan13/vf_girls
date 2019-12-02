@@ -92,7 +92,7 @@ class FTContent extends StatelessWidget {
         color: bgColor,
       ),
       padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-      margin: const EdgeInsets.all(24.0),
+      margin: const EdgeInsets.all(36.0),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +110,7 @@ class FTContent extends StatelessWidget {
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 12.0),
+              padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
               child: Text(
                 content,
                 softWrap: true,

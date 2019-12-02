@@ -1,14 +1,16 @@
 {
   "app_name": "VFLibrary",
 
+  "back_again": "Tap back again to exit",
+
   "font_by_sys": "By system",
   "font_kuai_le": "ZCool kuai le",
-
-  "welcome_to_loft": "Welcome to my attic",
 
   "language_by_sys": "By System",
   "language_en": "English",
   "language_zh_cn": "简体中文",
+
+  "page_not_found": "Page not found",
 
   "refresh_finish": "刷新完成",
   "refresh_failed": "刷新失败",
@@ -29,6 +31,7 @@
   "skip": "Skip",
   "tab_home": "Home",
   "tab_explore": "Explore",
-  "tab_mine": "Mine"
+  "tab_mine": "Mine",
 
+  "welcome_to_loft": "Welcome to my attic"
 }

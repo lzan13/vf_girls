@@ -55,13 +55,10 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
         onWillPop: () => Future.value(false),
         child: Stack(fit: StackFit.expand, children: <Widget>[
           Image.asset(
-              ResHelper.wrapImage(
-                  Theme.of(context).brightness == Brightness.light
-                      ? 'splash_bg.png'
-                      : 'splash_bg_dark.png'),
-//              colorBlendMode: BlendMode.srcOver,//colorBlendMode方式在android等机器上有些延迟,导致有些闪屏,故采用两套图片的方式
-//              color: Colors.black.withOpacity(
-//                  Theme.of(context).brightness == Brightness.light ? 0 : 0.65),
+              ResHelper.wrapImage('splash_bg.png'),
+              colorBlendMode: BlendMode.srcOver,//colorBlendMode方式在android等机器上有些延迟,导致有些闪屏,故采用两套图片的方式
+              color: Colors.black.withOpacity(
+                  Theme.of(context).brightness == Brightness.light ? 0 : 0.65),
               fit: BoxFit.fill),
           AnimatedFlutterLogo(
             animation: _animation,
@@ -82,7 +79,7 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
             child: SafeArea(
               child: InkWell(
                 onTap: () {
-                  nextPage(context);
+                  Router.toAppTab(context);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -113,7 +110,7 @@ class AnimatedCountdown extends AnimatedWidget {
       : super(key: key, listenable: animation) {
     this.animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        nextPage(context);
+        Router.toAppTab(context);
       }
     });
   }
@@ -177,10 +174,6 @@ class AnimatedAndroidLogo extends AnimatedWidget {
   }
 }
 
-void nextPage(context) {
-  Navigator.of(context).pushReplacementNamed(RouteName.appTab);
-}
-
 class GuidePage extends StatefulWidget {
   static const List<String> images = <String>[
     'guide_page_1.png',
@@ -222,7 +215,7 @@ class _GuidePageState extends State<GuidePage> {
               color: Theme.of(context).primaryColorDark,
               child: Text('点我开始'),
               onPressed: () {
-                nextPage(context);
+                Router.toAppTab(context);
               },
             ),
           )

@@ -14,8 +14,7 @@ class MineLoftOuter extends StatelessWidget {
       height: 180 + MediaQuery.of(context).padding.top + 20,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-              ResHelper.wrapImage('img_loft_bg.png')),
+          image: AssetImage(ResHelper.wrapImage('img_loft_bg.png')),
           fit: BoxFit.fill,
         ),
       ),
@@ -58,39 +57,38 @@ class MineLoftState extends State<MineLoft> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          heroTag: 'homeFab',
-          child: Icon(Icons.arrow_drop_down),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'homeFab',
+        child: Icon(Icons.arrow_drop_down),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      body: Stack(children: <Widget>[
+        Positioned(
+          top: -MediaQuery.of(context).padding.top,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: WebView(
+            // 初始化加载的url
+            initialUrl: 'https://blog.melove.net',
+            javascriptMode: JavascriptMode.unrestricted,
+            onWebViewCreated: (WebViewController controller) {},
+            onPageFinished: (String value) {
+              notifier.value = true;
+            },
+          ),
         ),
-        body: Stack(
-          children: <Widget>[
-            Positioned(
-              top: -MediaQuery.of(context).padding.top,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: WebView(
-                // 初始化加载的url
-                initialUrl: 'https://blog.melove.net',
-                javascriptMode: JavascriptMode.unrestricted,
-                onWebViewCreated: (WebViewController controller) {},
-                onPageFinished: (String value) {
-                  notifier.value = true;
-                },
-              ),
-            ),
-            Container(),
-            ValueListenableBuilder(
-                valueListenable: notifier,
-                builder: (context, value, child) => value
-                    ? SizedBox.shrink()
-                    : Center(
-                        child: CircularProgressIndicator(),
-                      ))
-          ],
-        ));
+        Container(),
+        ValueListenableBuilder(
+            valueListenable: notifier,
+            builder: (context, value, child) => value
+                ? SizedBox.shrink()
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ))
+      ]),
+    );
   }
 }
