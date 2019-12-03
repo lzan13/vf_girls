@@ -22,11 +22,11 @@ class CircularIcon extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
       ),
       child: Center(
         child: icon == null ? EmptyIcon() : Icon(icon,
-          size: 20.0,
+          size: 16.0,
           color: color,
         ),
       ),

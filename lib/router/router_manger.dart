@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:vf_library/router/route_anim.dart';
+import 'package:vf_library/ui/settings/settings.dart';
 
 import 'package:vf_library/ui/splash.dart';
 import 'package:vf_library/ui/app_tab.dart';
@@ -33,7 +34,7 @@ class RouteName {
   // 用户信息
   static const String user = 'user';
 
-  static const String empty = 'empty';
+  static const String notFound = 'notFound';
 
   static const String articleDetail = 'articleDetail';
   static const String structureList = 'structureList';
@@ -54,6 +55,8 @@ class Router {
         return NoAnimRouteBuilder(AppTab());
       case RouteName.mineLoft:
         return SlideTopRouteBuilder(MineLoft());
+      case RouteName.settings:
+        return CupertinoPageRoute(builder: (_) => SettingsPage());
       case RouteName.user:
         return CupertinoPageRoute(builder: (_) => UserPage());
 //      case RouteName.login:
@@ -98,28 +101,30 @@ class Router {
     }
   }
 
+  /// APP 入口 Tab
   static void toAppTab(context) {
     Navigator.of(context).pushReplacementNamed(RouteName.appTab);
   }
 
+  /// 阁楼
   static void toMineLoft(context) {
     Navigator.of(context).pushReplacementNamed(RouteName.mineLoft);
   }
 
-  static void toSetting(context) {
-    Navigator.of(context).pushReplacementNamed(RouteName.settings);
+  /// 设置页面
+  static void toSettings(context) {
+    Navigator.pushNamed(context, RouteName.settings);
   }
 
+  /// 个人中心
   static void toUser(context) {
-//    Navigator.of(context).pushReplacementNamed(RouteName.user);
     Navigator.pushNamed(context, RouteName.user);
   }
 
-  static void toEmpty(context) {
-//    Navigator.of(context).pushReplacementNamed(RouteName.user);
-    Navigator.pushNamed(context, RouteName.empty);
+  /// TODO 测试找不到的页面跳转
+  static void toNotFound(context) {
+    Navigator.pushNamed(context, RouteName.notFound);
   }
-
 }
 
 /// Pop路由

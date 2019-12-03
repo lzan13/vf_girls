@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:vf_library/ui/widget/circular_icon.dart';
 import 'package:vf_library/ui/widget/list_item.dart';
 
 /**
@@ -21,20 +20,20 @@ class ExplorePageState extends State<ExplorePage>
     super.build(context);
     return Scaffold(
       body: EasyRefresh.custom(slivers: <Widget>[
-        SliverAppBar(
-          floating: true,
-          snap: true,
-          pinned: true,
-          expandedHeight: 220.0,
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text(FlutterI18n.translate(context, 'tab_home')),
-            centerTitle: true,
-            background: Image.network(
-              'http://img1.mukewang.com/5c18cf540001ac8206000338.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
+//        SliverAppBar(
+//          floating: true,
+//          snap: true,
+//          pinned: true,
+//          expandedHeight: 220.0,
+//          flexibleSpace: FlexibleSpaceBar(
+//            title: Text(FlutterI18n.translate(context, 'tab_home')),
+//            centerTitle: true,
+//            background: Image.network(
+//              'http://img1.mukewang.com/5c18cf540001ac8206000338.jpg',
+//              fit: BoxFit.cover,
+//            ),
+//          ),
+//        ),
         SliverList(
           delegate: SliverChildListDelegate([
             // 基本使用
@@ -48,10 +47,6 @@ class ExplorePageState extends State<ExplorePage>
 //                            FlutterI18n.translate(context, 'basicUse'));
 //                      },));
               },
-              icon: CircularIcon(
-                bgColor: Theme.of(context).primaryColor,
-                icon: Icons.format_list_bulleted,
-              ),
             ),
           ]),
         ),

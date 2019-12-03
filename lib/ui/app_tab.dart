@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:vf_library/common/toast.dart';
+import 'package:vf_library/common/vf_dimens.dart';
 
+import 'package:vf_library/common/vf_toast.dart';
+import 'package:vf_library/config/resource_manager.dart';
 import 'home/home.dart';
 import 'explore/explore.dart';
 import 'mine/mine.dart';
@@ -38,7 +40,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
         refreshText: FlutterI18n.translate(context, 'refresh_to_pull'),
         refreshReadyText: FlutterI18n.translate(context, 'refresh_release'),
         refreshingText: FlutterI18n.translate(context, 'refreshing'),
-        refreshedText: FlutterI18n.translate(context, 'refreshed'),
+        refreshedText: FlutterI18n.translate(context, 'refresh_finish'),
         infoText: FlutterI18n.translate(context, 'refresh_update_at'),
         refreshFailedText: FlutterI18n.translate(context, 'refresh_failed'),
         noMoreText: FlutterI18n.translate(context, 'load_no_more'),
@@ -48,7 +50,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
         loadText: FlutterI18n.translate(context, 'load_to_push'),
         loadReadyText: FlutterI18n.translate(context, 'load_release'),
         loadingText: FlutterI18n.translate(context, 'loading'),
-        loadedText: FlutterI18n.translate(context, 'loaded'),
+        loadedText: FlutterI18n.translate(context, 'load_finish'),
         loadFailedText: FlutterI18n.translate(context, 'load_failed'),
         noMoreText: FlutterI18n.translate(context, 'load_no_more'),
         infoText: FlutterI18n.translate(context, 'load_update_at'),
@@ -72,7 +74,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
               DateTime.now().difference(lastTapAt) > Duration(seconds: 1)) {
             // 两次点击间隔超过阀值则重新计时
             lastTapAt = DateTime.now();
-            FToast.show(FlutterI18n.translate(context, "back_again"));
+            VFToast.show(FlutterI18n.translate(context, "back_again"));
             return false;
           }
           return true;
@@ -89,14 +91,32 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
         onTap: _onBottomNavigationBarTap,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text(FlutterI18n.translate(context, 'tab_home'))),
+              icon: Icon(
+                VFIcons.home,
+                size: VFDimens.d_28,
+              ),
+              title: Text(
+                FlutterI18n.translate(context, 'tab_home'),
+                style: TextStyle(fontSize: VFSizes.tab_small),
+              )),
           BottomNavigationBarItem(
-              icon: Icon(Icons.explore),
-              title: Text(FlutterI18n.translate(context, 'tab_explore'))),
+              icon: Icon(
+                VFIcons.explore,
+                size: VFDimens.d_28,
+              ),
+              title: Text(
+                FlutterI18n.translate(context, 'tab_explore'),
+                style: TextStyle(fontSize: VFSizes.tab_small),
+              )),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              title: Text(FlutterI18n.translate(context, 'tab_mine'))),
+              icon: Icon(
+                VFIcons.mine,
+                size: VFDimens.d_28,
+              ),
+              title: Text(
+                FlutterI18n.translate(context, 'tab_mine'),
+                style: TextStyle(fontSize: VFSizes.tab_small),
+              )),
         ],
       ),
     );

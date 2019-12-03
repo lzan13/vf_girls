@@ -4,7 +4,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
-import 'package:vf_library/common/toast.dart';
+import 'package:vf_library/common/vf_colors.dart';
+import 'package:vf_library/common/vf_toast.dart';
 import 'package:vf_library/config/resource_manager.dart';
 import 'package:vf_library/ui/widget/circular_icon.dart';
 import 'package:vf_library/ui/widget/list_item.dart';
@@ -50,7 +51,7 @@ class NotFoundPageState extends State<NotFoundPage> {
                   Icon(
                     Icons.not_interested,
                     size: 96.0,
-                    color: Colors.grey[400],
+                    color: VFColors.grey54,
                   ),
                   Text(
                     '[${widget.pageName}] ' +

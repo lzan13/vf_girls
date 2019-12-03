@@ -4,7 +4,7 @@ import 'package:oktoast/oktoast.dart';
 /*
  * 自定义 Flutter Toast 工具类
  */
-class FToast {
+class VFToast {
   /*
    * 显示普通的 Toast
    */
@@ -70,8 +70,8 @@ class FTContent extends StatelessWidget {
   FTContent({
     Key key,
     this.content,
-    this.hideIcon = true,
-    this.icon = Icons.insert_emoticon,
+    this.hideIcon: true,
+    this.icon: Icons.insert_emoticon,
     Color bgColor,
     this.radius = 4.0,
   })  : this.bgColor = bgColor ?? const Color(0xdd363636),
