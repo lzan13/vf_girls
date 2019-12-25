@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:vf_library/common/vf_dimens.dart';
-import 'package:vf_library/config/resource_manager.dart';
-import 'package:vf_library/router/router_manger.dart';
 
-import 'package:vf_library/common/vf_colors.dart';
-import 'package:vf_library/ui/widget/vf_top_bar.dart';
-import 'package:vf_library/ui/widget/list_item.dart';
+import 'package:vf_plugin/vf_plugin.dart';
 
-/**
- * 设置页面
- */
+///
+/// 设置页面
+///
 class SettingsPage extends StatefulWidget {
   @override
   SettingsPageState createState() => SettingsPageState();
@@ -50,7 +43,4 @@ class SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

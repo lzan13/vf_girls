@@ -11,7 +11,7 @@ import 'package:vf_library/index.dart';
 ///
 /// 资源加载帮助类
 ///
-class ResHelper {
+class RESHelper {
   static const String baseUrl = 'http://www.meetingplus.cn';
   static const String imagePrefix = '$baseUrl/uimg/';
 
@@ -118,8 +118,10 @@ class VFIcons {
   static const IconData face = IconData(0xe789, fontFamily: fontFamily);
   static const IconData emotionFill = IconData(0xe78a, fontFamily: fontFamily);
   static const IconData emotionLine = IconData(0xe78b, fontFamily: fontFamily);
-  static const IconData emotionSadFill = IconData(0xe78c, fontFamily: fontFamily);
-  static const IconData emotionSadLine = IconData(0xe78d, fontFamily: fontFamily);
+  static const IconData emotionSadFill =
+      IconData(0xe78c, fontFamily: fontFamily);
+  static const IconData emotionSadLine =
+      IconData(0xe78d, fontFamily: fontFamily);
   static const IconData switchClose = IconData(0xe609, fontFamily: fontFamily);
   static const IconData switchOpen = IconData(0xe7d6, fontFamily: fontFamily);
   static const IconData callEnd = IconData(0xe7d7, fontFamily: fontFamily);

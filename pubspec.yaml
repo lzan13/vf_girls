@@ -1,5 +1,5 @@
 name: vf_library
-description: 自定义 Flutter 相关工具项目
+description: 使用 Flutter 实现一个加载妹子图项目
 
 version: 1.0.0+1
 
@@ -24,6 +24,8 @@ dependencies:
   json_annotation: ^3.0.0
   # 加载网页
   webview_flutter: ^0.3.16
+  # html 数据解析
+  html: 0.14.0+3
 
   # 路径
   path_provider: ^1.4.5
@@ -43,6 +45,12 @@ dependencies:
 
   # 状态管理
   provider: ^3.1.0+1
+  # vf_plugin:
+  #   git:
+  #     url: git@github.com:lzan13/vf_plugin.git
+  #     ref: develop
+  vf_plugin:
+    path: ../vf_plugin
 
 # 开发时需要的依赖库
 dev_dependencies:

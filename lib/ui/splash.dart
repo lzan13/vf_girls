@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'package:vf_library/config/resource_manager.dart';
+import 'package:vf_library/common/index.dart';
 import 'package:vf_library/router/router_manger.dart';
 
+///
+/// 闪屏启动界面
+///
 class Splash extends StatefulWidget {
   @override
   SplashState createState() => SplashState();
@@ -54,9 +57,9 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
       body: WillPopScope(
         onWillPop: () => Future.value(false),
         child: Stack(fit: StackFit.expand, children: <Widget>[
-          Image.asset(
-              ResHelper.wrapImage('splash_bg.png'),
-              colorBlendMode: BlendMode.srcOver,//colorBlendMode方式在android等机器上有些延迟,导致有些闪屏,故采用两套图片的方式
+          Image.asset(RESHelper.wrapImage('splash_bg.png'),
+              colorBlendMode: BlendMode
+                  .srcOver, //colorBlendMode方式在android等机器上有些延迟,导致有些闪屏,故采用两套图片的方式
               color: Colors.black.withOpacity(
                   Theme.of(context).brightness == Brightness.light ? 0 : 0.65),
               fit: BoxFit.fill),
@@ -139,7 +142,7 @@ class AnimatedFlutterLogo extends AnimatedWidget {
       alignment: Alignment(0, 0.2 + animation.value * 0.3),
       curve: Curves.bounceOut,
       child: Image.asset(
-        ResHelper.wrapImage('splash_flutter.png'),
+        RESHelper.wrapImage('splash_flutter.png'),
         width: 280,
         height: 120,
       ),
@@ -160,12 +163,12 @@ class AnimatedAndroidLogo extends AnimatedWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Image.asset(
-          ResHelper.wrapImage('splash_fun.png'),
+          RESHelper.wrapImage('splash_fun.png'),
           width: 140 * animation.value,
           height: 80 * animation.value,
         ),
         Image.asset(
-          ResHelper.wrapImage('splash_android.png'),
+          RESHelper.wrapImage('splash_android.png'),
           width: 200 * (1 - animation.value),
           height: 80 * (1 - animation.value),
         ),

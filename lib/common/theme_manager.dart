@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class ThemeHelper {
   static InputDecorationTheme inputDecorationTheme(ThemeData theme) {
-
     var primaryColor = theme.primaryColor;
     var dividerColor = theme.dividerColor;
     var errorColor = theme.errorColor;

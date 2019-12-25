@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:vf_library/ui/widget/list_item.dart';
+import 'package:vf_plugin/vf_plugin.dart';
 
-/**
- * 发现探索 Tab 页面
- */
+///
+/// 发现探索 Tab 页面
+///
 class ExplorePage extends StatefulWidget {
   @override
   ExplorePageState createState() => ExplorePageState();
@@ -37,7 +36,7 @@ class ExplorePageState extends State<ExplorePage>
         SliverList(
           delegate: SliverChildListDelegate([
             // 基本使用
-            ListItem(
+            VFListItem(
               title: FlutterI18n.translate(context, 'basicUse'),
               describe: FlutterI18n.translate(context, 'basicUseDescribe'),
               onPressed: () {

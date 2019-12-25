@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'package:vf_library/index.dart';
-import 'package:vf_library/config/storage_manager.dart';
+import 'package:vf_library/common/index.dart';
 
 void main() async {
   await StorageManager.init();

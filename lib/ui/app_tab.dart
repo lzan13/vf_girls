@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:vf_library/common/vf_dimens.dart';
+import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_library/common/vf_toast.dart';
-import 'package:vf_library/config/resource_manager.dart';
+import 'package:vf_library/common/index.dart';
+import 'package:vf_library/ui/widget/toast.dart';
 import 'home/home.dart';
 import 'explore/explore.dart';
 import 'mine/mine.dart';

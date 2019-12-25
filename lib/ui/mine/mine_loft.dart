@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'package:vf_library/config/resource_manager.dart';
+import 'package:vf_library/common/index.dart';
 
 class MineLoftOuter extends StatelessWidget {
   final Widget child;
@@ -14,7 +14,7 @@ class MineLoftOuter extends StatelessWidget {
       height: 180 + MediaQuery.of(context).padding.top + 20,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(ResHelper.wrapImage('img_loft_bg.png')),
+          image: AssetImage(RESHelper.wrapImage('img_loft_bg.png')),
           fit: BoxFit.fill,
         ),
       ),

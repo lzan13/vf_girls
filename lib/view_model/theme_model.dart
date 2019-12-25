@@ -3,10 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:vf_library/config/storage_manager.dart';
-import 'package:vf_library/config/helper/theme_helper.dart';
+import 'package:vf_library/common/index.dart';
 
-class ThemeModel extends ChangeNotifier{
+class ThemeModel extends ChangeNotifier {
   static const kThemeColorIndex = 'kThemeColorIndex';
   static const kThemeUserDarkMode = 'kThemeUserDarkMode';
   static const kFontIndex = 'kFontIndex';
@@ -29,7 +28,7 @@ class ThemeModel extends ChangeNotifier{
 
     /// 获取主题色
     _themeColor = Colors.primaries[
-    StorageManager.sharedPreferences.getInt(kThemeColorIndex) ?? 9];
+        StorageManager.sharedPreferences.getInt(kThemeColorIndex) ?? 9];
 
     /// 获取字体
     _fontIndex = StorageManager.sharedPreferences.getInt(kFontIndex) ?? 0;
@@ -98,7 +97,8 @@ class ThemeModel extends ChangeNotifier{
       errorColor: Colors.red,
       cursorColor: accentColor,
       textTheme: themeData.textTheme.copyWith(
-        /// 解决中文hint不居中的问题 https://github.com/flutter/flutter/issues/40248
+
+          /// 解决中文hint不居中的问题 https://github.com/flutter/flutter/issues/40248
           subhead: themeData.textTheme.subhead
               .copyWith(textBaseline: TextBaseline.alphabetic)),
       textSelectionColor: accentColor.withAlpha(60),
@@ -142,5 +142,4 @@ class ThemeModel extends ChangeNotifier{
   static saveFontIndex(int index) async {
     await StorageManager.sharedPreferences.setInt(kFontIndex, index);
   }
-
 }

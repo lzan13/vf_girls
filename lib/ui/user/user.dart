@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:vf_library/ui/widget/circular_icon.dart';
-import 'package:vf_library/ui/widget/list_item.dart';
+import 'package:vf_plugin/vf_plugin.dart';
 
-/**
- * 用户信息页面
- */
+///
+/// 用户信息页面
+///
 class UserPage extends StatefulWidget {
   @override
   UserPageState createState() => UserPageState();

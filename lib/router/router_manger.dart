@@ -9,7 +9,7 @@ import 'package:vf_library/ui/splash.dart';
 import 'package:vf_library/ui/app_tab.dart';
 import 'package:vf_library/ui/mine/mine_loft.dart';
 import 'package:vf_library/ui/user/user.dart';
-import 'package:vf_library/ui/common/not_fount.dart';
+import 'package:vf_library/ui/widget/not_fount.dart';
 
 /*
  * 路由名

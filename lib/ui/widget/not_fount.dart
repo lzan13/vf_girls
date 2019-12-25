@@ -1,18 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
-import 'package:vf_library/common/vf_colors.dart';
-import 'package:vf_library/common/vf_toast.dart';
-import 'package:vf_library/config/resource_manager.dart';
-import 'package:vf_library/ui/widget/circular_icon.dart';
-import 'package:vf_library/ui/widget/list_item.dart';
+import 'package:vf_plugin/vf_plugin.dart';
 
-/**
- * 空视图页面
- */
+///
+/// 空视图页面
+///
 class NotFoundPage extends StatefulWidget {
   String pageName;
 
