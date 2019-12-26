@@ -1,4 +1,4 @@
-name: vf_library
+name: vf_girls
 description: 使用 Flutter 实现一个加载妹子图项目
 
 version: 1.0.0+1
@@ -39,16 +39,17 @@ dependencies:
   # 轮播 Banner
   flutter_swiper: ^1.1.6
   # 下拉刷新
-  #  pull_to_refresh: ^1.5.7
-  # 下拉刷新
-  flutter_easyrefresh: ^2.0.4
+  flutter_easyrefresh: ^2.0.8
 
   # 状态管理
   provider: ^3.1.0+1
+
+
+  ### 源码依赖，可以引用 git 上的源码以及本地源码
   # vf_plugin:
   #   git:
   #     url: git@github.com:lzan13/vf_plugin.git
-  #     ref: develop
+  #     ref: master
   vf_plugin:
     path: ../vf_plugin
 

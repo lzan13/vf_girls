@@ -1,7 +1,8 @@
 import 'package:provider/provider.dart';
 
-import 'package:vf_library/view_model/locale_model.dart';
-import 'package:vf_library/view_model/theme_model.dart';
+import 'package:vf_girls/view_model/locale_model.dart';
+import 'package:vf_girls/view_model/theme_model.dart';
+import 'package:vf_girls/view_model/user_model.dart';
 
 List<SingleChildCloneableWidget> providers = [
   ChangeNotifierProvider<ThemeModel>(
@@ -10,4 +11,7 @@ List<SingleChildCloneableWidget> providers = [
   ChangeNotifierProvider<LocaleModel>(
     create: (context) => LocaleModel(),
   ),
+  ChangeNotifierProvider<UserModel>(
+    create: (context) => UserModel(),
+  )
 ];

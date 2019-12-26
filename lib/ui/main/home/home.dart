@@ -4,8 +4,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_library/router/router_manger.dart';
-import 'package:vf_library/ui/widget/toast.dart';
+import 'package:vf_girls/router/router_manger.dart';
+import 'package:vf_girls/ui/widget/toast.dart';
 
 ///
 /// 首页 Tab 页面

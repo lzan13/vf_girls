@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:oktoast/oktoast.dart';
 
-import 'package:vf_library/index.dart';
-import 'package:vf_library/common/index.dart';
+import 'package:vf_girls/app/app.dart';
+import 'package:vf_girls/common/index.dart';
 
 void main() async {
   await StorageManager.init();
   runApp(StartApp());
+  // Android状态栏透明 splash 为白色,所以调整状态栏文字为黑色
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light));
 }
 
 class StartApp extends StatelessWidget {

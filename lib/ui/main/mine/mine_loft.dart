@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'package:vf_library/common/index.dart';
+import 'package:vf_girls/common/index.dart';
 
 class MineLoftOuter extends StatelessWidget {
   final Widget child;

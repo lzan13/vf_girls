@@ -1,4 +1,4 @@
-package com.vmloft.develop.library.vf_library;
+package com.vmloft.develop.app.flutter.vf_girls;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

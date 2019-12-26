@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+
 import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_library/common/index.dart';
-import 'package:vf_library/ui/widget/toast.dart';
-import 'home/home.dart';
-import 'explore/explore.dart';
-import 'mine/mine.dart';
+import 'package:vf_girls/common/index.dart';
+import 'package:vf_girls/ui/main/explore/explore.dart';
+import 'package:vf_girls/ui/main/home/home.dart';
+import 'package:vf_girls/ui/main/mine/mine.dart';
+import 'package:vf_girls/ui/widget/toast.dart';
 
 class AppTab extends StatefulWidget {
   AppTab({Key key}) : super(key: key);
@@ -34,7 +35,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
       setState(() {});
     });
     SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
-      // 设置EasyRefresh的默认样式
+      // 设置 EasyRefresh 的默认样式
       EasyRefresh.defaultHeader = ClassicalHeader(
         enableInfiniteRefresh: false,
         refreshText: FlutterI18n.translate(context, 'refresh_to_pull'),
@@ -84,10 +85,11 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
           children: <Widget>[HomePage(), ExplorePage(), MinePage()],
         ),
       ),
+      // 底部 tab 布局
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _tabController.index,
         type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.green,
+        fixedColor: Theme.of(context).primaryColor,
         onTap: _onBottomNavigationBarTap,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

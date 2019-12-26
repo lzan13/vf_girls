@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:vf_library/router/route_anim.dart';
-import 'package:vf_library/ui/settings/settings.dart';
-
-import 'package:vf_library/ui/splash.dart';
-import 'package:vf_library/ui/app_tab.dart';
-import 'package:vf_library/ui/mine/mine_loft.dart';
-import 'package:vf_library/ui/user/user.dart';
-import 'package:vf_library/ui/widget/not_fount.dart';
+import 'package:vf_girls/router/route_anim.dart';
+import 'package:vf_girls/ui/main/app_tab.dart';
+import 'package:vf_girls/ui/main/mine/mine_loft.dart';
+import 'package:vf_girls/ui/settings/settings.dart';
+import 'package:vf_girls/ui/splash/splash.dart';
+import 'package:vf_girls/ui/user/user.dart';
+import 'package:vf_girls/ui/widget/not_fount.dart';
 
 /*
  * 路由名
@@ -26,6 +25,8 @@ class RouteName {
 
   // 设置
   static const String settings = 'settings';
+  // 问题反馈
+  static const String feedback = 'feedback';
 
   // 登录注册
   static const String signIn = 'signIn';
@@ -116,12 +117,17 @@ class Router {
     Navigator.pushNamed(context, RouteName.settings);
   }
 
+  /// 问题反馈
+  static void toFeedback(context) {
+    Navigator.pushNamed(context, RouteName.feedback);
+  }
+
   /// 个人中心
   static void toUser(context) {
     Navigator.pushNamed(context, RouteName.user);
   }
 
-  /// TODO 测试找不到的页面跳转
+  /// 测试找不到的页面跳转
   static void toNotFound(context) {
     Navigator.pushNamed(context, RouteName.notFound);
   }

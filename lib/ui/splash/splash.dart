@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'package:vf_library/common/index.dart';
-import 'package:vf_library/router/router_manger.dart';
+import 'package:vf_girls/common/index.dart';
+import 'package:vf_girls/router/router_manger.dart';
 
 ///
 /// 闪屏启动界面

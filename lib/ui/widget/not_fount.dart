@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:vf_girls/common/index.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -23,8 +24,11 @@ class NotFoundPageState extends State<NotFoundPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(FlutterI18n.translate(context, 'page_not_found')),
+      appBar: VFTopBar(
+        top: MediaQuery.of(context).padding.top,
+        title: FlutterI18n.translate(context, "page_not_found"),
+        titleColor: VFColors.white,
+        leftIcon: VFIcons.arrowLeft,
       ),
       body: EasyRefresh.custom(
         emptyWidget: Container(
@@ -38,16 +42,16 @@ class NotFoundPageState extends State<NotFoundPage> {
                     child: SizedBox(),
                     flex: 2,
                   ),
-//                  Image.asset(
-//                    ResHelper.wrapImage('empty.png'),
-//                    width: 120,
-//                    height: 120,
-//                  ),
-                  Icon(
-                    Icons.not_interested,
-                    size: 96.0,
-                    color: VFColors.grey54,
+                  Image.asset(
+                    RESHelper.wrapImage('empty.png'),
+                    width: 120,
+                    height: 120,
                   ),
+                  // Icon(
+                  //   Icons.not_interested,
+                  //   size: 96.0,
+                  //   color: VFColors.grey54,
+                  // ),
                   Text(
                     '[${widget.pageName}] ' +
                         FlutterI18n.translate(context, 'page_not_found'),

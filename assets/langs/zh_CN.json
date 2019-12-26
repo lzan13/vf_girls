@@ -1,17 +1,13 @@
 {
-  "appName" : "VFLibrary",
-
+  "app_name": "VFGirls",
   "back_again": "再次点击退出",
-
   "font_by_sys": "跟随系统",
   "font_kuai_le": "站酷快乐体",
-
+  "feedback": "意见反馈",
   "language_auto": "跟随系统",
   "language_en": "English",
   "language_zh_cn": "简体中文",
-
   "page_not_found": "页面丢了",
-
   "refresh_finish": "刷新完成",
   "refresh_failed": "刷新失败",
   "refresh_release": "释放刷新",
@@ -24,12 +20,12 @@
   "load_up_pull": "拉动加载",
   "load_no_more": "没有更多数据",
   "loading": "正在加载...",
-
   "settings": "设置",
   "skip": "跳过",
+  "theme_font": "字体",
+  "theme_color": "主题颜色",
   "tab_home": "首页",
   "tab_explore": "发现",
   "tab_mine": "我的",
-
   "welcome_to_loft": "欢迎来到阁楼"
 }

@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:vf_library/common/index.dart';
+import 'package:vf_girls/common/index.dart';
+import 'package:vf_plugin/vf_plugin.dart';
 
 class ThemeModel extends ChangeNotifier {
   static const kThemeColorIndex = 'kThemeColorIndex';

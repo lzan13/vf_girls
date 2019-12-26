@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 
-import 'package:vf_library/common/index.dart';
-import 'package:vf_library/router/router_manger.dart';
-import 'package:vf_library/view_model/locale_model.dart';
-import 'package:vf_library/view_model/theme_model.dart';
+import 'package:vf_girls/common/index.dart';
+import 'package:vf_girls/router/router_manger.dart';
+import 'package:vf_girls/view_model/locale_model.dart';
+import 'package:vf_girls/view_model/theme_model.dart';
 
 class Store {
   /// 全局的上下文对象
