@@ -7,6 +7,8 @@ import 'package:vf_plugin/vf_plugin.dart';
 import 'package:vf_girls/router/router_manger.dart';
 import 'package:vf_girls/ui/widget/toast.dart';
 
+import 'parse_girl.dart';
+
 ///
 /// 首页 Tab 页面
 ///
@@ -23,22 +25,6 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
       body: Container(
         child: EasyRefresh.custom(
           slivers: <Widget>[
-//        SliverAppBar(
-//          floating: true,
-//          snap: true,
-//          pinned: true,
-//          expandedHeight: 220.0,
-//          flexibleSpace: FlexibleSpaceBar(
-//            background: Image.network(
-//              'http://img1.mukewang.com/5c18cf540001ac8206000338.jpg',
-//              fit: BoxFit.cover,
-//            ),
-////            centerTitle: false,
-//            title: Text(FlutterI18n.translate(context, 'tab_home')),
-////            titlePadding: const EdgeInsets.all(24.0),
-////            collapseMode: CollapseMode.parallax, // 默认模式
-//          ),
-//        ),
             SliverList(
               delegate: SliverChildListDelegate([
                 // 普通 Toast
@@ -69,6 +55,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                       FlutterI18n.translate(context, 'show a normal toast'),
                   onPressed: () {
                     VFToast.success("完成 Toast");
+                    loadData();
                   },
                   leftIcon: Icons.done,
                   leftIconColor: VFColors.green,
