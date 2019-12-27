@@ -4,10 +4,9 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
+import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
 import 'package:vf_girls/ui/widget/toast.dart';
-
-import 'parse_girl.dart';
 
 ///
 /// 首页 Tab 页面
@@ -55,7 +54,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
                       FlutterI18n.translate(context, 'show a normal toast'),
                   onPressed: () {
                     VFToast.success("完成 Toast");
-                    loadData();
+                    GirlsManager.loadData();
                   },
                   leftIcon: Icons.done,
                   leftIconColor: VFColors.green,

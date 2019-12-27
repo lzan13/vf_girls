@@ -23,23 +23,22 @@ class ThemeModel extends ChangeNotifier {
   int _fontIndex;
 
   ThemeModel() {
-    /// 用户选择的明暗模式
+    // 用户选择的明暗模式
     _userDarkMode =
         StorageManager.sharedPreferences.getBool(kThemeUserDarkMode) ?? false;
-
-    /// 获取主题色
+    // 获取主题色
     _themeColor = Colors.primaries[
         StorageManager.sharedPreferences.getInt(kThemeColorIndex) ?? 9];
-
-    /// 获取字体
+    // 获取字体
     _fontIndex = StorageManager.sharedPreferences.getInt(kFontIndex) ?? 0;
   }
 
   int get fontIndex => _fontIndex;
 
-  /// 切换指定色彩
   ///
-  /// 没有传[brightness]就不改变brightness,color同理
+  /// 切换指定色彩
+  /// 没有传 [brightness] 就不改变 brightness,color 同理
+  ///
   void switchTheme({bool userDarkMode, MaterialColor color}) {
     _userDarkMode = userDarkMode ?? _userDarkMode;
     _themeColor = color ?? _themeColor;
@@ -47,9 +46,10 @@ class ThemeModel extends ChangeNotifier {
     saveTheme2Storage(_userDarkMode, _themeColor);
   }
 
-  /// 随机一个主题色彩
   ///
+  /// 随机一个主题色彩
   /// 可以指定明暗模式,不指定则保持不变
+  ///
   void switchRandomTheme({Brightness brightness}) {
     int colorIndex = Random().nextInt(Colors.primaries.length - 1);
     switchTheme(
@@ -98,10 +98,10 @@ class ThemeModel extends ChangeNotifier {
       errorColor: Colors.red,
       cursorColor: accentColor,
       textTheme: themeData.textTheme.copyWith(
-
-          /// 解决中文hint不居中的问题 https://github.com/flutter/flutter/issues/40248
-          subhead: themeData.textTheme.subhead
-              .copyWith(textBaseline: TextBaseline.alphabetic)),
+        // 解决中文 hint 不居中的问题 https://github.com/flutter/flutter/issues/40248
+        subhead: themeData.textTheme.subhead
+            .copyWith(textBaseline: TextBaseline.alphabetic),
+      ),
       textSelectionColor: accentColor.withAlpha(60),
       textSelectionHandleColor: accentColor.withAlpha(60),
       toggleableActiveColor: accentColor,
@@ -112,12 +112,42 @@ class ThemeModel extends ChangeNotifier {
         backgroundColor: themeData.chipTheme.backgroundColor.withOpacity(0.1),
       ),
 //          textTheme: CupertinoTextThemeData(brightness: Brightness.light)
-      inputDecorationTheme: ThemeHelper.inputDecorationTheme(themeData),
+      inputDecorationTheme: inputDecorationTheme(themeData),
     );
     return themeData;
   }
 
-  /// 数据持久化到shared preferences
+  ///
+  /// 装饰主题
+  ///
+  InputDecorationTheme inputDecorationTheme(ThemeData theme) {
+    var primaryColor = theme.primaryColor;
+    var dividerColor = theme.dividerColor;
+    var errorColor = theme.errorColor;
+    var disabledColor = theme.disabledColor;
+
+    var width = 0.5;
+
+    return InputDecorationTheme(
+      hintStyle: TextStyle(fontSize: 14),
+      errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(width: width, color: errorColor)),
+      focusedErrorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(width: 0.7, color: errorColor)),
+      focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(width: width, color: primaryColor)),
+      enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(width: width, color: dividerColor)),
+      border: UnderlineInputBorder(
+          borderSide: BorderSide(width: width, color: dividerColor)),
+      disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(width: width, color: disabledColor)),
+    );
+  }
+
+  ///
+  /// 数据持久化到 SharedPreferences
+  ///
   saveTheme2Storage(bool userDarkMode, MaterialColor themeColor) async {
     var index = Colors.primaries.indexOf(themeColor);
     await Future.wait([
@@ -127,7 +157,9 @@ class ThemeModel extends ChangeNotifier {
     ]);
   }
 
+  ///
   /// 根据索引获取字体名称,这里牵涉到国际化
+  ///
   static String fontName(index, context) {
     switch (index) {
       case 0:
@@ -139,7 +171,9 @@ class ThemeModel extends ChangeNotifier {
     }
   }
 
+  ///
   /// 字体选择持久化
+  ///
   static saveFontIndex(int index) async {
     await StorageManager.sharedPreferences.setInt(kFontIndex, index);
   }
