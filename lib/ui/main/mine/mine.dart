@@ -34,8 +34,7 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin {
               onPressed: () {
                 Router.toUser(context);
               },
-              leftIcon: VFIcons.mine,
-              leftIconColor: VFColors.green,
+              leftIcon: VFIcons.ic_mine,
             ),
             // 设置
             VFListItem(
@@ -44,8 +43,8 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin {
               onPressed: () {
                 Router.toSettings(context);
               },
-              leftIcon: VFIcons.settings,
-              rightIcon: VFIcons.arrowRight,
+              leftIcon: VFIcons.ic_settings,
+              rightIcon: VFIcons.ic_arrow_right,
             ),
           ]),
         ),

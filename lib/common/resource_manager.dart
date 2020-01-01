@@ -65,65 +65,87 @@ class VFIcons {
   /// 引用自定义的字体图标
   static const String fontFamily = 'iconfont';
 
-  static const IconData man = IconData(0xe616, fontFamily: fontFamily);
-  static const IconData woman = IconData(0xe617, fontFamily: fontFamily);
-  static const IconData scan = IconData(0xe61b, fontFamily: fontFamily);
-  static const IconData ear = IconData(0xe690, fontFamily: fontFamily);
-  static const IconData sent = IconData(0xe644, fontFamily: fontFamily);
-  static const IconData send = IconData(0xe7d4, fontFamily: fontFamily);
-  static const IconData scan_1 = IconData(0xe600, fontFamily: fontFamily);
-  static const IconData location = IconData(0xe667, fontFamily: fontFamily);
-  static const IconData location2 = IconData(0xe62f, fontFamily: fontFamily);
-  static const IconData mine = IconData(0xe67d, fontFamily: fontFamily);
-  static const IconData explore = IconData(0xe682, fontFamily: fontFamily);
-  static const IconData video = IconData(0xe606, fontFamily: fontFamily);
-  static const IconData speaker = IconData(0xe829, fontFamily: fontFamily);
-  static const IconData flashChat = IconData(0xe619, fontFamily: fontFamily);
-  static const IconData chat = IconData(0xe61a, fontFamily: fontFamily);
-  static const IconData me = IconData(0xe61d, fontFamily: fontFamily);
-  static const IconData gift2 = IconData(0xe61e, fontFamily: fontFamily);
-  static const IconData comment = IconData(0xe620, fontFamily: fontFamily);
-  static const IconData star = IconData(0xe6b6, fontFamily: fontFamily);
-  static const IconData moon = IconData(0xe6b8, fontFamily: fontFamily);
-  static const IconData collect = IconData(0xe6b9, fontFamily: fontFamily);
-  static const IconData settings = IconData(0xe6bb, fontFamily: fontFamily);
-  static const IconData search = IconData(0xe6bf, fontFamily: fontFamily);
-  static const IconData game = IconData(0xe6c6, fontFamily: fontFamily);
-  static const IconData download = IconData(0xe6d1, fontFamily: fontFamily);
-  static const IconData album = IconData(0xe6d3, fontFamily: fontFamily);
-  static const IconData share = IconData(0xe6d5, fontFamily: fontFamily);
-  static const IconData cameraChange = IconData(0xe6de, fontFamily: fontFamily);
-  static const IconData friend = IconData(0xe6ea, fontFamily: fontFamily);
-  static const IconData notify = IconData(0xe6eb, fontFamily: fontFamily);
-  static const IconData camera = IconData(0xe6ed, fontFamily: fontFamily);
-  static const IconData home = IconData(0xe62e, fontFamily: fontFamily);
-  static const IconData shop = IconData(0xe630, fontFamily: fontFamily);
-  static const IconData gift = IconData(0xe639, fontFamily: fontFamily);
-  static const IconData minimize = IconData(0xe63b, fontFamily: fontFamily);
-  static const IconData play = IconData(0xe637, fontFamily: fontFamily);
-  static const IconData pause = IconData(0xe63a, fontFamily: fontFamily);
-  static const IconData call = IconData(0xe613, fontFamily: fontFamily);
-  static const IconData likeFill = IconData(0xe63d, fontFamily: fontFamily);
-  static const IconData likePath = IconData(0xe63e, fontFamily: fontFamily);
-  static const IconData mic = IconData(0xe751, fontFamily: fontFamily);
-  static const IconData micMute = IconData(0xe752, fontFamily: fontFamily);
-  static const IconData eyeOff = IconData(0xe621, fontFamily: fontFamily);
-  static const IconData eyeOn = IconData(0xe699, fontFamily: fontFamily);
-  static const IconData qrCode = IconData(0xe66b, fontFamily: fontFamily);
-  static const IconData delete = IconData(0xe750, fontFamily: fontFamily);
-  static const IconData error = IconData(0xe674, fontFamily: fontFamily);
-  static const IconData arrowLeft = IconData(0xe6f7, fontFamily: fontFamily);
-  static const IconData arrowRight = IconData(0xe6f8, fontFamily: fontFamily);
-  static const IconData close = IconData(0xe6f9, fontFamily: fontFamily);
-  static const IconData face = IconData(0xe789, fontFamily: fontFamily);
-  static const IconData emotionFill = IconData(0xe78a, fontFamily: fontFamily);
-  static const IconData emotionLine = IconData(0xe78b, fontFamily: fontFamily);
-  static const IconData emotionSadFill =
-      IconData(0xe78c, fontFamily: fontFamily);
-  static const IconData emotionSadLine =
-      IconData(0xe78d, fontFamily: fontFamily);
-  static const IconData switchClose = IconData(0xe609, fontFamily: fontFamily);
-  static const IconData switchOpen = IconData(0xe7d6, fontFamily: fontFamily);
-  static const IconData callEnd = IconData(0xe7d7, fontFamily: fontFamily);
-  static const IconData add = IconData(0xe7d8, fontFamily: fontFamily);
+  static const IconData ic_man = IconData(0xe616, fontFamily: fontFamily);
+  static const IconData ic_woman = IconData(0xe617, fontFamily: fontFamily);
+  static const IconData ic_scan = IconData(0xe61b, fontFamily: fontFamily);
+  static const IconData ic_send = IconData(0xe7d4, fontFamily: fontFamily);
+  static const IconData ic_dingwei = IconData(0xe667, fontFamily: fontFamily);
+  static const IconData ic_thumb = IconData(0xe668, fontFamily: fontFamily);
+  static const IconData ic_warning = IconData(0xe66f, fontFamily: fontFamily);
+  static const IconData ic_picture = IconData(0xe67c, fontFamily: fontFamily);
+  static const IconData ic_mine = IconData(0xe67d, fontFamily: fontFamily);
+  static const IconData ic_zhinanzhen =
+      IconData(0xe682, fontFamily: fontFamily);
+  static const IconData ic_video = IconData(0xe606, fontFamily: fontFamily);
+  static const IconData ic_speaker = IconData(0xe829, fontFamily: fontFamily);
+  static const IconData ic_chat_circle =
+      IconData(0xe619, fontFamily: fontFamily);
+  static const IconData ic_chat = IconData(0xe61a, fontFamily: fontFamily);
+  static const IconData ic_gift = IconData(0xe61e, fontFamily: fontFamily);
+  static const IconData ic_comment = IconData(0xe620, fontFamily: fontFamily);
+  static const IconData ic_star = IconData(0xe6b6, fontFamily: fontFamily);
+  static const IconData ic_moon = IconData(0xe6b8, fontFamily: fontFamily);
+  static const IconData ic_collect = IconData(0xe6b9, fontFamily: fontFamily);
+  static const IconData ic_settings = IconData(0xe6bb, fontFamily: fontFamily);
+  static const IconData ic_search = IconData(0xe6bf, fontFamily: fontFamily);
+  static const IconData ic_game = IconData(0xe6c6, fontFamily: fontFamily);
+  static const IconData ic_download_picture =
+      IconData(0xe6d1, fontFamily: fontFamily);
+  static const IconData ic_album = IconData(0xe6d3, fontFamily: fontFamily);
+  static const IconData ic_share = IconData(0xe6d5, fontFamily: fontFamily);
+  static const IconData ic_camera_change =
+      IconData(0xe6de, fontFamily: fontFamily);
+  static const IconData ic_friend = IconData(0xe6ea, fontFamily: fontFamily);
+  static const IconData ic_notify = IconData(0xe6eb, fontFamily: fontFamily);
+  static const IconData ic_camera = IconData(0xe6ed, fontFamily: fontFamily);
+  static const IconData ic_download = IconData(0xe611, fontFamily: fontFamily);
+  static const IconData ic_home = IconData(0xe62e, fontFamily: fontFamily);
+  static const IconData ic_location = IconData(0xe62f, fontFamily: fontFamily);
+  static const IconData ic_shop = IconData(0xe630, fontFamily: fontFamily);
+  static const IconData ic_diamond = IconData(0xe636, fontFamily: fontFamily);
+  static const IconData ic_gift_box = IconData(0xe639, fontFamily: fontFamily);
+  static const IconData ic_edit = IconData(0xe640, fontFamily: fontFamily);
+  static const IconData ic_time = IconData(0xe63c, fontFamily: fontFamily);
+  static const IconData ic_mobile = IconData(0xe63f, fontFamily: fontFamily);
+  static const IconData ic_minimize = IconData(0xe63b, fontFamily: fontFamily);
+  static const IconData ic_explore = IconData(0xe632, fontFamily: fontFamily);
+  static const IconData ic_play = IconData(0xe637, fontFamily: fontFamily);
+  static const IconData ic_pause = IconData(0xe63a, fontFamily: fontFamily);
+  static const IconData ic_call = IconData(0xe613, fontFamily: fontFamily);
+  static const IconData ic_like_fill = IconData(0xe63d, fontFamily: fontFamily);
+  static const IconData ic_like_path = IconData(0xe63e, fontFamily: fontFamily);
+  static const IconData ic_palette = IconData(0xe664, fontFamily: fontFamily);
+  static const IconData ic_mic = IconData(0xe751, fontFamily: fontFamily);
+  static const IconData ic_mic_mute = IconData(0xe752, fontFamily: fontFamily);
+  static const IconData ic_eye_on = IconData(0xe699, fontFamily: fontFamily);
+  static const IconData ic_qrcode = IconData(0xe66b, fontFamily: fontFamily);
+  static const IconData ic_network = IconData(0xe8a2, fontFamily: fontFamily);
+  static const IconData ic_arrow_left =
+      IconData(0xe6f7, fontFamily: fontFamily);
+  static const IconData ic_arrow_down =
+      IconData(0xe6fa, fontFamily: fontFamily);
+  static const IconData ic_arrow_up = IconData(0xe6fb, fontFamily: fontFamily);
+  static const IconData ic_arrow_right =
+      IconData(0xe6f8, fontFamily: fontFamily);
+  static const IconData ic_close = IconData(0xe6f9, fontFamily: fontFamily);
+  static const IconData ic_done_all = IconData(0xe6cd, fontFamily: fontFamily);
+  static const IconData ic_eye_off = IconData(0xe621, fontFamily: fontFamily);
+  static const IconData ic_switch_close =
+      IconData(0xe609, fontFamily: fontFamily);
+  static const IconData ic_face = IconData(0xe789, fontFamily: fontFamily);
+  static const IconData ic_emotion_fill =
+      IconData(0xe78a, fontFamily: fontFamily);
+  static const IconData ic_emotion_line =
+      IconData(0xe78b, fontFamily: fontFamily);
+  static const IconData ic_switch_open =
+      IconData(0xe7d6, fontFamily: fontFamily);
+  static const IconData ic_call_end = IconData(0xe7d7, fontFamily: fontFamily);
+  static const IconData ic_add = IconData(0xe7d8, fontFamily: fontFamily);
+  static const IconData ic_alert = IconData(0xe673, fontFamily: fontFamily);
+  static const IconData ic_delete = IconData(0xe677, fontFamily: fontFamily);
+  static const IconData ic_info = IconData(0xe68b, fontFamily: fontFamily);
+  static const IconData ic_shield = IconData(0xe69a, fontFamily: fontFamily);
+  static const IconData ic_earth = IconData(0xe622, fontFamily: fontFamily);
+  static const IconData ic_done = IconData(0xed3d, fontFamily: fontFamily);
+  static const IconData ic_font = IconData(0xed5d, fontFamily: fontFamily);
 }

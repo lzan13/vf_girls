@@ -16,7 +16,8 @@ dependencies:
   # 图标库
   cupertino_icons: ^0.1.2
   # 国际化
-  flutter_i18n: ^0.8.2
+  flutter_i18n: ^0.8.2         
+  flutter_screenutil: ^0.7.0
 
   # 网络请求
   dio: ^3.0.6
@@ -33,11 +34,12 @@ dependencies:
   localstorage: ^3.0.1+4
   # SharedPreferences
   shared_preferences: ^0.5.4+6
-
   # Toast
   oktoast: ^2.2.0
   # 轮播 Banner
   flutter_swiper: ^1.1.6
+  # 瀑布流布局
+  flutter_staggered_grid_view: ^0.3.0
   # 下拉刷新
   flutter_easyrefresh: ^2.0.8
 

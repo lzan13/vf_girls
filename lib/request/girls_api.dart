@@ -8,7 +8,7 @@ final Http http = Http();
 class Http extends BaseHttp {
   @override
   void init() {
-    options.baseUrl = 'http://www.meinvtu.site';
+    // options.baseUrl = 'http://www.meinvtu.site';
     interceptors..add(ApiInterceptor());
   }
 }

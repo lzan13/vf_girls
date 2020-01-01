@@ -7,10 +7,10 @@ import 'package:vf_girls/request/bean/girl.dart';
 
 class GirlsManager {
   ///
-  /// 加载并解析 Html 数据
+  /// 加载首页数据
   ///
-  static Future loadData() async {
-    var response = await http.get("/");
+  static Future loadHomeData() async {
+    var response = await http.get("http://www.meinvtu.site/");
     var result;
     if (response.statusCode == 200) {
       result = response.data;
@@ -41,5 +41,24 @@ class GirlsManager {
       });
     }
     return data;
+  }
+
+  ///
+  /// 获取详情
+  ///
+  static Future loadDetail(String detailUrl) async {
+    var response = await http.get(detailUrl);
+    var result;
+    if (response.statusCode == 200) {
+      result = response.data;
+    } else {
+      result = '';
+    }
+
+    int start = result.indexOf('[[{');
+    int end = result.indexOf('}]]');
+    result = result.subString(start, end);
+
+    return null;
   }
 }

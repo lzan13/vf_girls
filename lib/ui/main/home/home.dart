@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
+import 'package:vf_girls/request/bean/girl.dart';
+import 'package:vf_girls/ui/widget/empty.dart';
+import 'package:vf_girls/ui/widget/loading.dart';
+import 'package:vf_girls/ui/widget/staggered_item.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
-import 'package:vf_girls/ui/widget/toast.dart';
 
 ///
 /// 首页 Tab 页面
@@ -17,62 +21,79 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+  // 刷新控制类，必须有，否则列表无法滚动
+  EasyRefreshController _controller = EasyRefreshController();
+  // 加载数据
+  dynamic girlList = [];
+  bool enableRefresh = true;
+  bool enableLoad = false;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Container(
-        child: EasyRefresh.custom(
-          slivers: <Widget>[
-            SliverList(
-              delegate: SliverChildListDelegate([
-                // 普通 Toast
-                VFListItem(
-                  title: FlutterI18n.translate(context, 'Normal Toast'),
-                  describe:
-                      FlutterI18n.translate(context, 'show a normal toast'),
-                  onPressed: () {
-                    VFToast.show("普通 Toast");
-                  },
-                  leftIcon: Icons.nature,
-                ),
-                // 错误 Toast
-                VFListItem(
-                  title: FlutterI18n.translate(context, 'Normal Toast'),
-                  describe:
-                      FlutterI18n.translate(context, 'show a normal toast'),
-                  onPressed: () {
-                    VFToast.error("错误 Toast，同时输出错误相关信息，可能会超过一行，自动换行");
-                  },
-                  leftIcon: Icons.error,
-                  leftIconColor: VFColors.red,
-                ),
-                // 完成 Toast
-                VFListItem(
-                  title: FlutterI18n.translate(context, 'Normal Toast'),
-                  describe:
-                      FlutterI18n.translate(context, 'show a normal toast'),
-                  onPressed: () {
-                    VFToast.success("完成 Toast");
-                    GirlsManager.loadData();
-                  },
-                  leftIcon: Icons.done,
-                  leftIconColor: VFColors.green,
-                ),
-                // 基本使用
-                VFListItem(
-                  title: FlutterI18n.translate(context, 'basicUse'),
-                  describe: FlutterI18n.translate(context, 'basicUseDescribe'),
-                  onPressed: () {
-                    Router.toNotFound(context);
-                  },
-                ),
-              ]),
-            ),
-          ],
+
+    _controller.callRefresh();
+    // _controller.callLoad();
+
+    return Container(
+      child: EasyRefresh(
+        // controller: _controller,
+        emptyWidget: this.girlList.length == 0 ? EmptyPage() : null,
+        firstRefresh: true,
+        firstRefreshWidget: Loading(),
+        onRefresh: enableRefresh
+            ? () async {
+                loadData();
+              }
+            : null,
+        onLoad: enableLoad
+            ? () async {
+                // loadData();
+              }
+            : null,
+        child: StaggeredGridView.countBuilder(
+          itemCount: this.girlList.length > 0 ? this.girlList.length : 0,
+          primary: false,
+          crossAxisCount: 4,
+          mainAxisSpacing: VFDimens.d_4,
+          crossAxisSpacing: VFDimens.d_4,
+          itemBuilder: (context, index) {
+            GirlEntity entity = girlList[index];
+            return StaggeredItem(
+              girl: entity,
+              callback: () => Router.toDetail(context, entity.jumpUrl),
+            );
+          },
+          staggeredTileBuilder: (int index) =>
+              StaggeredTile.count(2, index.isEven ? 3 : 2.5),
+          padding: EdgeInsets.only(
+            left: VFDimens.padding_little,
+            right: VFDimens.padding_little,
+          ),
         ),
       ),
     );
+  }
+
+  ///
+  /// 加载数据
+  /// isRefresh 表示是否刷新，如果是，则从第一页加载
+  void loadData() async {
+    dynamic result = await GirlsManager.loadHomeData();
+    setState(() {
+      girlList.clear();
+      girlList.addAll(result);
+    });
+    // 数据加载结束，重置刷新加载状态
+    // if (isRefresh) {
+    _controller.finishRefresh(success: true);
+    // } else {
+    //   _controller.finishLoad(
+    //     success: true,
+    //     noMore: false,
+    //   );
+    // }
+    print('数据加载完成');
   }
 
   @override

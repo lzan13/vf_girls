@@ -8,9 +8,9 @@ List<SingleChildCloneableWidget> providers = [
   ChangeNotifierProvider<ThemeModel>(
     create: (context) => ThemeModel(),
   ),
-  ChangeNotifierProvider<LocaleModel>(
-    create: (context) => LocaleModel(),
-  ),
+  // ChangeNotifierProvider<LocaleModel>(
+  //   create: (context) => LocaleModel(),
+  // ),
   ChangeNotifierProvider<UserModel>(
     create: (context) => UserModel(),
   )

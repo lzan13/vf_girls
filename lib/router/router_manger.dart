@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:vf_girls/router/route_anim.dart';
+import 'package:vf_girls/ui/detail/detail_page.dart';
 import 'package:vf_girls/ui/main/app_tab.dart';
 import 'package:vf_girls/ui/main/mine/mine_loft.dart';
+import 'package:vf_girls/ui/settings/feedback.dart';
 import 'package:vf_girls/ui/settings/settings.dart';
 import 'package:vf_girls/ui/splash/splash.dart';
 import 'package:vf_girls/ui/user/user.dart';
@@ -35,6 +36,10 @@ class RouteName {
   // 用户信息
   static const String user = 'user';
 
+  // 详情路由
+  static const String detail = 'detail';
+
+  // 错误页面路由
   static const String notFound = 'notFound';
 
   static const String articleDetail = 'articleDetail';
@@ -56,10 +61,15 @@ class Router {
         return NoAnimRouteBuilder(AppTab());
       case RouteName.mineLoft:
         return SlideTopRouteBuilder(MineLoft());
+      case RouteName.feedback:
+        return CupertinoPageRoute(builder: (_) => FeedbackPage());
       case RouteName.settings:
         return CupertinoPageRoute(builder: (_) => SettingsPage());
       case RouteName.user:
         return CupertinoPageRoute(builder: (_) => UserPage());
+      case RouteName.detail:
+        String url = settings.arguments;
+        return CupertinoPageRoute(builder: (_) => DetailPage(url));
 //      case RouteName.login:
 //        return CupertinoPageRoute(
 //            fullscreenDialog: true, builder: (_) => LoginPage());
@@ -112,19 +122,28 @@ class Router {
     Navigator.of(context).pushReplacementNamed(RouteName.mineLoft);
   }
 
-  /// 设置页面
-  static void toSettings(context) {
-    Navigator.pushNamed(context, RouteName.settings);
-  }
-
   /// 问题反馈
   static void toFeedback(context) {
     Navigator.pushNamed(context, RouteName.feedback);
   }
 
+  /// 设置页面
+  static void toSettings(context) {
+    Navigator.pushNamed(context, RouteName.settings);
+  }
+
   /// 个人中心
   static void toUser(context) {
     Navigator.pushNamed(context, RouteName.user);
+  }
+
+  /// 详情
+  static void toDetail(context, url) {
+    Navigator.pushNamed(
+      context,
+      RouteName.detail,
+      arguments: url,
+    );
   }
 
   /// 测试找不到的页面跳转

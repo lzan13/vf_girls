@@ -28,7 +28,7 @@ class NotFoundPageState extends State<NotFoundPage> {
         top: MediaQuery.of(context).padding.top,
         title: FlutterI18n.translate(context, "page_not_found"),
         titleColor: VFColors.white,
-        leftIcon: VFIcons.arrowLeft,
+        leftIcon: VFIcons.ic_arrow_left,
       ),
       body: EasyRefresh.custom(
         emptyWidget: Container(

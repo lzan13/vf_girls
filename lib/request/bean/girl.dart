@@ -20,4 +20,9 @@ class GirlEntity {
       'count': count,
     };
   }
+
+  @override
+  String toString() {
+    return 'title $title';
+  }
 }
