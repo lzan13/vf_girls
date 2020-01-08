@@ -1,19 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:vf_girls/common/index.dart';
-import 'package:vf_girls/request/bean/girl.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
+
+import 'package:vf_girls/common/index.dart';
+import 'package:vf_girls/request/bean/girl.dart';
 
 ///
 /// 瀑布流 Item
 ///
 class StaggeredItem extends StatelessWidget {
-  final GirlEntity girl;
+  final GirlEntity entity;
   final VoidCallback callback;
 
   const StaggeredItem({
     Key key,
-    this.girl,
+    this.entity,
     this.callback,
   }) : super(key: key);
 
@@ -22,107 +24,119 @@ class StaggeredItem extends StatelessWidget {
     return GestureDetector(
       onTap: callback,
       child: Container(
-        // 图片
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(VFDimens.border_radius_normal),
-          image: DecorationImage(
-            image: NetworkImage(
-              girl != null && girl.imgUrl != null ? girl.imgUrl : '',
-            ),
-            fit: BoxFit.cover,
-          ), //设置图片的填充模式
-        ),
-        // 顶部布局
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          alignment: Alignment.center,
+          fit: StackFit.loose,
           children: <Widget>[
-            Container(
-              // 顶部阴影
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    VFColors.black12,
-                    VFColors.grey12,
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(VFDimens.border_radius_normal),
-                  topRight: Radius.circular(VFDimens.border_radius_normal),
-                ),
+            // Image.network(
+            //   entity != null && entity.imgUrl != null ? entity.imgUrl : '',
+            // ),
+            CachedNetworkImage(
+              imageUrl:
+                  entity != null && entity.imgUrl != null ? entity.imgUrl : '',
+              placeholder: (context, url) => Padding(
+                padding: EdgeInsets.all(VFDimens.d_24),
+                child: VFProgress(),
               ),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+            Positioned(
+              left: 0.0,
+              top: 0.0,
+              right: 0.0,
               child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    // 收藏图标
-                    Padding(
-                      padding: EdgeInsets.all(VFDimens.padding_small),
-                      child: Icon(
-                        VFIcons.ic_like_fill,
-                        size: VFSizes.title,
-                        color: Colors.white,
-                      ),
-                    ),
-                    // 图片张数
-                    Container(
-                      margin: EdgeInsets.all(VFDimens.margin_small),
-                      decoration: BoxDecoration(
-                        color: VFColors.black38,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(VFDimens.border_radius_large),
+                // 顶部阴影
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      VFColors.black12,
+                      VFColors.grey12,
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(VFDimens.border_radius_normal),
+                    topRight: Radius.circular(VFDimens.border_radius_normal),
+                  ),
+                ),
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // 收藏图标
+                      Padding(
+                        padding: EdgeInsets.all(VFDimens.padding_small),
+                        child: Icon(
+                          VFIcons.ic_like_fill,
+                          size: VFSizes.title,
+                          color: Colors.white,
                         ),
                       ),
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(
-                          VFDimens.padding_small,
-                          VFDimens.padding_little,
-                          VFDimens.padding_small,
-                          VFDimens.padding_little,
+                      // 图片张数
+                      Container(
+                        margin: EdgeInsets.all(VFDimens.margin_small),
+                        decoration: BoxDecoration(
+                          color: VFColors.black38,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(VFDimens.border_radius_large),
+                          ),
                         ),
-                        child: Text(
-                          girl.count,
-                          style: TextStyle(
-                            color: VFColors.white87,
-                            fontSize: VFSizes.s_10,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(
+                            VFDimens.padding_small,
+                            VFDimens.padding_little,
+                            VFDimens.padding_small,
+                            VFDimens.padding_little,
+                          ),
+                          child: Text(
+                            entity.count,
+                            style: TextStyle(
+                              color: VFColors.white87,
+                              fontSize: VFSizes.s_10,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-            Container(
-              // 底部阴影
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    VFColors.black38,
-                    VFColors.grey38,
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(VFDimens.border_radius_normal),
-                  bottomRight: Radius.circular(VFDimens.border_radius_normal),
-                ),
-              ),
-              // 描述
+            Positioned(
+              left: 0.0,
+              right: 0.0,
+              bottom: 0.0,
               child: Container(
-                width: double.infinity,
-                margin: EdgeInsets.all(VFDimens.margin_small),
-                child: Text(
-                  girl.title != null ? girl.title : '',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: VFSizes.s_14,
-                    color: Colors.white,
+                // 底部阴影
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      VFColors.black38,
+                      VFColors.grey38,
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(VFDimens.border_radius_normal),
+                    bottomRight: Radius.circular(VFDimens.border_radius_normal),
+                  ),
+                ),
+                // 描述
+                child: Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.all(VFDimens.margin_small),
+                  child: Text(
+                    entity.title != null ? entity.title : '',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: VFSizes.s_14,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

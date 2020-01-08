@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:vf_girls/request/bean/girl.dart';
 
 import 'package:vf_girls/router/route_anim.dart';
 import 'package:vf_girls/ui/detail/detail_page.dart';
+import 'package:vf_girls/ui/display_multi.dart';
 import 'package:vf_girls/ui/main/app_tab.dart';
 import 'package:vf_girls/ui/main/mine/mine_loft.dart';
 import 'package:vf_girls/ui/settings/feedback.dart';
@@ -36,8 +38,11 @@ class RouteName {
   // 用户信息
   static const String user = 'user';
 
-  // 详情路由
+  // 详情
   static const String detail = 'detail';
+
+  // 预览多图
+  static const String displayMulti = 'displayMulti';
 
   // 错误页面路由
   static const String notFound = 'notFound';
@@ -68,8 +73,11 @@ class Router {
       case RouteName.user:
         return CupertinoPageRoute(builder: (_) => UserPage());
       case RouteName.detail:
-        String url = settings.arguments;
-        return CupertinoPageRoute(builder: (_) => DetailPage(url));
+        GirlEntity entity = settings.arguments;
+        return CupertinoPageRoute(builder: (_) => DetailPage(entity));
+      case RouteName.displayMulti:
+        return CupertinoPageRoute(
+            builder: (_) => DisplayMultiPage(settings.arguments));
 //      case RouteName.login:
 //        return CupertinoPageRoute(
 //            fullscreenDialog: true, builder: (_) => LoginPage());
@@ -138,11 +146,23 @@ class Router {
   }
 
   /// 详情
-  static void toDetail(context, url) {
+  static void toDetail(context, entity) {
     Navigator.pushNamed(
       context,
       RouteName.detail,
-      arguments: url,
+      arguments: entity,
+    );
+  }
+
+  /// 预览
+  static void toDisplayMulti(context, list, index) {
+    Navigator.pushNamed(
+      context,
+      RouteName.displayMulti,
+      arguments: {
+        'data': list,
+        'index': index,
+      },
     );
   }
 

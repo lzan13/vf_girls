@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:vf_girls/request/girls_api.dart';
 
 import 'package:html/dom.dart';
@@ -34,9 +36,6 @@ class GirlsManager {
 
         Element tips = elements[i].querySelector('.img-wrap>.img-inner>.tips');
         entity.count = tips.text;
-
-        print(entity);
-
         return entity;
       });
     }
@@ -57,8 +56,16 @@ class GirlsManager {
 
     int start = result.indexOf('[[{');
     int end = result.indexOf('}]]');
-    result = result.subString(start, end);
-
-    return null;
+    result = result.substring(start, end) + "}]]";
+    List jsonList = json.decode(result);
+    List<GirlEntity> data = [];
+    // 解析嵌套数据
+    for (int i = 0; i < jsonList.length; i++) {
+      List list = jsonList[i];
+      for (int j = 0; j < list.length; j++) {
+        data.add(GirlEntity.fromJson(list[j]));
+      }
+    }
+    return data;
   }
 }

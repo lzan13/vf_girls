@@ -54,18 +54,18 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
         child: StaggeredGridView.countBuilder(
           itemCount: this.girlList.length > 0 ? this.girlList.length : 0,
           primary: false,
-          crossAxisCount: 4,
+          crossAxisCount: 2,
           mainAxisSpacing: VFDimens.d_4,
           crossAxisSpacing: VFDimens.d_4,
           itemBuilder: (context, index) {
             GirlEntity entity = girlList[index];
             return StaggeredItem(
-              girl: entity,
-              callback: () => Router.toDetail(context, entity.jumpUrl),
+              entity: entity,
+              callback: () => Router.toDetail(context, entity),
             );
           },
-          staggeredTileBuilder: (int index) =>
-              StaggeredTile.count(2, index.isEven ? 3 : 2.5),
+          staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+          // StaggeredTile.count(2, index.isEven ? 3 : 2.5),
           padding: EdgeInsets.only(
             left: VFDimens.padding_little,
             right: VFDimens.padding_little,
@@ -93,7 +93,6 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
     //     noMore: false,
     //   );
     // }
-    print('数据加载完成');
   }
 
   @override

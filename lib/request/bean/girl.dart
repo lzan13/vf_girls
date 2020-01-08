@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 // 数据实体
 class GirlEntity {
   String title;
@@ -12,6 +14,12 @@ class GirlEntity {
     this.count,
   });
 
+  GirlEntity.fromJson(Map<String, dynamic> json)
+      : title = json['title'],
+        imgUrl = json['img'],
+        jumpUrl = json['jumpUrl'],
+        count = json['count'];
+
   Map<String, dynamic> toJson() {
     return {
       'title': title,
@@ -23,6 +31,6 @@ class GirlEntity {
 
   @override
   String toString() {
-    return 'title $title';
+    return json.encode(this.toJson());
   }
 }

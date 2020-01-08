@@ -1,22 +1,24 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+
+import 'package:vf_plugin/vf_plugin.dart';
+
+import 'package:vf_girls/common/resource_manager.dart';
+import 'package:vf_girls/request/bean/girl.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/ui/widget/empty.dart';
 import 'package:vf_girls/ui/widget/loading.dart';
 
-import 'package:vf_plugin/vf_plugin.dart';
-
 import 'package:vf_girls/router/router_manger.dart';
-import 'package:vf_girls/ui/widget/toast.dart';
 
 ///
 /// 发现探索 Tab 页面
 ///
 class DetailPage extends StatefulWidget {
-  String url;
+  GirlEntity mEntity;
 
-  DetailPage(this.url);
+  DetailPage(this.mEntity);
 
   @override
   DetailPageState createState() => DetailPageState();
@@ -26,7 +28,7 @@ class DetailPageState extends State<DetailPage> {
   // 刷新控制类，必须有，否则列表无法滚动
   EasyRefreshController _controller = EasyRefreshController();
   // 加载数据
-  dynamic girlList = [];
+  List<GirlEntity> dataList = [];
 
   ///
   /// 初始化
@@ -40,15 +42,14 @@ class DetailPageState extends State<DetailPage> {
   /// 加载数据
   ///
   void loadData() async {
-    dynamic result = await GirlsManager.loadDetail(widget.url);
-    print(result);
-    // setState(() {
-    //   girlList.clear();
-    //   girlList.addAll(result);
-    // });
+    dynamic result = await GirlsManager.loadDetail(widget.mEntity.jumpUrl);
+    setState(() {
+      dataList.clear();
+      dataList.addAll(result);
+    });
     // // 数据加载结束，重置刷新加载状态
     // // if (isRefresh) {
-    // _controller.finishRefresh(success: true);
+    _controller.finishRefresh(success: true);
     // } else {
     //   _controller.finishLoad(
     //     success: true,
@@ -60,9 +61,15 @@ class DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: VFTopBar(
+        top: MediaQuery.of(context).padding.top,
+        title: widget.mEntity.title,
+        titleColor: VFColors.white,
+        leftIcon: VFIcons.ic_arrow_left,
+      ),
       body: EasyRefresh(
         // controller: _controller,
-        emptyWidget: this.girlList.length == 0 ? EmptyPage() : null,
+        emptyWidget: this.dataList.length == 0 ? EmptyPage() : null,
         firstRefresh: true,
         firstRefreshWidget: Loading(),
         onRefresh: () async {
@@ -71,7 +78,24 @@ class DetailPageState extends State<DetailPage> {
         onLoad: () async {
           // loadData();
         },
-        child: ListView(),
+        child: ListView.builder(
+            itemCount: this.dataList.length > 0 ? this.dataList.length : 0,
+            itemBuilder: (BuildContext context, int index) {
+              GirlEntity entity = dataList[index];
+              return GestureDetector(
+                onTap: () => Router.toDisplayMulti(context, dataList, index),
+                child: CachedNetworkImage(
+                  imageUrl: entity != null && entity.imgUrl != null
+                      ? entity.imgUrl
+                      : '',
+                  placeholder: (context, url) => Padding(
+                    padding: EdgeInsets.all(VFDimens.d_36),
+                    child: VFProgress(),
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              );
+            }),
       ),
     );
   }
