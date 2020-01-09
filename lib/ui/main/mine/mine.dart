@@ -80,8 +80,7 @@ class MineHeaderWidget extends StatelessWidget {
                   child: Hero(
                     tag: 'loginLogo',
                     child: ClipOval(
-                      child: Image.asset(
-                          RESHelper.wrapImage('img_default_avatar.png'),
+                      child: Image.asset(RESHelper.wrapImage('img_default.png'),
                           fit: BoxFit.cover,
                           width: 80,
                           height: 80,

@@ -4,13 +4,15 @@ import 'package:vf_girls/request/bean/girl.dart';
 
 import 'package:vf_girls/router/route_anim.dart';
 import 'package:vf_girls/ui/detail/detail_page.dart';
-import 'package:vf_girls/ui/display_multi.dart';
+import 'package:vf_girls/ui/display/display_multi.dart';
 import 'package:vf_girls/ui/main/app_tab.dart';
 import 'package:vf_girls/ui/main/mine/mine_loft.dart';
 import 'package:vf_girls/ui/settings/feedback.dart';
 import 'package:vf_girls/ui/settings/settings.dart';
 import 'package:vf_girls/ui/splash/splash.dart';
 import 'package:vf_girls/ui/user/user.dart';
+
+import 'package:vf_girls/ui/test_page.dart';
 import 'package:vf_girls/ui/widget/not_fount.dart';
 
 /*
@@ -44,14 +46,11 @@ class RouteName {
   // 预览多图
   static const String displayMulti = 'displayMulti';
 
-  // 错误页面路由
+  // 错误页面
   static const String notFound = 'notFound';
 
-  static const String articleDetail = 'articleDetail';
-  static const String structureList = 'structureList';
-  static const String favouriteList = 'favouriteList';
-  static const String coinRecordList = 'coinRecordList';
-  static const String coinRankingList = 'coinRankingList';
+  // 测试页面
+  static const String test = 'test';
 }
 
 /*
@@ -110,13 +109,11 @@ class Router {
 //        return CupertinoPageRoute(builder: (_) => CoinRecordListPage());
 //      case RouteName.coinRankingList:
 //        return CupertinoPageRoute(builder: (_) => CoinRankingListPage());
+
+      case RouteName.test:
+        return CupertinoPageRoute(builder: (_) => TestPage());
       default:
         return CupertinoPageRoute(builder: (_) => NotFoundPage(settings.name));
-//        Scaffold(
-//          body: Center(
-//            child: Text(FlutterI18n.translate(context, "hide_not_fount_page")+' ${settings.name}'),
-//          ),
-//        )
     }
   }
 
@@ -147,11 +144,15 @@ class Router {
 
   /// 详情
   static void toDetail(context, entity) {
-    Navigator.pushNamed(
-      context,
-      RouteName.detail,
-      arguments: entity,
-    );
+    if (entity != null) {
+      Navigator.pushNamed(
+        context,
+        RouteName.detail,
+        arguments: entity,
+      );
+    } else {
+      toNotFound(context);
+    }
   }
 
   /// 预览
@@ -169,6 +170,11 @@ class Router {
   /// 测试找不到的页面跳转
   static void toNotFound(context) {
     Navigator.pushNamed(context, RouteName.notFound);
+  }
+
+  /// 测试页面
+  static void toTest(context) {
+    Navigator.pushNamed(context, RouteName.test);
   }
 }
 

@@ -22,20 +22,6 @@ class ExplorePageState extends State<ExplorePage>
     super.build(context);
     return Scaffold(
       body: EasyRefresh.custom(slivers: <Widget>[
-//        SliverAppBar(
-//          floating: true,
-//          snap: true,
-//          pinned: true,
-//          expandedHeight: 220.0,
-//          flexibleSpace: FlexibleSpaceBar(
-//            title: Text(FlutterI18n.translate(context, 'tab_home')),
-//            centerTitle: true,
-//            background: Image.network(
-//              'http://img1.mukewang.com/5c18cf540001ac8206000338.jpg',
-//              fit: BoxFit.cover,
-//            ),
-//          ),
-//        ),
         SliverList(
           delegate: SliverChildListDelegate([
             // 普通 Toast
@@ -72,7 +58,7 @@ class ExplorePageState extends State<ExplorePage>
               title: FlutterI18n.translate(context, 'basicUse'),
               describe: FlutterI18n.translate(context, 'basicUseDescribe'),
               onPressed: () {
-                Router.toNotFound(context);
+                Router.toTest(context);
               },
             ),
           ]),

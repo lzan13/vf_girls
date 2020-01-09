@@ -39,7 +39,7 @@ class EmptyPageState extends State<EmptyPage> {
               child: Text(
                 FlutterI18n.translate(context, 'no_data'),
                 style: TextStyle(
-                  color: Color(0xFF999999),
+                  color: VFColors.black54,
                   fontSize: VFSizes.s_14,
                 ),
               ),

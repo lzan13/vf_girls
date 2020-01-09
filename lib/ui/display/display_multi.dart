@@ -63,7 +63,7 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
                   );
                 },
                 itemCount: widget.dataList.length,
-                loadingChild: VFProgress(),
+                loadingChild: VFLoading(type: VFLoadingType.threeBounce),
                 pageController: widget.controller,
                 enableRotation: true,
                 onPageChanged: (index) {

@@ -1,6 +1,7 @@
 {
   "app_name": "VFGirls",
   "back_again": "再次点击退出",
+  "comment": "评论",
   "font_by_sys": "跟随系统",
   "font_kuai_le": "站酷快乐体",
   "feedback": "意见反馈",
@@ -24,6 +25,7 @@
   "no_data": "暂无数据",
   "settings": "设置",
   "skip": "跳过",
+  "test": "测试",
   "theme_color": "主题颜色",
   "theme_font": "字体",
   "theme_language": "语言",

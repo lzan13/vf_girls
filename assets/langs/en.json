@@ -1,6 +1,7 @@
 {
   "app_name": "VFGirls",
   "back_again": "Tap back again to exit",
+  "comment": "Comment",
   "font_by_sys": "By system",
   "font_kuai_le": "ZCool kuai le",
   "feedback": "Feedback",
@@ -24,6 +25,7 @@
   "no_data": "No data",
   "settings": "Settings",
   "skip": "Skip",
+  "test": "Test",
   "theme_color": "Theme color",
   "theme_font": "Font",
   "theme_language": "Language",
