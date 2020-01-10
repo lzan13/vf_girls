@@ -9,10 +9,10 @@ import 'package:vf_girls/request/bean/girl.dart';
 
 class GirlsManager {
   ///
-  /// 加载首页数据
+  /// 统一加载数据方法
   ///
-  static Future loadHomeData() async {
-    var response = await http.get("http://www.meinvtu.site/");
+  static Future loadData(String url) async {
+    var response = await http.get(url);
     var result;
     if (response.statusCode == 200) {
       result = response.data;
@@ -23,7 +23,7 @@ class GirlsManager {
     Document document = parse(result);
     // 这里使用 css 选择器语法提取数据
     List<Element> elements =
-        document.querySelectorAll('.page-index > .item-box > .item-list > a');
+        document.querySelectorAll('.main-body > .item-box > .item-list > a');
     List<GirlEntity> data = [];
     if (elements.isNotEmpty) {
       data = List.generate(elements.length, (i) {
@@ -39,7 +39,6 @@ class GirlsManager {
         return entity;
       });
     }
-    print(data);
     return data;
   }
 

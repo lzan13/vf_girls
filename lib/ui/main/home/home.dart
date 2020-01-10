@@ -32,7 +32,9 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   /// 加载数据 isRefresh 表示是否刷新，如果是，则从第一页加载
   ///
   void loadData() async {
-    dynamic result = await GirlsManager.loadHomeData();
+    String url = 'http://www.meinvtu.site/';
+    // String url = 'http://www.meinv666.site/';
+    dynamic result = await GirlsManager.loadData(url);
     setState(() {
       girlList.clear();
       girlList.addAll(result);
@@ -55,39 +57,37 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
     _controller.callRefresh();
     // _controller.callLoad();
 
-    return Container(
-      child: EasyRefresh(
-        firstRefresh: true,
-        firstRefreshWidget: DialogLoading(),
-        header: BallPulseHeader(color: Theme.of(context).primaryColor),
-        onRefresh: enableRefresh
-            ? () async {
-                await loadData();
-              }
-            : null,
-        onLoad: enableLoad
-            ? () async {
-                // loadData();
-              }
-            : null,
-        child: StaggeredGridView.countBuilder(
-          itemCount: this.girlList.length,
-          primary: false,
-          crossAxisCount: 2,
-          mainAxisSpacing: VFDimens.d_4,
-          crossAxisSpacing: VFDimens.d_4,
-          itemBuilder: (context, index) {
-            GirlEntity entity = girlList[index];
-            return FallsItem(
-              entity: entity,
-              callback: () => Router.toDetail(context, entity),
-            );
-          },
-          staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-          padding: EdgeInsets.only(
-            left: VFDimens.padding_little,
-            right: VFDimens.padding_little,
-          ),
+    return EasyRefresh(
+      firstRefresh: true,
+      firstRefreshWidget: DialogLoading(),
+      header: BallPulseHeader(color: Theme.of(context).primaryColor),
+      onRefresh: enableRefresh
+          ? () async {
+              await loadData();
+            }
+          : null,
+      onLoad: enableLoad
+          ? () async {
+              // loadData();
+            }
+          : null,
+      child: StaggeredGridView.countBuilder(
+        itemCount: this.girlList.length,
+        primary: false,
+        crossAxisCount: 2,
+        mainAxisSpacing: VFDimens.d_4,
+        crossAxisSpacing: VFDimens.d_4,
+        itemBuilder: (context, index) {
+          GirlEntity entity = girlList[index];
+          return FallsItem(
+            entity: entity,
+            callback: () => Router.toDetail(context, entity),
+          );
+        },
+        staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+        padding: EdgeInsets.only(
+          left: VFDimens.padding_little,
+          right: VFDimens.padding_little,
         ),
       ),
     );

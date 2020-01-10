@@ -166,9 +166,9 @@ class DetailPageState extends State<DetailPage> {
               leftIcon: VFIcons.ic_arrow_left,
               rightWidget: RefreshIndicator(linkNotifier),
               coverWidget: Hero(
-                tag: widget.mEntity.imgUrl,
+                tag: widget.mEntity.imgUrl + "cover",
                 child: CachedNetworkImage(
-                  imageUrl: widget.mEntity.imgUrl + "cover",
+                  imageUrl: widget.mEntity.imgUrl,
                   placeholder: (context, url) => Padding(
                     padding: EdgeInsets.all(VFDimens.d_36),
                     child: VFLoading(type: VFLoadingType.threeBounce),
