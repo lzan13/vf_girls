@@ -24,8 +24,8 @@ class AppTab extends StatefulWidget {
 
 class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
   // 页面控制
-  TabController tabController;
-  // PageController pageController = PageController();
+  // TabController tabController;
+  PageController pageController = PageController();
   int currentIndex = 0;
 
   // 上次点击时间
@@ -35,21 +35,21 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
-    tabController.addListener(() {
-      setState(() {});
-    });
+    // tabController = TabController(length: 3, vsync: this);
+    // tabController.addListener(() {
+    //   setState(() {});
+    // });
   }
 
   ///
   /// 底部栏切换
   ///
-  void onBottomNavigationBarTap(int index) {
-    setState(() {
-      currentIndex = index;
-      tabController.index = index;
-    });
-  }
+  // void onBottomNavigationBarTap(int index) {
+  //   setState(() {
+  //     currentIndex = index;
+  //     // tabController.index = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -65,31 +65,31 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
           }
           return true;
         },
-        child: TabBarView(
-          controller: tabController,
-          children: pages,
-        ),
-        // child: PageView.builder(
-        //   itemBuilder: (ctx, index) => pages[index],
-        //   itemCount: pages.length,
-        //   controller: pageController,
-        //   physics: NeverScrollableScrollPhysics(),
-        //   onPageChanged: (index) {
-        //     setState(() {
-        //       currentIndex = index;
-        //     });
-        //   },
+        // child: TabBarView(
+        //   controller: tabController,
+        //   children: pages,
         // ),
+        child: PageView.builder(
+          itemBuilder: (ctx, index) => pages[index],
+          itemCount: pages.length,
+          controller: pageController,
+          physics: NeverScrollableScrollPhysics(),
+          onPageChanged: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+        ),
       ),
       // 底部 tab 布局
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         fixedColor: Theme.of(context).primaryColor,
-        onTap: onBottomNavigationBarTap,
-        // onTap: (index) {
-        // pageController.jumpToPage(index);
-        // },
+        // onTap: onBottomNavigationBarTap,
+        onTap: (index) {
+          pageController.jumpToPage(index);
+        },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(

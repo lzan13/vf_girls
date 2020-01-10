@@ -7,6 +7,8 @@ import 'package:vf_plugin/vf_plugin.dart';
 import 'package:vf_girls/router/router_manger.dart';
 import 'package:vf_girls/ui/widget/toast.dart';
 
+List<String> tabTitle = ['tab1', 'tab2', 'tab3'];
+
 ///
 /// 发现探索 Tab 页面
 ///
@@ -21,7 +23,27 @@ class ExplorePageState extends State<ExplorePage>
   Widget build(BuildContext context) {
     super.build(context);
     return DefaultTabController(
-      body: ExploreList(),
+      length: tabTitle.length,
+      initialIndex: 0,
+      child: Scaffold(
+        appBar: AppBar(
+          title: TabBar(
+            isScrollable: true,
+            tabs: List.generate(
+              tabTitle.length,
+              (index) => Tab(
+                text: tabTitle[index],
+              ),
+            ),
+          ),
+        ),
+        body: TabBarView(
+          children: List.generate(
+            tabTitle.length,
+            (index) => ExploreList(),
+          ),
+        ),
+      ),
     );
   }
 
