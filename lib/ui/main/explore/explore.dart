@@ -16,57 +16,72 @@ class ExplorePage extends StatefulWidget {
 }
 
 class ExplorePageState extends State<ExplorePage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: EasyRefresh.custom(slivers: <Widget>[
-        SliverList(
-          delegate: SliverChildListDelegate([
-            // 普通 Toast
-            VFListItem(
-              title: FlutterI18n.translate(context, 'Normal Toast'),
-              describe: FlutterI18n.translate(context, 'show a normal toast'),
-              onPressed: () {
-                VFToast.show("普通 Toast");
-              },
-              leftIcon: Icons.nature,
-            ),
-            // 错误 Toast
-            VFListItem(
-              title: FlutterI18n.translate(context, 'Normal Toast'),
-              describe: FlutterI18n.translate(context, 'show a normal toast'),
-              onPressed: () {
-                VFToast.error("错误 Toast，同时输出错误相关信息，可能会超过一行，自动换行");
-              },
-              leftIcon: Icons.error,
-              leftIconColor: VFColors.red,
-            ),
-            // 完成 Toast
-            VFListItem(
-              title: FlutterI18n.translate(context, 'Normal Toast'),
-              describe: FlutterI18n.translate(context, 'show a normal toast'),
-              onPressed: () {
-                VFToast.success("完成 Toast");
-              },
-              leftIcon: Icons.done,
-              leftIconColor: VFColors.green,
-            ),
-            // 基本使用
-            VFListItem(
-              title: FlutterI18n.translate(context, 'basicUse'),
-              describe: FlutterI18n.translate(context, 'basicUseDescribe'),
-              onPressed: () {
-                Router.toTest(context);
-              },
-            ),
-          ]),
-        ),
-      ]),
+    return DefaultTabController(
+      body: ExploreList(),
     );
   }
 
   @override
   bool get wantKeepAlive => true;
+}
+
+///
+/// 发现列表
+///
+class ExploreList extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => ExploreListState();
+}
+
+class ExploreListState extends State<ExploreList> {
+  @override
+  Widget build(BuildContext context) {
+    return EasyRefresh.custom(slivers: <Widget>[
+      SliverList(
+        delegate: SliverChildListDelegate([
+          // 普通 Toast
+          VFListItem(
+            title: FlutterI18n.translate(context, 'Normal Toast'),
+            describe: FlutterI18n.translate(context, 'show a normal toast'),
+            onPressed: () {
+              VFToast.show("普通 Toast");
+            },
+            leftIcon: Icons.nature,
+          ),
+          // 错误 Toast
+          VFListItem(
+            title: FlutterI18n.translate(context, 'Normal Toast'),
+            describe: FlutterI18n.translate(context, 'show a normal toast'),
+            onPressed: () {
+              VFToast.error("错误 Toast，同时输出错误相关信息，可能会超过一行，自动换行");
+            },
+            leftIcon: Icons.error,
+            leftIconColor: VFColors.red,
+          ),
+          // 完成 Toast
+          VFListItem(
+            title: FlutterI18n.translate(context, 'Normal Toast'),
+            describe: FlutterI18n.translate(context, 'show a normal toast'),
+            onPressed: () {
+              VFToast.success("完成 Toast");
+            },
+            leftIcon: Icons.done,
+            leftIconColor: VFColors.green,
+          ),
+          // 基本使用
+          VFListItem(
+            title: FlutterI18n.translate(context, 'basicUse'),
+            describe: FlutterI18n.translate(context, 'basicUseDescribe'),
+            onPressed: () {
+              Router.toTest(context);
+            },
+          ),
+        ]),
+      ),
+    ]);
+  }
 }

@@ -39,6 +39,7 @@ class GirlsManager {
         return entity;
       });
     }
+    print(data);
     return data;
   }
 

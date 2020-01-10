@@ -10,11 +10,11 @@ import 'package:vf_girls/request/bean/girl.dart';
 ///
 /// 瀑布流 Item
 ///
-class StaggeredItem extends StatelessWidget {
+class FallsItem extends StatelessWidget {
   final GirlEntity entity;
   final VoidCallback callback;
 
-  const StaggeredItem({
+  const FallsItem({
     Key key,
     this.entity,
     this.callback,
@@ -31,7 +31,7 @@ class StaggeredItem extends StatelessWidget {
                 fit: StackFit.loose,
                 children: <Widget>[
                   Hero(
-                    tag: entity.imgUrl,
+                    tag: entity.imgUrl + "cover",
                     child: CachedNetworkImage(
                       imageUrl: entity.imgUrl,
                       placeholder: (context, url) => Padding(

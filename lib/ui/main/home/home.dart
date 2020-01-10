@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/request/bean/girl.dart';
-import 'package:vf_girls/ui/widget/empty.dart';
 import 'package:vf_girls/ui/widget/dialog_loading.dart';
-import 'package:vf_girls/ui/widget/staggered_item.dart';
+import 'package:vf_girls/ui/widget/falls_item.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
 
@@ -59,12 +57,9 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
 
     return Container(
       child: EasyRefresh(
-        // controller: _controller,
-        // emptyWidget: this.girlList.length == 0 ? EmptyPage() : null,
         firstRefresh: true,
         firstRefreshWidget: DialogLoading(),
         header: BallPulseHeader(color: Theme.of(context).primaryColor),
-        footer: BallPulseFooter(color: Theme.of(context).primaryColor),
         onRefresh: enableRefresh
             ? () async {
                 await loadData();
@@ -83,7 +78,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
           crossAxisSpacing: VFDimens.d_4,
           itemBuilder: (context, index) {
             GirlEntity entity = girlList[index];
-            return StaggeredItem(
+            return FallsItem(
               entity: entity,
               callback: () => Router.toDetail(context, entity),
             );

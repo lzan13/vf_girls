@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -55,11 +56,12 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
                   child: PhotoViewGallery.builder(
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
+                  GirlEntity entity = widget.dataList[index];
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: NetworkImage(widget.dataList[index].imgUrl),
-                    // heroAttributes: PhotoViewHeroAttributes(
-                    //   tag: 'display_picture',
-                    // ),
+                    imageProvider: CachedNetworkImageProvider(entity.imgUrl),
+                    heroAttributes: PhotoViewHeroAttributes(
+                      tag: entity.imgUrl,
+                    ),
                   );
                 },
                 itemCount: widget.dataList.length,

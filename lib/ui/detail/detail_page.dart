@@ -104,12 +104,12 @@ class DetailPageState extends State<DetailPage> {
               : Container());
       // 将图片加载到集合中
       children.add(
-        Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            AspectRatio(
-              aspectRatio: 1.0,
-              child: GestureDetector(
+        GestureDetector(
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              AspectRatio(
+                aspectRatio: 1.0,
                 child: Hero(
                   tag: entity.imgUrl,
                   child: CachedNetworkImage(
@@ -121,11 +121,11 @@ class DetailPageState extends State<DetailPage> {
                     ),
                   ),
                 ),
-                onTap: () => Router.toDisplayMulti(context, girls, i),
               ),
-            ),
-            countWidget,
-          ],
+              countWidget,
+            ],
+          ),
+          onTap: () => Router.toDisplayMulti(context, girls, i),
         ),
       );
     }
@@ -155,6 +155,7 @@ class DetailPageState extends State<DetailPage> {
               }
             : null,
         slivers: <Widget>[
+          // 顶部伸缩布局
           SliverPersistentHeader(
             pinned: true,
             delegate: VFSliverDelegate(
@@ -167,7 +168,7 @@ class DetailPageState extends State<DetailPage> {
               coverWidget: Hero(
                 tag: widget.mEntity.imgUrl,
                 child: CachedNetworkImage(
-                  imageUrl: widget.mEntity.imgUrl,
+                  imageUrl: widget.mEntity.imgUrl + "cover",
                   placeholder: (context, url) => Padding(
                     padding: EdgeInsets.all(VFDimens.d_36),
                     child: VFLoading(type: VFLoadingType.threeBounce),
@@ -179,6 +180,7 @@ class DetailPageState extends State<DetailPage> {
             ),
           ),
           buildTitle(widget.mEntity.title),
+          // 加载 GridView
           SliverGrid.count(
             crossAxisCount: 3,
             crossAxisSpacing: VFDimens.d_8,
