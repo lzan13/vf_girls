@@ -27,6 +27,7 @@
   "skip": "Skip",
   "test": "Test",
   "theme_color": "Theme color",
+  "theme_dark": "Dark mode",
   "theme_font": "Font",
   "theme_language": "Language",
   "tab_home": "Home",

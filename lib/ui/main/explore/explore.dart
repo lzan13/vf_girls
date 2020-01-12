@@ -4,17 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:vf_girls/request/bean/girl.dart';
-import 'package:vf_girls/request/girls_manager.dart';
-import 'package:vf_girls/ui/widget/dialog_loading.dart';
-import 'package:vf_girls/ui/widget/falls_item.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
+import 'package:vf_girls/request/bean/girl.dart';
+import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
-import 'package:vf_girls/ui/widget/toast.dart';
+import 'package:vf_girls/ui/widget/custom_tab.dart';
+import 'package:vf_girls/ui/widget/dialog_loading.dart';
+import 'package:vf_girls/ui/widget/falls_item.dart';
 
 ///
 /// 发现探索 Tab 页面
@@ -52,11 +51,29 @@ class ExplorePageState extends State<ExplorePage>
       initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: VFColors.transparent,
           title: TabBar(
             isScrollable: true,
+            indicator: VFTabIndicator(
+              borderSide: BorderSide(
+                width: VFDimens.d_3,
+                color: Theme.of(context).accentColor,
+              ),
+            ),
+            labelColor: Theme.of(context).accentColor,
+            labelStyle: TextStyle(
+              fontSize: VFSizes.s_20,
+              fontWeight: FontWeight.bold,
+            ),
+            labelPadding: EdgeInsets.only(left: 0, right: 0),
+            unselectedLabelColor: VFColors.grey87,
+            unselectedLabelStyle: TextStyle(
+              fontSize: VFSizes.s_14,
+              fontWeight: FontWeight.w400,
+            ),
             tabs: List.generate(
               mTabList.length,
-              (index) => Tab(
+              (index) => VFTab(
                 text: mTabList[index].title,
               ),
             ),
@@ -88,7 +105,8 @@ class ExploreBody extends StatefulWidget {
   State<StatefulWidget> createState() => ExploreBodyState();
 }
 
-class ExploreBodyState extends State<ExploreBody> {
+class ExploreBodyState extends State<ExploreBody>
+    with AutomaticKeepAliveClientMixin {
   bool enableRefresh = true;
   bool enableLoad = true;
 
@@ -167,48 +185,8 @@ class ExploreBodyState extends State<ExploreBody> {
         ),
       ),
     );
-    // EasyRefresh.custom(slivers: <Widget>[
-    //   SliverList(
-    //     delegate: SliverChildListDelegate([
-    //       // 普通 Toast
-    //       VFListItem(
-    //         title: FlutterI18n.translate(context, 'Normal Toast'),
-    //         describe: FlutterI18n.translate(context, 'show a normal toast'),
-    //         onPressed: () {
-    //           VFToast.show("普通 Toast");
-    //         },
-    //         leftIcon: Icons.nature,
-    //       ),
-    //       // 错误 Toast
-    //       VFListItem(
-    //         title: FlutterI18n.translate(context, 'Normal Toast'),
-    //         describe: FlutterI18n.translate(context, 'show a normal toast'),
-    //         onPressed: () {
-    //           VFToast.error("错误 Toast，同时输出错误相关信息，可能会超过一行，自动换行");
-    //         },
-    //         leftIcon: Icons.error,
-    //         leftIconColor: VFColors.red,
-    //       ),
-    //       // 完成 Toast
-    //       VFListItem(
-    //         title: FlutterI18n.translate(context, 'Normal Toast'),
-    //         describe: FlutterI18n.translate(context, 'show a normal toast'),
-    //         onPressed: () {
-    //           VFToast.success("完成 Toast");
-    //         },
-    //         leftIcon: Icons.done,
-    //         leftIconColor: VFColors.green,
-    //       ),
-    //       // 基本使用
-    //       VFListItem(
-    //         title: FlutterI18n.translate(context, 'basicUse'),
-    //         describe: FlutterI18n.translate(context, 'basicUseDescribe'),
-    //         onPressed: () {
-    //           Router.toTest(context);
-    //         },
-    //       ),
-    //     ]),
-    //   ),
-    // ]);
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

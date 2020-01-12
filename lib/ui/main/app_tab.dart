@@ -85,8 +85,6 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
-        fixedColor: Theme.of(context).primaryColor,
-        // onTap: onBottomNavigationBarTap,
         onTap: (index) {
           pageController.jumpToPage(index);
         },
@@ -94,7 +92,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
           BottomNavigationBarItem(
               icon: Icon(
                 VFIcons.ic_home,
-                size: VFDimens.d_28,
+                size: VFDimens.d_30,
               ),
               title: Text(
                 FlutterI18n.translate(context, 'tab_home'),
@@ -103,7 +101,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
           BottomNavigationBarItem(
               icon: Icon(
                 VFIcons.ic_explore,
-                size: VFDimens.d_28,
+                size: VFDimens.d_30,
               ),
               title: Text(
                 FlutterI18n.translate(context, 'tab_explore'),
@@ -112,7 +110,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
           BottomNavigationBarItem(
               icon: Icon(
                 VFIcons.ic_mine,
-                size: VFDimens.d_28,
+                size: VFDimens.d_30,
               ),
               title: Text(
                 FlutterI18n.translate(context, 'tab_mine'),

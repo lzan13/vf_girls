@@ -85,6 +85,7 @@ class VFIcons {
   static const IconData ic_comment = IconData(0xe620, fontFamily: fontFamily);
   static const IconData ic_star = IconData(0xe6b6, fontFamily: fontFamily);
   static const IconData ic_moon = IconData(0xe6b8, fontFamily: fontFamily);
+  static const IconData ic_sun = IconData(0xe6ab, fontFamily: fontFamily);
   static const IconData ic_collect = IconData(0xe6b9, fontFamily: fontFamily);
   static const IconData ic_settings = IconData(0xe6bb, fontFamily: fontFamily);
   static const IconData ic_search = IconData(0xe6bf, fontFamily: fontFamily);

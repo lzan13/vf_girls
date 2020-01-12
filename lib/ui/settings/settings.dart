@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -56,6 +57,31 @@ class SettingBodyState extends State<SettingBody> {
             },
             leftIcon: VFIcons.ic_font,
           ),
+          // 切换夜间模式
+          VFListItem(
+            title: FlutterI18n.translate(context, 'theme_dark'),
+            titleColor: Theme.of(context).textTheme.title.color,
+            onPressed: () {
+              Provider.of<ThemeModel>(context).switchTheme(
+                  userDarkMode:
+                      Theme.of(context).brightness == Brightness.light);
+            },
+            leftIcon: Theme.of(context).brightness == Brightness.light
+                ? VFIcons.ic_sun
+                : VFIcons.ic_moon,
+            rightWidget: Padding(
+              padding: EdgeInsets.only(right: VFDimens.d_16),
+              child: CupertinoSwitch(
+                activeColor: Theme.of(context).accentColor,
+                value: Theme.of(context).brightness == Brightness.dark,
+                onChanged: (value) {
+                  Provider.of<ThemeModel>(context).switchTheme(
+                      userDarkMode:
+                          Theme.of(context).brightness == Brightness.light);
+                },
+              ),
+            ),
+          ),
           // 设置主题
           VFListItem(
             title: FlutterI18n.translate(context, 'theme_color'),
@@ -86,6 +112,14 @@ class SettingBodyState extends State<SettingBody> {
         ]),
       ),
     );
+  }
+
+  ///
+  /// 切换黑暗模式
+  ///
+  void switchDarkMode(context) {
+    Provider.of<ThemeModel>(context).switchTheme(
+        userDarkMode: Theme.of(context).brightness == Brightness.light);
   }
 
   ///
