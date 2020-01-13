@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:vf_girls/request/bean/girl.dart';
+import 'package:vf_girls/request/bean/girl_bean.dart';
 
 import 'package:vf_girls/router/route_anim.dart';
 import 'package:vf_girls/ui/detail/detail_page.dart';
@@ -72,7 +72,7 @@ class Router {
       case RouteName.user:
         return CupertinoPageRoute(builder: (_) => UserPage());
       case RouteName.detail:
-        GirlEntity entity = settings.arguments;
+        GirlBean entity = settings.arguments;
         return CupertinoPageRoute(builder: (_) => DetailPage(entity));
       case RouteName.displayMulti:
         return CupertinoPageRoute(

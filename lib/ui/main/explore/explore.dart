@@ -8,7 +8,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_girls/request/bean/girl.dart';
+import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
 import 'package:vf_girls/ui/widget/custom_tab.dart';
@@ -26,7 +26,7 @@ class ExplorePage extends StatefulWidget {
 class ExplorePageState extends State<ExplorePage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   // tab 结合
-  List<GirlEntity> mTabList = [];
+  List<GirlBean> mTabList = [];
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class ExplorePageState extends State<ExplorePage>
         '[{"title":"清纯美眉","jumpUrl":"http://www.meinvtu.site/list-cateId-3.html"},{"title":"性感美女","jumpUrl":"http://www.meinvtu.site/list-cateId-2.html"},{"title":"Cosplay","jumpUrl":"http://www.meinvtu.site/list-cateId-20.html"},{"title":"性感美女","jumpUrl":"http://www.meinv666.site/list-cateId-2.html"},{"title":"性爱私拍","jumpUrl":"http://www.meinv666.site/list-cateId-1.html"},{"title":"性感动漫","jumpUrl":"http://www.meinv666.site/list-cateId-21.html"},{"title":"甜美萝莉","jumpUrl":"http://www.meinv666.site/list-cateId-5.html"},{"title":"自拍街拍","jumpUrl":"http://www.meinv666.site/list-cateId-4.html"},{"title":"清纯美眉","jumpUrl":"http://www.meinv666.site/list-cateId-3.html"}]';
     List jsonList = json.decode(jsonStr);
     for (int i = 0; i < jsonList.length; i++) {
-      mTabList.add(GirlEntity.fromJson(jsonList[i]));
+      mTabList.add(GirlBean.fromJson(jsonList[i]));
     }
   }
 
@@ -97,7 +97,7 @@ class ExplorePageState extends State<ExplorePage>
 /// 发现列表
 ///
 class ExploreBody extends StatefulWidget {
-  GirlEntity entity;
+  GirlBean entity;
 
   ExploreBody(this.entity);
 
@@ -129,7 +129,6 @@ class ExploreBodyState extends State<ExploreBody>
       page++;
       url = '${widget.entity.jumpUrl}?page=$page';
     }
-    print('请求地址 $url');
     dynamic result = await GirlsManager.loadData(url);
     setState(() {
       if (isRefresh) {
@@ -172,9 +171,9 @@ class ExploreBodyState extends State<ExploreBody>
         mainAxisSpacing: VFDimens.d_4,
         crossAxisSpacing: VFDimens.d_4,
         itemBuilder: (context, index) {
-          GirlEntity entity = girlList[index];
+          GirlBean entity = girlList[index];
           return FallsItem(
-            entity: entity,
+            bean: entity,
             callback: () => Router.toDetail(context, entity),
           );
         },

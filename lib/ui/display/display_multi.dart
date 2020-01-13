@@ -5,7 +5,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_girls/request/bean/girl.dart';
+import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/common/index.dart';
 
 ///
@@ -15,7 +15,7 @@ class DisplayMultiPage extends StatefulWidget {
   // 参数集合，因为当前页需要参数比较多，路由直接透传
   Map<String, dynamic> params;
 
-  List<GirlEntity> dataList;
+  List<GirlBean> dataList;
   int index = 0;
   String heroTag;
   PageController controller;
@@ -56,11 +56,11 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
                   child: PhotoViewGallery.builder(
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
-                  GirlEntity entity = widget.dataList[index];
+                  GirlBean entity = widget.dataList[index];
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: CachedNetworkImageProvider(entity.imgUrl),
+                    imageProvider: CachedNetworkImageProvider(entity.cover),
                     heroAttributes: PhotoViewHeroAttributes(
-                      tag: entity.imgUrl,
+                      tag: entity.cover,
                     ),
                   );
                 },

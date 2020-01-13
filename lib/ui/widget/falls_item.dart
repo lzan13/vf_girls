@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -5,41 +7,53 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/index.dart';
-import 'package:vf_girls/request/bean/girl.dart';
+import 'package:vf_girls/request/bean/girl_bean.dart';
 
 ///
-/// 瀑布流 Item
+/// 瀑布流布局 Widget
 ///
 class FallsItem extends StatelessWidget {
-  final GirlEntity entity;
+  final GirlBean bean;
   final VoidCallback callback;
 
   const FallsItem({
     Key key,
-    this.entity,
+    this.bean,
     this.callback,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return entity != null && entity.imgUrl != null
+    return bean != null && bean.cover != null
         ? GestureDetector(
             onTap: callback,
             child: Container(
               child: Stack(
                 alignment: Alignment.center,
-                fit: StackFit.loose,
+                fit: StackFit.expand,
                 children: <Widget>[
                   Hero(
-                    tag: entity.imgUrl + "cover",
+                    tag: bean.cover,
                     child: CachedNetworkImage(
-                      imageUrl: entity.imgUrl,
+                      httpHeaders: {
+                        'Referer':
+                            DateTime.now().millisecondsSinceEpoch.toString()
+                      },
+                      fit: BoxFit.cover,
+                      imageUrl: bean.cover,
                       placeholder: (context, url) => Padding(
                         padding: EdgeInsets.all(VFDimens.d_24),
                         child: VFLoading(type: VFLoadingType.threeBounce),
                       ),
                     ),
                   ),
+                  // 模糊
+                  // BackdropFilter(
+                  //   filter: new ImageFilter.blur(sigmaX: 2, sigmaY: 3),
+                  //   child: new Container(
+                  //     color: VFColors.white.withOpacity(0.1),
+                  //   ),
+                  // ),
                   Positioned(
                     left: 0.0,
                     top: 0.0,
@@ -93,7 +107,7 @@ class FallsItem extends StatelessWidget {
                                   VFDimens.padding_little,
                                 ),
                                 child: Text(
-                                  entity.count,
+                                  bean.time,
                                   style: TextStyle(
                                     color: VFColors.white87,
                                     fontSize: VFSizes.s_10,
@@ -133,7 +147,7 @@ class FallsItem extends StatelessWidget {
                         width: double.infinity,
                         margin: EdgeInsets.all(VFDimens.margin_small),
                         child: Text(
-                          entity.title != null ? entity.title : '',
+                          bean.title != null ? bean.title : '',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           textAlign: TextAlign.left,

@@ -6,7 +6,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/resource_manager.dart';
-import 'package:vf_girls/request/bean/girl.dart';
+import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/ui/widget/dialog_loading.dart';
 
@@ -16,7 +16,7 @@ import 'package:vf_girls/router/router_manger.dart';
 /// 图片详情页面
 ///
 class DetailPage extends StatefulWidget {
-  GirlEntity mEntity;
+  GirlBean mEntity;
 
   DetailPage(this.mEntity);
 
@@ -28,7 +28,7 @@ class DetailPageState extends State<DetailPage> {
   // 刷新控制类，必须有，否则列表无法滚动
   EasyRefreshController _controller = EasyRefreshController();
   // 加载数据
-  List<GirlEntity> girls = [];
+  List<GirlBean> girls = [];
   bool enableRefresh = true;
   bool enableLoad = false;
 
@@ -89,7 +89,7 @@ class DetailPageState extends State<DetailPage> {
   List<Widget> bindGrid() {
     List<Widget> children = [];
     for (int i = 0; i < (girls.length > 9 ? 9 : girls.length); i++) {
-      GirlEntity entity = girls[i];
+      GirlBean entity = girls[i];
       // 根据图片数量判断是否显示最后的更多数量
       var countWidget = Container(
           child: i == 8 && girls.length > 9
@@ -111,10 +111,10 @@ class DetailPageState extends State<DetailPage> {
               AspectRatio(
                 aspectRatio: 1.0,
                 child: Hero(
-                  tag: entity.imgUrl,
+                  tag: entity.cover,
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: entity.imgUrl,
+                    imageUrl: entity.cover,
                     placeholder: (context, url) => Padding(
                       padding: EdgeInsets.all(VFDimens.d_36),
                       child: VFLoading(type: VFLoadingType.threeBounce),
@@ -166,9 +166,9 @@ class DetailPageState extends State<DetailPage> {
               leftIcon: VFIcons.ic_arrow_left,
               rightWidget: RefreshIndicator(linkNotifier),
               coverWidget: Hero(
-                tag: widget.mEntity.imgUrl + "cover",
+                tag: widget.mEntity.cover,
                 child: CachedNetworkImage(
-                  imageUrl: widget.mEntity.imgUrl,
+                  imageUrl: widget.mEntity.cover,
                   placeholder: (context, url) => Padding(
                     padding: EdgeInsets.all(VFDimens.d_36),
                     child: VFLoading(type: VFLoadingType.threeBounce),
