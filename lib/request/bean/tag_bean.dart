@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 ///
-/// 数据实体
+/// 标签数据实体
 ///
 class TagBean {
   String title;

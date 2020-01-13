@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:vf_girls/request/bean/category_bean.dart';
 import 'package:vf_girls/request/girls_api.dart';
 
 import 'package:html/dom.dart';
@@ -68,7 +69,7 @@ class GirlsManager {
   ///
   /// 获取详情
   ///
-  static Future loadGirlDetail(String detailUrl) async {
+  static Future loadGirlDetail(String url) async {
     // <div class="main">
     //   <div class="content">
     //     <h2 class="main-title">水电费</h2>
@@ -87,7 +88,7 @@ class GirlsManager {
     //     </div>
     //   </div>
     // </div>
-    var response = await http.get(detailUrl);
+    var response = await http.get(url);
     var result;
     if (response.statusCode == 200) {
       result = response.data;
@@ -97,32 +98,55 @@ class GirlsManager {
 
     Document document = parse(result);
     // 这里使用 css 选择器语法提取数据
-    List<Element> elements =
-        document.querySelectorAll('.main > .content > .postlist > #pins > li');
-    GirlBean bean;
+    GirlBean girl = new GirlBean();
+    CategoryBean category = new CategoryBean();
 
-    if (elements.isNotEmpty) {
-      data = List.generate(elements.length, (i) {
-        GirlBean bean = GirlBean();
-        // 获取图片信息
-        Element image = elements[i].querySelector('.lazy');
-        bean.cover = image.attributes['data-original'];
-        bean.width = int.parse(image.attributes['width']);
-        bean.width = int.parse(image.attributes['height']);
+    // 标题
+    girl.title = document.querySelector('.main>.content>.main-title').text;
+    // 时间
+    girl.time =
+        document.querySelectorAll('.main>.content>.main-meta>span')[1].text;
+    // 分类
+    category.title =
+        document.querySelector('.main>.content>.main-meta>span>a').text;
+    category.url = document
+        .querySelector('.main>.content>.main-meta>span>a')
+        .attributes['href'];
+    // 宽高
+    girl.width = int.parse(document
+        .querySelector('.main>.content>.main-image>p>a>img')
+        .attributes['width']);
+    girl.height = int.parse(document
+        .querySelector('.main>.content>.main-image>p>a>img')
+        .attributes['height']);
+    girl.count = int.parse(
+        document.querySelectorAll('.main>.content>.pagenavi>a>span')[4].text);
+    girl.images = List.generate(girl.count, (i) {
+      // TODO
+    });
 
-        // 标题及跳转
-        Element a = elements[i].querySelector('span > a');
-        bean.title = a.text;
-        bean.jumpUrl = a.attributes['href'];
+    // if (elements.isNotEmpty) {
+    //   data = List.generate(elements.length, (i) {
+    //     GirlBean bean = GirlBean();
+    //     // 获取图片信息
+    //     Element image = elements[i].querySelector('.lazy');
+    //     bean.cover = image.attributes['data-original'];
+    //     bean.width = int.parse(image.attributes['width']);
+    //     bean.width = int.parse(image.attributes['height']);
 
-        // 时间
-        Element time = elements[i].querySelector('.time');
-        bean.time = time.text;
+    //     // 标题及跳转
+    //     Element a = elements[i].querySelector('span > a');
+    //     bean.title = a.text;
+    //     bean.jumpUrl = a.attributes['href'];
 
-        return bean;
-      });
-    }
-    return data;
+    //     // 时间
+    //     Element time = elements[i].querySelector('.time');
+    //     bean.time = time.text;
+
+    //     return bean;
+    //   });
+    // }
+    return girl;
 
     int start = result.indexOf('[[{');
     int end = result.indexOf('}]]');
@@ -163,7 +187,7 @@ class GirlsManager {
 
         Element image = elements[i].querySelector('.img-wrap>.img-inner>img');
         entity.title = image.attributes['alt'];
-        entity.imgUrl = image.attributes['data-original'];
+        entity.cover = image.attributes['data-original'];
 
         Element tips = elements[i].querySelector('.img-wrap>.img-inner>.tips');
         entity.count = tips.text;

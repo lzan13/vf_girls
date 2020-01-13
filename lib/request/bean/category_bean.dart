@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 ///
-/// 数据实体
+/// 分类数据实体
 ///
-class TabBean {
+class CategoryBean {
   String title;
   String url;
 
-  TabBean({
+  CategoryBean({
     this.title,
     this.url,
   });
 
-  TabBean.fromJson(Map<String, dynamic> json)
+  CategoryBean.fromJson(Map<String, dynamic> json)
       : title = json['title'],
         url = json['url'];
 

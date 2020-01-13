@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:vf_girls/request/bean/category_bean.dart';
 
 ///
 /// 数据实体
@@ -9,13 +10,15 @@ class GirlBean {
   String cover;
   List<String> images;
 
-  String count;
   String time;
 
   String jumpUrl;
 
+  int count;
   int width;
   int height;
+
+  CategoryBean category;
 
   GirlBean({
     this.title,
@@ -26,6 +29,7 @@ class GirlBean {
     this.jumpUrl,
     this.width,
     this.height,
+    this.category,
   });
 
   GirlBean.fromJson(Map<String, dynamic> json)
@@ -36,7 +40,8 @@ class GirlBean {
         time = json['time'],
         jumpUrl = json['jumpUrl'],
         width = json['width'],
-        height = json['height'];
+        height = json['height'],
+        category = json['category'];
 
   Map<String, dynamic> toJson() {
     return {
@@ -48,6 +53,7 @@ class GirlBean {
       'jumpUrl': jumpUrl,
       'width': width,
       'height': height,
+      'category': category,
     };
   }
 
