@@ -109,7 +109,7 @@ class VFIcons {
   static const IconData ic_time = IconData(0xe63c, fontFamily: fontFamily);
   static const IconData ic_mobile = IconData(0xe63f, fontFamily: fontFamily);
   static const IconData ic_minimize = IconData(0xe63b, fontFamily: fontFamily);
-  static const IconData ic_explore = IconData(0xe632, fontFamily: fontFamily);
+  static const IconData ic_explore = IconData(0xe951, fontFamily: fontFamily);
   static const IconData ic_play = IconData(0xe637, fontFamily: fontFamily);
   static const IconData ic_pause = IconData(0xe63a, fontFamily: fontFamily);
   static const IconData ic_call = IconData(0xe613, fontFamily: fontFamily);
@@ -134,12 +134,14 @@ class VFIcons {
   static const IconData ic_switch_close =
       IconData(0xe609, fontFamily: fontFamily);
   static const IconData ic_face = IconData(0xe789, fontFamily: fontFamily);
+  static const IconData ic_fire = IconData(0xefd4, fontFamily: fontFamily);
   static const IconData ic_emotion_fill =
       IconData(0xe78a, fontFamily: fontFamily);
   static const IconData ic_emotion_line =
       IconData(0xe78b, fontFamily: fontFamily);
   static const IconData ic_switch_open =
       IconData(0xe7d6, fontFamily: fontFamily);
+  static const IconData ic_subject = IconData(0xe670, fontFamily: fontFamily);
   static const IconData ic_call_end = IconData(0xe7d7, fontFamily: fontFamily);
   static const IconData ic_add = IconData(0xe7d8, fontFamily: fontFamily);
   static const IconData ic_alert = IconData(0xe673, fontFamily: fontFamily);

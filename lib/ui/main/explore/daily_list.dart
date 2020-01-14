@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
@@ -14,18 +15,18 @@ import 'package:vf_girls/ui/widget/dialog_loading.dart';
 import 'package:vf_girls/ui/widget/falls_item.dart';
 
 ///
-/// 发现列表
+/// 日常更新列表
 ///
-class FallsList extends StatefulWidget {
+class DailyList extends StatefulWidget {
   CategoryBean category;
 
-  FallsList(this.category);
+  DailyList(this.category);
 
   @override
-  State<StatefulWidget> createState() => FallsListState();
+  State<StatefulWidget> createState() => DailyListState();
 }
 
-class FallsListState extends State<FallsList>
+class DailyListState extends State<DailyList>
     with AutomaticKeepAliveClientMixin {
   bool enableRefresh = true;
   bool enableLoad = true;
@@ -49,7 +50,7 @@ class FallsListState extends State<FallsList>
       page++;
       url = '${widget.category.url}page/$page/';
     }
-    dynamic result = await GirlsManager.loadFalls(url);
+    dynamic result = await GirlsManager.loadDaily(url);
     setState(() {
       if (isRefresh) {
         girlList.clear();
@@ -91,11 +92,20 @@ class FallsListState extends State<FallsList>
         mainAxisSpacing: VFDimens.d_0,
         crossAxisSpacing: VFDimens.d_4,
         itemBuilder: (context, index) {
-          GirlBean girlBean = girlList[index];
-          return FallsItem(
-            bean: girlBean,
-            callback: () => Router.toDetail(context, girlBean),
+          GirlBean bean = girlList[index];
+          return CachedNetworkImage(
+            httpHeaders: {'Referer': bean.cover},
+            fit: BoxFit.cover,
+            imageUrl: bean.cover,
+            placeholder: (context, url) => Padding(
+              padding: EdgeInsets.all(VFDimens.d_20),
+              child: VFLoading(type: VFLoadingType.threeBounce),
+            ),
           );
+          // FallsItem(
+          //   bean: girlBean,
+          //   callback: () => Router.toDetail(context, girlBean),
+          // );
         },
         staggeredTileBuilder: (int index) => StaggeredTile.count(2, 3),
         padding: EdgeInsets.only(

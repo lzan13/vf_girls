@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:vf_girls/request/bean/girl_bean.dart';
 
+import 'package:vf_girls/request/bean/category_bean.dart';
+import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/router/route_anim.dart';
+import 'package:vf_girls/ui/category/category.dart';
 import 'package:vf_girls/ui/detail/detail.dart';
 import 'package:vf_girls/ui/display/display_multi.dart';
 import 'package:vf_girls/ui/main/app_tab.dart';
@@ -11,9 +13,8 @@ import 'package:vf_girls/ui/settings/feedback.dart';
 import 'package:vf_girls/ui/settings/settings.dart';
 import 'package:vf_girls/ui/splash/splash.dart';
 import 'package:vf_girls/ui/user/user.dart';
-
-import 'package:vf_girls/ui/test_page.dart';
 import 'package:vf_girls/ui/widget/not_fount.dart';
+import 'package:vf_girls/ui/test_page.dart';
 
 /*
  * 路由名
@@ -39,6 +40,9 @@ class RouteName {
 
   // 用户信息
   static const String user = 'user';
+
+  //  分类
+  static const String category = 'category';
 
   // 详情
   static const String detail = 'detail';
@@ -71,9 +75,12 @@ class Router {
         return CupertinoPageRoute(builder: (_) => SettingsPage());
       case RouteName.user:
         return CupertinoPageRoute(builder: (_) => UserPage());
+      case RouteName.category:
+        CategoryBean bean = settings.arguments;
+        return CupertinoPageRoute(builder: (_) => CategoryPage(bean));
       case RouteName.detail:
-        GirlBean entity = settings.arguments;
-        return CupertinoPageRoute(builder: (_) => DetailPage(entity));
+        GirlBean bean = settings.arguments;
+        return CupertinoPageRoute(builder: (_) => DetailPage(bean));
       case RouteName.displayMulti:
         return CupertinoPageRoute(
             builder: (_) => DisplayMultiPage(settings.arguments));
@@ -142,13 +149,26 @@ class Router {
     Navigator.pushNamed(context, RouteName.user);
   }
 
+  /// 分类
+  static void toCategory(context, bean) {
+    if (bean != null) {
+      Navigator.pushNamed(
+        context,
+        RouteName.category,
+        arguments: bean,
+      );
+    } else {
+      toNotFound(context);
+    }
+  }
+
   /// 详情
-  static void toDetail(context, entity) {
-    if (entity != null) {
+  static void toDetail(context, bean) {
+    if (bean != null) {
       Navigator.pushNamed(
         context,
         RouteName.detail,
-        arguments: entity,
+        arguments: bean,
       );
     } else {
       toNotFound(context);

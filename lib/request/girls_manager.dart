@@ -8,7 +8,10 @@ import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/girls_api.dart';
 
 class GirlsManager {
-  static Future loadHomeData(String url) async {
+  ///
+  /// 加载瀑布流数据
+  ///
+  static Future loadFalls(String url) async {
     // <div class="main">
     //   <div class="main-content">
     //     <div class="postlist">
@@ -26,16 +29,7 @@ class GirlsManager {
     //     </div>
     //   </div>
     // </div>
-    print('request url: $url');
-    var response = await http.get(url);
-    var result;
-    if (response.statusCode == 200) {
-      result = response.data;
-    } else {
-      result = '<html>error! status:${response.statusCode}</html>';
-    }
-
-    Document document = parse(result);
+    Document document = _loadData(url) as Document;
     // 这里使用 css 选择器语法提取数据
     List<Element> elements = document
         .querySelectorAll('.main > .main-content > .postlist > #pins > li');
@@ -68,7 +62,7 @@ class GirlsManager {
   ///
   /// 获取详情
   ///
-  static Future loadGirlDetail(String url) async {
+  static Future loadDetail(String url) async {
     // <div class="main">
     //   <div class="content">
     //     <h2 class="main-title">水电费</h2>
@@ -87,15 +81,7 @@ class GirlsManager {
     //     </div>
     //   </div>
     // </div>
-    var response = await http.get(url);
-    var result;
-    if (response.statusCode == 200) {
-      result = response.data;
-    } else {
-      result = '';
-    }
-
-    Document document = parse(result);
+    Document document = _loadData(url) as Document;
     // 这里使用 css 选择器语法提取数据
     GirlBean girl = new GirlBean();
     girl.category = new CategoryBean();
@@ -133,12 +119,73 @@ class GirlsManager {
     String imgSuffix = imgUrl.substring(end);
     girl.images = List.generate(girl.count, (i) {
       int index = i + 1;
-      if (i < 10) {
+      if (index < 10) {
         return '${imgPrefix}0$index$imgSuffix';
       } else {
         return '$imgPrefix$index$imgSuffix';
       }
     });
     return girl;
+  }
+
+  ///
+  /// 加载日常更新数据
+  ///
+  static Future loadDaily(url) async {
+    // <div class="main">
+    //   <div class="main-content">
+    //     <div class="postlist">
+    //       <div id="comments">
+    //         <ul>
+    //           <li class="comment byuser comment-author-abu bypostauthor even thread-even depth-1" id="comment-10685">
+    //             <div id="div-comment-10685" class="comment-body">
+    //               <p>
+    //                 <img class="lazy" data-original="https://wxt.sinaimg.cn/mw1024/9d52c073gy1gau5acibp8j20m80rrdht.jpg" width="640" height="auto" />
+    //               </p>
+    //             </div>
+    //           </li>
+    //         </ul>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+    Document document = _loadData(url) as Document;
+    // 这里使用 css 选择器语法提取数据
+    List<Element> elements = document.querySelectorAll(
+        '.main>.main-content>.postlist>.comments>ul>li>.comment-body');
+    List<GirlBean> data = [];
+    if (elements.isNotEmpty) {
+      data = List.generate(elements.length, (i) {
+        GirlBean bean = GirlBean();
+        // 时间
+        bean.time = elements[i].querySelector('.comment-meta>a').text;
+
+        // 标题及跳转
+        bean.cover =
+            elements[i].querySelector('p>.lazy').attributes['data-original'];
+        bean.width =
+            int.parse(elements[i].querySelector('p>.lazy').attributes['width']);
+
+        return bean;
+      });
+    }
+    return data;
+  }
+
+  ///
+  /// 统一处理请求
+  ///
+  static Future _loadData(url) async {
+    print('request url: $url');
+    var response = await http.get(url);
+    var result;
+    if (response.statusCode == 200) {
+      result = response.data;
+    } else {
+      result =
+          '{"code":${response.statusCode}, "msg":"${response.statusMessage}"}';
+    }
+    Document document = parse(result);
+    return document;
   }
 }

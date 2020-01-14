@@ -51,10 +51,10 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
               fontWeight: FontWeight.bold,
             ),
             labelPadding: EdgeInsets.only(left: 0, right: 0),
-            unselectedLabelColor: VFColors.grey87,
+            unselectedLabelColor: VFColors.greyWhite87,
             unselectedLabelStyle: TextStyle(
-              fontSize: VFSizes.s_14,
-              fontWeight: FontWeight.w400,
+              fontSize: VFSizes.s_16,
+              fontWeight: FontWeight.bold,
             ),
             tabs: List.generate(
               tabList.length,

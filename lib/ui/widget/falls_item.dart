@@ -26,23 +26,18 @@ class FallsItem extends StatelessWidget {
         ? GestureDetector(
             onTap: callback,
             child: Container(
+              padding: EdgeInsets.only(top: VFDimens.d_4),
               child: Stack(
                 alignment: Alignment.center,
                 fit: StackFit.expand,
                 children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(VFDimens.border_radius_normal),
-                      ),
-                    ),
+                  ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(VFDimens.border_radius_normal),
                     child: Hero(
-                      tag: bean.cover,
+                      tag: bean.cover + 'cover',
                       child: CachedNetworkImage(
-                        httpHeaders: {
-                          'Referer':
-                              DateTime.now().millisecondsSinceEpoch.toString()
-                        },
+                        httpHeaders: {'Referer': bean.cover},
                         fit: BoxFit.cover,
                         imageUrl: bean.cover,
                         placeholder: (context, url) => Padding(

@@ -5,12 +5,18 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/index.dart';
-import 'package:vf_girls/ui/main/explore/explore.dart';
 import 'package:vf_girls/ui/main/home/home.dart';
+import 'package:vf_girls/ui/main/explore/explore.dart';
+import 'package:vf_girls/ui/main/tag/tag.dart';
 import 'package:vf_girls/ui/main/mine/mine.dart';
 import 'package:vf_girls/ui/widget/toast.dart';
 
-List<Widget> pages = <Widget>[HomePage(), ExplorePage(), MinePage()];
+List<Widget> pages = <Widget>[
+  HomePage(),
+  ExplorePage(),
+  TagPage(),
+  MinePage(),
+];
 
 ///
 /// 项目 Tab 界面
@@ -90,32 +96,45 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(
-                VFIcons.ic_home,
-                size: VFDimens.d_30,
-              ),
-              title: Text(
-                FlutterI18n.translate(context, 'tab_home'),
-                style: TextStyle(fontSize: VFSizes.tab_small),
-              )),
+            icon: Icon(
+              VFIcons.ic_home,
+              size: VFDimens.d_30,
+            ),
+            title: Text(
+              FlutterI18n.translate(context, 'tab_home'),
+              style: TextStyle(fontSize: VFSizes.tab_small),
+            ),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                VFIcons.ic_explore,
-                size: VFDimens.d_30,
-              ),
-              title: Text(
-                FlutterI18n.translate(context, 'tab_explore'),
-                style: TextStyle(fontSize: VFSizes.tab_small),
-              )),
+            icon: Icon(
+              VFIcons.ic_explore,
+              size: VFDimens.d_30,
+            ),
+            title: Text(
+              FlutterI18n.translate(context, 'tab_explore'),
+              style: TextStyle(fontSize: VFSizes.tab_small),
+            ),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                VFIcons.ic_mine,
-                size: VFDimens.d_30,
-              ),
-              title: Text(
-                FlutterI18n.translate(context, 'tab_mine'),
-                style: TextStyle(fontSize: VFSizes.tab_small),
-              )),
+            icon: Icon(
+              VFIcons.ic_subject,
+              size: VFDimens.d_30,
+            ),
+            title: Text(
+              FlutterI18n.translate(context, 'tab_tag'),
+              style: TextStyle(fontSize: VFSizes.tab_small),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              VFIcons.ic_mine,
+              size: VFDimens.d_30,
+            ),
+            title: Text(
+              FlutterI18n.translate(context, 'tab_mine'),
+              style: TextStyle(fontSize: VFSizes.tab_small),
+            ),
+          ),
         ],
       ),
     );

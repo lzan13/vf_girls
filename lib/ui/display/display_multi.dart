@@ -55,7 +55,10 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
                 builder: (BuildContext context, int index) {
                   String image = widget.imgList[index];
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: CachedNetworkImageProvider(image),
+                    imageProvider: CachedNetworkImageProvider(
+                      image,
+                      headers: {'Referer': image},
+                    ),
                     heroAttributes: PhotoViewHeroAttributes(
                       tag: image,
                     ),
@@ -79,7 +82,7 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
               child: VFTopBar(
                 bgColor: VFColors.translucent,
                 top: MediaQuery.of(context).padding.top,
-                title: "${currentIndex + 1}/${widget.imgList.length}",
+                title: '${currentIndex + 1}/${widget.imgList.length}',
                 titleColor: VFColors.white,
                 leftIcon: VFIcons.ic_arrow_left,
               ),

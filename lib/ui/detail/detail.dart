@@ -62,7 +62,7 @@ class DetailPageState extends State<DetailPage> {
   /// 加载详情数据
   ///
   void loadDetail() async {
-    GirlBean result = await GirlsManager.loadGirlDetail(widget.girl.jumpUrl);
+    GirlBean result = await GirlsManager.loadDetail(widget.girl.jumpUrl);
     setState(() {
       widget.girl.title = result.title;
       widget.girl.images = result.images;
@@ -116,28 +116,33 @@ class DetailPageState extends State<DetailPage> {
                   ],
                 ),
                 // 分类
-                Container(
-                  margin: EdgeInsets.all(VFDimens.margin_small),
-                  decoration: BoxDecoration(
-                    color: VFColors.black38,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(VFDimens.border_radius_large),
-                    ),
-                  ),
+                GestureDetector(
+                  onTap: () {
+                    Router.toCategory(context, widget.girl.category);
+                  },
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(
-                      VFDimens.padding_small,
-                      VFDimens.padding_little,
-                      VFDimens.padding_small,
-                      VFDimens.padding_little,
+                    margin: EdgeInsets.all(VFDimens.margin_small),
+                    decoration: BoxDecoration(
+                      color: VFColors.grey54,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(VFDimens.border_radius_large),
+                      ),
                     ),
-                    child: Text(
-                      widget.girl.category == null
-                          ? ''
-                          : widget.girl.category.title,
-                      style: TextStyle(
-                        color: VFColors.white87,
-                        fontSize: VFSizes.s_14,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(
+                        VFDimens.padding_small,
+                        VFDimens.padding_little,
+                        VFDimens.padding_small,
+                        VFDimens.padding_little,
+                      ),
+                      child: Text(
+                        widget.girl.category == null
+                            ? ''
+                            : widget.girl.category.title,
+                        style: TextStyle(
+                          color: VFColors.white87,
+                          fontSize: VFSizes.s_14,
+                        ),
                       ),
                     ),
                   ),
@@ -161,37 +166,63 @@ class DetailPageState extends State<DetailPage> {
   ///
   Widget bindGrid() {
     return SliverPadding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(
+        VFDimens.d_16,
+        VFDimens.d_8,
+        VFDimens.d_16,
+        VFDimens.d_8,
+      ),
       sliver: new SliverGrid(
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, //Grid按两列显示
-          mainAxisSpacing: 8.0,
-          crossAxisSpacing: 8.0,
+          mainAxisSpacing: VFDimens.d_4,
+          crossAxisSpacing: VFDimens.d_4,
           childAspectRatio: 1.0,
         ),
         delegate: new SliverChildBuilderDelegate(
           (context, index) {
-            //创建子widget
+            var countWidget = index == 8 && imgList.length > 9
+                ? Text(
+                    '+${imgList.length}',
+                    style: TextStyle(
+                      color: VFColors.white87,
+                      fontWeight: FontWeight.bold,
+                      fontSize: VFSizes.s_30,
+                      shadows: [
+                        Shadow(
+                            color: VFColors.black,
+                            offset: Offset(0, 1),
+                            blurRadius: VFDimens.d_16)
+                      ],
+                    ),
+                  )
+                : Container();
             return GestureDetector(
               child: Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
                   Hero(
                     tag: imgList[index],
-                    child: CachedNetworkImage(
-                      httpHeaders: {
-                        'Referer':
-                            DateTime.now().millisecondsSinceEpoch.toString()
-                      },
-                      fit: BoxFit.cover,
-                      imageUrl: imgList[index],
-                      placeholder: (context, url) => Padding(
-                        padding: EdgeInsets.all(VFDimens.d_20),
-                        child: VFLoading(type: VFLoadingType.threeBounce),
+                    child: AspectRatio(
+                      aspectRatio: 1.0,
+                      child: ClipRRect(
+                        borderRadius:
+                            BorderRadius.circular(VFDimens.border_radius_small),
+                        child: CachedNetworkImage(
+                          httpHeaders: {
+                            'Referer': imgList[index],
+                          },
+                          fit: BoxFit.cover,
+                          imageUrl: imgList[index],
+                          placeholder: (context, url) => Padding(
+                            padding: EdgeInsets.all(VFDimens.d_20),
+                            child: VFLoading(type: VFLoadingType.threeBounce),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  // countWidget,
+                  countWidget,
                 ],
               ),
               onTap: () => Router.toDisplayMulti(context, imgList, index),
@@ -201,54 +232,6 @@ class DetailPageState extends State<DetailPage> {
         ),
       ),
     );
-
-    // List<Widget> children = [];
-    // for (int i = 0; i < (imgList.length > 9 ? 9 : imgList.length); i++) {
-    //   String image = imgList[i];
-    //   // 根据图片数量判断是否显示最后的更多数量
-    //   var countWidget = Container(
-    //       child: i == 8 && imgList.length > 9
-    //           ? Text(
-    //               '+${imgList.length}',
-    //               style: TextStyle(
-    //                 color: VFColors.white,
-    //                 fontWeight: FontWeight.w500,
-    //                 fontSize: VFSizes.s_30,
-    //               ),
-    //             )
-    //           : Container());
-    //   // 将图片加载到集合中
-    //   children.add(
-    //     GestureDetector(
-    //       child: Stack(
-    //         alignment: Alignment.center,
-    //         children: <Widget>[
-    //           AspectRatio(
-    //             aspectRatio: 1.0,
-    //             child: Hero(
-    //               tag: image,
-    //               child: CachedNetworkImage(
-    //                 httpHeaders: {
-    //                   'Referer':
-    //                       DateTime.now().millisecondsSinceEpoch.toString()
-    //                 },
-    //                 fit: BoxFit.cover,
-    //                 imageUrl: image,
-    //                 placeholder: (context, url) => Padding(
-    //                   padding: EdgeInsets.all(VFDimens.d_20),
-    //                   child: VFLoading(type: VFLoadingType.threeBounce),
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //           countWidget,
-    //         ],
-    //       ),
-    //       onTap: () => Router.toDisplayMulti(context, imgList, i),
-    //     ),
-    //   );
-    // }
-    // return children;
   }
 
   @override
@@ -281,7 +264,7 @@ class DetailPageState extends State<DetailPage> {
               leftIcon: VFIcons.ic_arrow_left,
               rightWidget: RefreshIndicator(linkNotifier),
               coverWidget: Hero(
-                tag: widget.girl.cover,
+                tag: widget.girl.cover + 'cover',
                 child: CachedNetworkImage(
                   imageUrl: widget.girl.cover,
                   placeholder: (context, url) => Padding(
@@ -298,12 +281,6 @@ class DetailPageState extends State<DetailPage> {
           bindDetailWidget(),
           // 网格数据
           bindGrid(),
-          // SliverGrid.count(
-          //   crossAxisCount: 3,
-          //   crossAxisSpacing: VFDimens.d_8,
-          //   mainAxisSpacing: VFDimens.d_8,
-          //   children: bindGrid(),
-          // ),
           // 评论标题
           SliverToBoxAdapter(
             child: Padding(
