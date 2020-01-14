@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
@@ -32,18 +30,25 @@ class FallsItem extends StatelessWidget {
                 alignment: Alignment.center,
                 fit: StackFit.expand,
                 children: <Widget>[
-                  Hero(
-                    tag: bean.cover,
-                    child: CachedNetworkImage(
-                      httpHeaders: {
-                        'Referer':
-                            DateTime.now().millisecondsSinceEpoch.toString()
-                      },
-                      fit: BoxFit.cover,
-                      imageUrl: bean.cover,
-                      placeholder: (context, url) => Padding(
-                        padding: EdgeInsets.all(VFDimens.d_24),
-                        child: VFLoading(type: VFLoadingType.threeBounce),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(VFDimens.border_radius_normal),
+                      ),
+                    ),
+                    child: Hero(
+                      tag: bean.cover,
+                      child: CachedNetworkImage(
+                        httpHeaders: {
+                          'Referer':
+                              DateTime.now().millisecondsSinceEpoch.toString()
+                        },
+                        fit: BoxFit.cover,
+                        imageUrl: bean.cover,
+                        placeholder: (context, url) => Padding(
+                          padding: EdgeInsets.all(VFDimens.d_20),
+                          child: VFLoading(type: VFLoadingType.threeBounce),
+                        ),
                       ),
                     ),
                   ),

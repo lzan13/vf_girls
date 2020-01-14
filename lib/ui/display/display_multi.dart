@@ -5,7 +5,6 @@ import 'package:photo_view/photo_view_gallery.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/common/index.dart';
 
 ///
@@ -15,15 +14,13 @@ class DisplayMultiPage extends StatefulWidget {
   // 参数集合，因为当前页需要参数比较多，路由直接透传
   Map<String, dynamic> params;
 
-  List<GirlBean> dataList;
+  List<String> imgList;
   int index = 0;
-  String heroTag;
   PageController controller;
 
   DisplayMultiPage(this.params) : super() {
-    dataList = params['data'];
+    imgList = params['data'];
     index = params['index'];
-    heroTag = params['hero_tag'];
     controller = PageController(initialPage: index);
   }
 
@@ -56,15 +53,15 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
                   child: PhotoViewGallery.builder(
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
-                  GirlBean entity = widget.dataList[index];
+                  String image = widget.imgList[index];
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: CachedNetworkImageProvider(entity.cover),
+                    imageProvider: CachedNetworkImageProvider(image),
                     heroAttributes: PhotoViewHeroAttributes(
-                      tag: entity.cover,
+                      tag: image,
                     ),
                   );
                 },
-                itemCount: widget.dataList.length,
+                itemCount: widget.imgList.length,
                 loadingChild: VFLoading(type: VFLoadingType.threeBounce),
                 pageController: widget.controller,
                 enableRotation: true,
@@ -82,7 +79,7 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
               child: VFTopBar(
                 bgColor: VFColors.translucent,
                 top: MediaQuery.of(context).padding.top,
-                title: "${currentIndex + 1}/${widget.dataList.length}",
+                title: "${currentIndex + 1}/${widget.imgList.length}",
                 titleColor: VFColors.white,
                 leftIcon: VFIcons.ic_arrow_left,
               ),

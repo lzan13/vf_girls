@@ -32,16 +32,19 @@ class GirlBean {
     this.category,
   });
 
-  GirlBean.fromJson(Map<String, dynamic> json)
-      : title = json['title'],
-        cover = json['cover'],
-        images = json['images'],
-        count = json['count'],
-        time = json['time'],
-        jumpUrl = json['jumpUrl'],
-        width = json['width'],
-        height = json['height'],
-        category = json['category'];
+  factory GirlBean.fromJson(Map<String, dynamic> json) {
+    CategoryBean category = json['category'];
+    return GirlBean(
+        title: json['title'],
+        cover: json['cover'],
+        images: json['images'],
+        count: json['count'],
+        time: json['time'],
+        jumpUrl: json['jumpUrl'],
+        width: json['width'],
+        height: json['height'],
+        category: category);
+  }
 
   Map<String, dynamic> toJson() {
     return {

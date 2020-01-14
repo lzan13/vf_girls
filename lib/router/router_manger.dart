@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:vf_girls/request/bean/girl_bean.dart';
 
 import 'package:vf_girls/router/route_anim.dart';
-import 'package:vf_girls/ui/detail/detail_page.dart';
+import 'package:vf_girls/ui/detail/detail.dart';
 import 'package:vf_girls/ui/display/display_multi.dart';
 import 'package:vf_girls/ui/main/app_tab.dart';
 import 'package:vf_girls/ui/main/mine/mine_loft.dart';

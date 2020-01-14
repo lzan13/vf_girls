@@ -129,7 +129,7 @@ class ExploreBodyState extends State<ExploreBody>
       page++;
       url = '${widget.entity.jumpUrl}?page=$page';
     }
-    dynamic result = await GirlsManager.loadData(url);
+    dynamic result = await GirlsManager.loadHomeData(url);
     setState(() {
       if (isRefresh) {
         girlList.clear();

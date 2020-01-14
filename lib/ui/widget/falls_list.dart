@@ -6,7 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_girls/request/bean/tab_bean.dart';
+import 'package:vf_girls/request/bean/category_bean.dart';
 import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
@@ -17,9 +17,9 @@ import 'package:vf_girls/ui/widget/falls_item.dart';
 /// 发现列表
 ///
 class FallsList extends StatefulWidget {
-  TabBean tabBean;
+  CategoryBean category;
 
-  FallsList(this.tabBean);
+  FallsList(this.category);
 
   @override
   State<StatefulWidget> createState() => FallsListState();
@@ -44,10 +44,10 @@ class FallsListState extends State<FallsList>
     String url = '';
     if (isRefresh) {
       page = 1;
-      url = widget.tabBean.url;
+      url = widget.category.url;
     } else {
       page++;
-      url = '${widget.tabBean.url}page/$page/';
+      url = '${widget.category.url}page/$page/';
     }
     dynamic result = await GirlsManager.loadHomeData(url);
     setState(() {

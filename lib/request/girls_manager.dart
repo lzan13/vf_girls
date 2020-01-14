@@ -1,12 +1,11 @@
-import 'dart:convert';
-
-import 'package:vf_girls/request/bean/category_bean.dart';
-import 'package:vf_girls/request/girls_api.dart';
-
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' show parse;
 
+import 'package:vf_plugin/vf_plugin.dart';
+
+import 'package:vf_girls/request/bean/category_bean.dart';
 import 'package:vf_girls/request/bean/girl_bean.dart';
+import 'package:vf_girls/request/girls_api.dart';
 
 class GirlsManager {
   static Future loadHomeData(String url) async {
@@ -99,19 +98,22 @@ class GirlsManager {
     Document document = parse(result);
     // 这里使用 css 选择器语法提取数据
     GirlBean girl = new GirlBean();
-    CategoryBean category = new CategoryBean();
+    girl.category = new CategoryBean();
 
     // 标题
     girl.title = document.querySelector('.main>.content>.main-title').text;
     // 时间
     girl.time =
         document.querySelectorAll('.main>.content>.main-meta>span')[1].text;
+    girl.time = girl.time.substring(girl.time.indexOf(' '));
+
     // 分类
-    category.title =
+    girl.category.title =
         document.querySelector('.main>.content>.main-meta>span>a').text;
-    category.url = document
+    girl.category.url = document
         .querySelector('.main>.content>.main-meta>span>a')
         .attributes['href'];
+
     // 宽高
     girl.width = int.parse(document
         .querySelector('.main>.content>.main-image>p>a>img')
@@ -121,106 +123,22 @@ class GirlsManager {
         .attributes['height']);
     girl.count = int.parse(
         document.querySelectorAll('.main>.content>.pagenavi>a>span')[4].text);
+
+    // 解析图片地址
+    String imgUrl = document
+        .querySelector('.main>.content>.main-image>p>a>img')
+        .attributes['src'];
+    int end = imgUrl.lastIndexOf('.');
+    String imgPrefix = imgUrl.substring(0, end - 2);
+    String imgSuffix = imgUrl.substring(end);
     girl.images = List.generate(girl.count, (i) {
-      // TODO
+      int index = i + 1;
+      if (i < 10) {
+        return '${imgPrefix}0$index$imgSuffix';
+      } else {
+        return '$imgPrefix$index$imgSuffix';
+      }
     });
-
-    // if (elements.isNotEmpty) {
-    //   data = List.generate(elements.length, (i) {
-    //     GirlBean bean = GirlBean();
-    //     // 获取图片信息
-    //     Element image = elements[i].querySelector('.lazy');
-    //     bean.cover = image.attributes['data-original'];
-    //     bean.width = int.parse(image.attributes['width']);
-    //     bean.width = int.parse(image.attributes['height']);
-
-    //     // 标题及跳转
-    //     Element a = elements[i].querySelector('span > a');
-    //     bean.title = a.text;
-    //     bean.jumpUrl = a.attributes['href'];
-
-    //     // 时间
-    //     Element time = elements[i].querySelector('.time');
-    //     bean.time = time.text;
-
-    //     return bean;
-    //   });
-    // }
     return girl;
-
-    int start = result.indexOf('[[{');
-    int end = result.indexOf('}]]');
-    result = result.substring(start, end) + "}]]";
-    List jsonList = json.decode(result);
-    List<GirlBean> data = [];
-    // 解析嵌套数据
-    for (int i = 0; i < jsonList.length; i++) {
-      List list = jsonList[i];
-      for (int j = 0; j < list.length; j++) {
-        data.add(GirlBean.fromJson(list[j]));
-      }
-    }
-    return data;
-  }
-
-  ///
-  /// 统一加载数据方法
-  ///
-  static Future loadData(String url) async {
-    var response = await http.get(url);
-    var result;
-    if (response.statusCode == 200) {
-      result = response.data;
-    } else {
-      result = '<html>error! status:${response.statusCode}</html>';
-    }
-
-    Document document = parse(result);
-    // 这里使用 css 选择器语法提取数据
-    List<Element> elements =
-        document.querySelectorAll('.main-body > .item-box > .item-list > a');
-    List<GirlBean> data = [];
-    if (elements.isNotEmpty) {
-      data = List.generate(elements.length, (i) {
-        GirlBean entity = GirlBean();
-        entity.jumpUrl = elements[i].attributes['href'];
-
-        Element image = elements[i].querySelector('.img-wrap>.img-inner>img');
-        entity.title = image.attributes['alt'];
-        entity.cover = image.attributes['data-original'];
-
-        Element tips = elements[i].querySelector('.img-wrap>.img-inner>.tips');
-        entity.count = tips.text;
-        return entity;
-      });
-    }
-    return data;
-  }
-
-  ///
-  /// 获取详情
-  ///
-  static Future loadDetail(String detailUrl) async {
-    var response = await http.get(detailUrl);
-    var result;
-    if (response.statusCode == 200) {
-      result = response.data;
-    } else {
-      result = '';
-    }
-
-    int start = result.indexOf('[[{');
-    int end = result.indexOf('}]]');
-    result = result.substring(start, end) + "}]]";
-    List jsonList = json.decode(result);
-    List<GirlBean> data = [];
-    // 解析嵌套数据
-    for (int i = 0; i < jsonList.length; i++) {
-      List list = jsonList[i];
-      for (int j = 0; j < list.length; j++) {
-        data.add(GirlBean.fromJson(list[j]));
-      }
-    }
-    return data;
   }
 }

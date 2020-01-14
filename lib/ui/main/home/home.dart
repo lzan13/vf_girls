@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/json_manager.dart';
-import 'package:vf_girls/request/bean/tab_bean.dart';
+import 'package:vf_girls/request/bean/category_bean.dart';
 import 'package:vf_girls/ui/widget/custom_tab.dart';
 import 'package:vf_girls/ui/widget/falls_list.dart';
 
 ///
-/// 首页 Tab 页面
+/// 首页页面
 ///
 class HomePage extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
-  List<TabBean> tabList = [];
+  List<CategoryBean> tabList = [];
 
   @override
   void initState() {
@@ -39,6 +39,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
           title: TabBar(
             isScrollable: true,
             indicator: VFTabIndicator(
+              width: VFDimens.d_24,
               borderSide: BorderSide(
                 width: VFDimens.d_3,
                 color: Theme.of(context).accentColor,
@@ -57,8 +58,14 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
             ),
             tabs: List.generate(
               tabList.length,
-              (index) => VFTab(
-                text: tabList[index].title,
+              (index) => Padding(
+                padding: EdgeInsets.only(
+                  left: VFDimens.d_8,
+                  right: VFDimens.d_8,
+                ),
+                child: VFTab(
+                  text: tabList[index].title,
+                ),
               ),
             ),
           ),

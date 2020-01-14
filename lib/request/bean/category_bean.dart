@@ -7,20 +7,14 @@ class CategoryBean {
   String title;
   String url;
 
-  CategoryBean({
-    this.title,
-    this.url,
-  });
+  CategoryBean({this.title, this.url});
 
-  CategoryBean.fromJson(Map<String, dynamic> json)
-      : title = json['title'],
-        url = json['url'];
+  factory CategoryBean.fromJson(Map<String, dynamic> json) {
+    return CategoryBean(title: json['title'], url: json['url']);
+  }
 
   Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'url': url,
-    };
+    return {'title': title, 'url': url};
   }
 
   @override

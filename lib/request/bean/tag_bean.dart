@@ -14,17 +14,16 @@ class TagBean {
     this.url,
   });
 
-  TagBean.fromJson(Map<String, dynamic> json)
-      : title = json['title'],
-        cover = json['cover'],
-        url = json['url'];
+  factory TagBean.fromJson(Map<String, dynamic> json) {
+    return TagBean(
+      title: json['title'],
+      cover: json['cover'],
+      url: json['url'],
+    );
+  }
 
   Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'cover': cover,
-      'url': url,
-    };
+    return {'title': title, 'cover': cover, 'url': url};
   }
 
   @override
