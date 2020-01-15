@@ -61,7 +61,7 @@ class JSONHelper {
   ///
   static List<CategoryBean> getExploreTabs() {
     String tabStr =
-        '[{"title":"妹子自拍","url":"https://www.mzitu.com/zipai/",},{"title":"街拍美女","url":"https://www.mzitu.com/jiepai/",}]';
+        '[{"title":"妹子自拍","url":"https://www.mzitu.com/zipai/"},{"title":"街拍美女","url":"https://www.mzitu.com/jiepai/"}]';
     List jsonList = json.decode(tabStr);
     List<CategoryBean> tabList = [];
     jsonList.forEach((tab) {

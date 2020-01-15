@@ -1,5 +1,6 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart' show parse;
+import 'package:vf_girls/request/bean/daily_bean.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -29,10 +30,10 @@ class GirlsManager {
     //     </div>
     //   </div>
     // </div>
-    Document document = _loadData(url) as Document;
+    Document document = await _loadData(url);
     // 这里使用 css 选择器语法提取数据
-    List<Element> elements = document
-        .querySelectorAll('.main > .main-content > .postlist > #pins > li');
+    List<Element> elements =
+        document.querySelectorAll('.main>.main-content>.postlist>#pins>li');
     List<GirlBean> data = [];
 
     if (elements.isNotEmpty) {
@@ -45,7 +46,7 @@ class GirlsManager {
         bean.width = int.parse(image.attributes['height']);
 
         // 标题及跳转
-        Element a = elements[i].querySelector('span > a');
+        Element a = elements[i].querySelector('span>a');
         bean.title = a.text;
         bean.jumpUrl = a.attributes['href'];
 
@@ -81,8 +82,7 @@ class GirlsManager {
     //     </div>
     //   </div>
     // </div>
-    Document document = _loadData(url) as Document;
-    // 这里使用 css 选择器语法提取数据
+    Document document = await _loadData(url);
     GirlBean girl = new GirlBean();
     girl.category = new CategoryBean();
 
@@ -149,23 +149,79 @@ class GirlsManager {
     //     </div>
     //   </div>
     // </div>
-    Document document = _loadData(url) as Document;
+    Document document = await _loadData(url);
+    DailyBean data = new DailyBean();
+
+    // 图片集合
+    List<Element> imgElements = document.querySelectorAll(
+        '.main>.main-content>.postlist>#comments>ul>li>.comment-body');
+    if (imgElements.isNotEmpty) {
+      data.images = List.generate(imgElements.length, (i) {
+        return imgElements[i]
+            .querySelector('p>.lazy')
+            .attributes['data-original'];
+      });
+    }
+    // 排行榜
+    List<Element> topElements =
+        document.querySelectorAll('.main>.sidebar>.widgets_top>a');
+    if (topElements.isNotEmpty) {
+      data.topGirls = List.generate(topElements.length, (i) {
+        GirlBean bean = new GirlBean();
+        Element element = topElements[i];
+        bean.jumpUrl = element.attributes['href'];
+        bean.title = element.querySelector('img').attributes['alt'];
+        bean.cover = element.querySelector('img').attributes['src'];
+        bean.width =
+            int.parse(element.querySelector('img').attributes['width']);
+        bean.height =
+            int.parse(element.querySelector('img').attributes['height']);
+        return bean;
+      });
+    }
+
+    // 下一页
+    data.next = document
+        .querySelector(
+            '.main>.main-content>.postlist>#comments>.pagenavi-cm>.prev')
+        .attributes['href'];
+    return data;
+  }
+
+  ///
+  /// 加载专题数据
+  ///
+  static Future loadSubject(String url) async {
+    // <div class="main">
+    //   <div class="main-content">
+    //     <div class="postlist">
+    //       <dl class="tags">
+    //         <dt>标签</dt>
+    //         <dd>
+    //           <a href="https://www.mzitu.com/tag/xinggan/" target="_blank">
+    //             <img class="lazy" src="https://www.mzitu.com/static/pc/img/lazy.png" data-original="https://wxt.sinaimg.cn/mw690/9d52c073gy1frm1sklskij205y05yglw.jpg" alt="性感美女专题" />性感美女</a>
+    //           <i>共4347套图</i>
+    //         </dd>
+    //       </dl>
+    //     </div>
+    //   </div>
+    // </div>
+    Document document = await _loadData(url);
     // 这里使用 css 选择器语法提取数据
-    List<Element> elements = document.querySelectorAll(
-        '.main>.main-content>.postlist>.comments>ul>li>.comment-body');
-    List<GirlBean> data = [];
+    List<Element> elements =
+        document.querySelectorAll('.main>.main-content>.postlist>.tags>dd');
+    List<CategoryBean> data = [];
+
     if (elements.isNotEmpty) {
       data = List.generate(elements.length, (i) {
-        GirlBean bean = GirlBean();
-        // 时间
-        bean.time = elements[i].querySelector('.comment-meta>a').text;
-
-        // 标题及跳转
+        CategoryBean bean = CategoryBean();
+        // 标题描述
+        bean.title = elements[i].querySelector('a').text;
+        bean.desc = elements[i].querySelector('i').text;
+        // 封面信息
         bean.cover =
-            elements[i].querySelector('p>.lazy').attributes['data-original'];
-        bean.width =
-            int.parse(elements[i].querySelector('p>.lazy').attributes['width']);
-
+            elements[i].querySelector('.lazy').attributes['data-original'];
+        bean.url = elements[i].querySelector('a').attributes['href'];
         return bean;
       });
     }
@@ -176,7 +232,7 @@ class GirlsManager {
   /// 统一处理请求
   ///
   static Future _loadData(url) async {
-    print('request url: $url');
+    VFLog.d('request url: $url');
     var response = await http.get(url);
     var result;
     if (response.statusCode == 200) {
@@ -185,7 +241,6 @@ class GirlsManager {
       result =
           '{"code":${response.statusCode}, "msg":"${response.statusMessage}"}';
     }
-    Document document = parse(result);
-    return document;
+    return parse(result);
   }
 }

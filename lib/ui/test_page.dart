@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:vf_girls/ui/widget/dialog_loading.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -32,7 +31,7 @@ class TestPageState extends State<TestPage> {
       // body: DialogLoading(),
       body: EasyRefresh.custom(
         firstRefresh: true,
-        firstRefreshWidget: DialogLoading(),
+        firstRefreshWidget: VFDialogLoading(),
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildBuilderDelegate(

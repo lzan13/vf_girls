@@ -33,7 +33,7 @@ class GirlBean {
   });
 
   factory GirlBean.fromJson(Map<String, dynamic> json) {
-    CategoryBean category = json['category'];
+    CategoryBean category = CategoryBean.fromJson(json['category']);
     return GirlBean(
         title: json['title'],
         cover: json['cover'],

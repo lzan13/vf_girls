@@ -42,7 +42,7 @@ class FallsItem extends StatelessWidget {
                         imageUrl: bean.cover,
                         placeholder: (context, url) => Padding(
                           padding: EdgeInsets.all(VFDimens.d_20),
-                          child: VFLoading(type: VFLoadingType.threeBounce),
+                          child: VFLoading(),
                         ),
                       ),
                     ),

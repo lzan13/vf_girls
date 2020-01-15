@@ -22,6 +22,12 @@ class MinePage extends StatefulWidget {
 
 class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin {
   @override
+  void initState() {
+    super.initState();
+    VFLog.d('MinePage initState');
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(

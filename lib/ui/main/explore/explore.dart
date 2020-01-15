@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vf_girls/ui/common/daily_body.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/json_manager.dart';
 import 'package:vf_girls/request/bean/category_bean.dart';
-import 'package:vf_girls/ui/main/explore/daily_list.dart';
-import 'package:vf_girls/ui/widget/custom_tab.dart';
 
 ///
-/// 发现探索 Tab 页面
+/// 标签分类页面
 ///
 class ExplorePage extends StatefulWidget {
   @override
@@ -21,6 +20,7 @@ class ExplorePageState extends State<ExplorePage>
   @override
   void initState() {
     super.initState();
+    VFLog.d('ExplorePage initState');
     initTab();
   }
 
@@ -35,9 +35,10 @@ class ExplorePageState extends State<ExplorePage>
       length: tabList.length,
       initialIndex: 0,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: VFColors.transparent,
-          title: TabBar(
+        appBar: VFTopBar(
+          bgColor: VFColors.transparent,
+          top: MediaQuery.of(context).padding.top,
+          titleWidget: TabBar(
             isScrollable: true,
             indicator: VFTabIndicator(
               width: VFDimens.d_24,
@@ -74,7 +75,7 @@ class ExplorePageState extends State<ExplorePage>
         body: TabBarView(
           children: List.generate(
             tabList.length,
-            (index) => DailyList(tabList[index]),
+            (index) => DailyBody(tabList[index]),
           ),
         ),
       ),

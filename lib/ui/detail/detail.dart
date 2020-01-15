@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -10,7 +9,6 @@ import 'package:vf_girls/common/resource_manager.dart';
 import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
-import 'package:vf_girls/ui/widget/dialog_loading.dart';
 
 ///
 /// 详情页面
@@ -37,6 +35,7 @@ class DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
+    VFLog.d('DetailPage initState');
     linkNotifier = LinkHeaderNotifier();
   }
 
@@ -107,7 +106,7 @@ class DetailPageState extends State<DetailPage> {
                       size: VFDimens.d_18,
                     ),
                     Text(
-                      widget.girl.time,
+                      widget.girl.time == null ? '' : widget.girl.time,
                       style: TextStyle(
                         color: VFColors.grey87,
                         fontSize: VFSizes.s_12,
@@ -116,37 +115,37 @@ class DetailPageState extends State<DetailPage> {
                   ],
                 ),
                 // 分类
-                GestureDetector(
-                  onTap: () {
-                    Router.toCategory(context, widget.girl.category);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.all(VFDimens.margin_small),
-                    decoration: BoxDecoration(
-                      color: VFColors.grey54,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(VFDimens.border_radius_large),
-                      ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(
-                        VFDimens.padding_small,
-                        VFDimens.padding_little,
-                        VFDimens.padding_small,
-                        VFDimens.padding_little,
-                      ),
-                      child: Text(
-                        widget.girl.category == null
-                            ? ''
-                            : widget.girl.category.title,
-                        style: TextStyle(
-                          color: VFColors.white87,
-                          fontSize: VFSizes.s_14,
+                widget.girl.category != null
+                    ? GestureDetector(
+                        onTap: () {
+                          Router.toCategory(context, widget.girl.category);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(VFDimens.margin_small),
+                          decoration: BoxDecoration(
+                            color: VFColors.grey54,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(VFDimens.border_radius_large),
+                            ),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(
+                              VFDimens.padding_small,
+                              VFDimens.padding_little,
+                              VFDimens.padding_small,
+                              VFDimens.padding_little,
+                            ),
+                            child: Text(
+                              widget.girl.category.title,
+                              style: TextStyle(
+                                color: VFColors.white87,
+                                fontSize: VFSizes.s_14,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
+                      )
+                    : Container(),
               ],
             ),
             SizedBox(height: VFDimens.d_4),
@@ -216,7 +215,7 @@ class DetailPageState extends State<DetailPage> {
                           imageUrl: imgList[index],
                           placeholder: (context, url) => Padding(
                             padding: EdgeInsets.all(VFDimens.d_20),
-                            child: VFLoading(type: VFLoadingType.threeBounce),
+                            child: VFLoading(),
                           ),
                         ),
                       ),
@@ -269,7 +268,7 @@ class DetailPageState extends State<DetailPage> {
                   imageUrl: widget.girl.cover,
                   placeholder: (context, url) => Padding(
                     padding: EdgeInsets.all(VFDimens.d_36),
-                    child: VFLoading(type: VFLoadingType.threeBounce),
+                    child: VFLoading(),
                   ),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                   fit: BoxFit.cover,

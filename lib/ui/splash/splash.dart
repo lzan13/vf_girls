@@ -39,7 +39,7 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
     _logoController.forward();
 
     _countdownController =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     _countdownController.forward();
     super.initState();
   }

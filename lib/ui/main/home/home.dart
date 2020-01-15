@@ -3,8 +3,7 @@ import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/json_manager.dart';
 import 'package:vf_girls/request/bean/category_bean.dart';
-import 'package:vf_girls/ui/widget/custom_tab.dart';
-import 'package:vf_girls/ui/widget/falls_list.dart';
+import 'package:vf_girls/ui/common/falls_body.dart';
 
 ///
 /// 首页页面
@@ -20,6 +19,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
+    VFLog.d('HomePage initState');
     initTab();
   }
 
@@ -34,9 +34,10 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
       length: tabList.length,
       initialIndex: 0,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: VFColors.transparent,
-          title: TabBar(
+        appBar: VFTopBar(
+          bgColor: VFColors.transparent,
+          top: MediaQuery.of(context).padding.top,
+          titleWidget: TabBar(
             isScrollable: true,
             indicator: VFTabIndicator(
               width: VFDimens.d_24,
@@ -51,7 +52,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
               fontWeight: FontWeight.bold,
             ),
             labelPadding: EdgeInsets.only(left: 0, right: 0),
-            unselectedLabelColor: VFColors.greyWhite87,
+            unselectedLabelColor: VFColors.grey87,
             unselectedLabelStyle: TextStyle(
               fontSize: VFSizes.s_16,
               fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
         body: TabBarView(
           children: List.generate(
             tabList.length,
-            (index) => FallsList(tabList[index]),
+            (index) => FallsBody(tabList[index]),
           ),
         ),
       ),

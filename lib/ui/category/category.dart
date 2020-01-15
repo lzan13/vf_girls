@@ -3,7 +3,7 @@ import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/request/bean/category_bean.dart';
-import 'package:vf_girls/ui/widget/falls_list.dart';
+import 'package:vf_girls/ui/common/falls_body.dart';
 
 ///
 /// 分类页面
@@ -34,7 +34,7 @@ class CategoryPageState extends State<CategoryPage>
         titleColor: VFColors.white,
         leftIcon: VFIcons.ic_arrow_left,
       ),
-      body: FallsList(widget.category),
+      body: FallsBody(widget.category),
     );
   }
 

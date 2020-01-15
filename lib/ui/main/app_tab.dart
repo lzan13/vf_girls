@@ -7,15 +7,15 @@ import 'package:vf_plugin/vf_plugin.dart';
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/ui/main/home/home.dart';
 import 'package:vf_girls/ui/main/explore/explore.dart';
-import 'package:vf_girls/ui/main/tag/tag.dart';
+import 'package:vf_girls/ui/main/subject/subject.dart';
 import 'package:vf_girls/ui/main/mine/mine.dart';
 import 'package:vf_girls/ui/widget/toast.dart';
 
 List<Widget> pages = <Widget>[
   HomePage(),
   ExplorePage(),
-  TagPage(),
-  MinePage(),
+  SubjectPage(),
+  MinePage()
 ];
 
 ///
@@ -41,6 +41,8 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    VFLog.d('AppTab initState');
+
     // tabController = TabController(length: 3, vsync: this);
     // tabController.addListener(() {
     //   setState(() {});
@@ -121,7 +123,7 @@ class AppTabState extends State<AppTab> with SingleTickerProviderStateMixin {
               size: VFDimens.d_30,
             ),
             title: Text(
-              FlutterI18n.translate(context, 'tab_tag'),
+              FlutterI18n.translate(context, 'tab_subject'),
               style: TextStyle(fontSize: VFSizes.tab_small),
             ),
           ),
