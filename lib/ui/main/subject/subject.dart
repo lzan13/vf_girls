@@ -54,7 +54,7 @@ class SubjectPageState extends State<SubjectPage>
       ),
       sliver: new SliverGrid(
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, //Grid按两列显示
+          crossAxisCount: 4, //Grid按两列显示
           mainAxisSpacing: VFDimens.d_4,
           crossAxisSpacing: VFDimens.d_4,
           childAspectRatio: 1.0,
@@ -90,7 +90,7 @@ class SubjectPageState extends State<SubjectPage>
                     right: 0.0,
                     bottom: 0.0,
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: VFDimens.d_16),
+                      padding: EdgeInsets.only(bottom: VFDimens.d_8),
                       child: Column(
                         children: <Widget>[
                           Text(
@@ -98,7 +98,7 @@ class SubjectPageState extends State<SubjectPage>
                             style: TextStyle(
                               color: VFColors.white87,
                               fontWeight: FontWeight.bold,
-                              fontSize: VFSizes.s_14,
+                              fontSize: VFSizes.s_12,
                               shadows: [
                                 Shadow(
                                   color: VFColors.black,
@@ -108,12 +108,12 @@ class SubjectPageState extends State<SubjectPage>
                               ],
                             ),
                           ),
+                          SizedBox(height: VFDimens.d_4),
                           Text(
                             bean.desc,
                             style: TextStyle(
                               color: VFColors.white87,
-                              fontWeight: FontWeight.bold,
-                              fontSize: VFSizes.s_14,
+                              fontSize: VFSizes.s_10,
                               shadows: [
                                 Shadow(
                                   color: VFColors.black,

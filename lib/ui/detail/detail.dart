@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -83,6 +85,47 @@ class DetailPageState extends State<DetailPage> {
         noMore: false,
       );
     }
+  }
+
+  ///
+  /// 模糊封面图
+  ///
+  Widget bindCoverWidget() {
+    return Stack(
+      alignment: Alignment.center,
+      fit: StackFit.expand,
+      overflow: Overflow.clip,
+      children: <Widget>[
+        Positioned(
+          left: 0.0,
+          right: 0.0,
+          child: Hero(
+            tag: widget.girl.cover + 'cover',
+            child: CachedNetworkImage(
+              imageUrl: widget.girl.cover,
+              placeholder: (context, url) => Padding(
+                padding: EdgeInsets.all(VFDimens.d_36),
+                child: VFLoading(),
+              ),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        // 模糊
+        Positioned(
+          left: 0.0,
+          right: 0.0,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 3),
+            child: Container(
+              color: VFColors.white.withOpacity(0.1),
+              height: VFDimens.d_320,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   ///
@@ -262,18 +305,7 @@ class DetailPageState extends State<DetailPage> {
               top: MediaQuery.of(context).padding.top,
               leftIcon: VFIcons.ic_arrow_left,
               rightWidget: RefreshIndicator(linkNotifier),
-              coverWidget: Hero(
-                tag: widget.girl.cover + 'cover',
-                child: CachedNetworkImage(
-                  imageUrl: widget.girl.cover,
-                  placeholder: (context, url) => Padding(
-                    padding: EdgeInsets.all(VFDimens.d_36),
-                    child: VFLoading(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                  fit: BoxFit.cover,
-                ),
-              ),
+              coverWidget: bindCoverWidget(),
             ),
           ),
           //  组合详细信息Widget
