@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:vf_girls/router/router_manger.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -16,9 +16,6 @@ class TestPage extends StatefulWidget {
 }
 
 class TestPageState extends State<TestPage> {
-  // 总数
-  int _count = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,32 +27,23 @@ class TestPageState extends State<TestPage> {
       ),
       // body: DialogLoading(),
       body: EasyRefresh.custom(
-        firstRefresh: true,
+        firstRefresh: false,
         firstRefreshWidget: VFDialogLoading(),
         slivers: <Widget>[
           SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return VFExampleItem();
-              },
-              childCount: _count,
-            ),
+            delegate: SliverChildListDelegate([
+              // 测试
+              VFListItem(
+                title: FlutterI18n.translate(context, 'splash'),
+                onPressed: () {
+                  Router.toSplash(context);
+                },
+                leftIcon: VFIcons.ic_settings,
+                rightIcon: VFIcons.ic_arrow_right,
+              ),
+            ]),
           ),
         ],
-        onRefresh: () async {
-          await Future.delayed(Duration(seconds: 3), () {
-            setState(() {
-              _count = 20;
-            });
-          });
-        },
-        onLoad: () async {
-          await Future.delayed(Duration(seconds: 2), () {
-            setState(() {
-              _count += 20;
-            });
-          });
-        },
       ),
     );
   }

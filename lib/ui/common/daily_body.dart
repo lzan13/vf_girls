@@ -4,6 +4,7 @@ import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:vf_girls/common/resource_manager.dart';
 import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/router/router_manger.dart';
 
@@ -127,10 +128,14 @@ class DailyBodyState extends State<DailyBody>
                       httpHeaders: {'Referer': bean.cover},
                       fit: BoxFit.cover,
                       imageUrl: bean.cover,
-                      placeholder: (context, url) => Padding(
-                        padding: EdgeInsets.all(VFDimens.d_20),
-                        child: VFLoading(),
+                      placeholder: (context, url) => Image.asset(
+                        RESHelper.wrapImage('img_default.png'),
+                        fit: BoxFit.cover,
                       ),
+                      // Padding(
+                      //   padding: EdgeInsets.all(VFDimens.d_20),
+                      //   child: VFLoading(),
+                      // ),
                     ),
                   ),
                 ),
@@ -151,10 +156,14 @@ class DailyBodyState extends State<DailyBody>
                   httpHeaders: {'Referer': image},
                   fit: BoxFit.cover,
                   imageUrl: image,
-                  placeholder: (context, url) => Padding(
-                    padding: EdgeInsets.all(VFDimens.d_20),
-                    child: VFLoading(),
+                  placeholder: (context, url) => Image.asset(
+                    RESHelper.wrapImage('img_default_big.png'),
+                    fit: BoxFit.cover,
                   ),
+                  // Padding(
+                  //   padding: EdgeInsets.all(VFDimens.d_20),
+                  //   child: VFLoading(),
+                  // ),
                 ),
               ),
             );

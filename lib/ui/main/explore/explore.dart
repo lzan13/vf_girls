@@ -38,25 +38,25 @@ class ExplorePageState extends State<ExplorePage>
         appBar: VFTopBar(
           bgColor: VFColors.transparent,
           top: MediaQuery.of(context).padding.top,
+          // 配置 tabbar
           titleWidget: TabBar(
             isScrollable: true,
             indicator: VFTabIndicator(
               width: VFDimens.d_24,
               borderSide: BorderSide(
                 width: VFDimens.d_3,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).textTheme.title.color,
               ),
             ),
-            labelColor: Theme.of(context).accentColor,
+            labelColor: Theme.of(context).textTheme.title.color,
             labelStyle: TextStyle(
-              fontSize: VFSizes.s_20,
+              fontSize: VFSizes.s_16,
               fontWeight: FontWeight.bold,
             ),
             labelPadding: EdgeInsets.only(left: 0, right: 0),
-            unselectedLabelColor: VFColors.grey87,
             unselectedLabelStyle: TextStyle(
               fontSize: VFSizes.s_16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
             ),
             tabs: List.generate(
               tabList.length,

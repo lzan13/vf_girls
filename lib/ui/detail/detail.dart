@@ -256,10 +256,14 @@ class DetailPageState extends State<DetailPage> {
                           },
                           fit: BoxFit.cover,
                           imageUrl: imgList[index],
-                          placeholder: (context, url) => Padding(
-                            padding: EdgeInsets.all(VFDimens.d_20),
-                            child: VFLoading(),
+                          placeholder: (context, url) => Image.asset(
+                            RESHelper.wrapImage('img_default_big.png'),
+                            fit: BoxFit.cover,
                           ),
+                          // Padding(
+                          //   padding: EdgeInsets.all(VFDimens.d_20),
+                          //   child: VFLoading(),
+                          // ),
                         ),
                       ),
                     ),

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
+import 'package:vf_plugin/vf_plugin.dart';
+
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/router/router_manger.dart';
 
@@ -17,37 +19,49 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> with TickerProviderStateMixin {
-  AnimationController _logoController;
-  Animation<double> _animation;
-  AnimationController _countdownController;
+  // 动画时间 单位 秒
+  int animTime = 5;
+  // 封面背景动画
+  Animation<double> coverAnimation;
+  AnimationController coverController;
+
+  // 跳过按钮动画
+  Animation<int> skipAnimation;
+  AnimationController skipController;
 
   @override
   void initState() {
-    _logoController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+    super.initState();
+    coverController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: animTime * 1000),
+    );
+    // 创建动画
+    coverAnimation = Tween(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(curve: Curves.easeInOutBack, parent: coverController));
+    // 开始动画
+    coverController.forward();
 
-    _animation = Tween(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(curve: Curves.easeInOutBack, parent: _logoController));
-
-    _animation.addStatusListener((status) {
+    // 跳过按钮动画
+    skipController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: animTime),
+    );
+    skipAnimation = StepTween(begin: animTime, end: 0).animate(skipController);
+    // 动画监听
+    skipAnimation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        _logoController.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _logoController.forward();
+        Router.toAppTab(context);
       }
     });
-    _logoController.forward();
-
-    _countdownController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
-    _countdownController.forward();
-    super.initState();
+    // 开始动画
+    skipController.forward();
   }
 
   @override
   void dispose() {
-    _logoController.dispose();
-    _countdownController.dispose();
+    coverController.dispose();
+    skipController.dispose();
     super.dispose();
   }
 
@@ -56,123 +70,105 @@ class SplashState extends State<Splash> with TickerProviderStateMixin {
     return Scaffold(
       body: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: Stack(fit: StackFit.expand, children: <Widget>[
-          Image.asset(RESHelper.wrapImage('splash_bg.png'),
-              colorBlendMode: BlendMode
-                  .srcOver, //colorBlendMode方式在android等机器上有些延迟,导致有些闪屏,故采用两套图片的方式
-              color: Colors.black.withOpacity(
-                  Theme.of(context).brightness == Brightness.light ? 0 : 0.65),
-              fit: BoxFit.fill),
-          AnimatedFlutterLogo(
-            animation: _animation,
-          ),
-          Align(
-            alignment: Alignment(0.0, 0.7),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                AnimatedAndroidLogo(
-                  animation: _animation,
-                ),
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: SafeArea(
-              child: InkWell(
-                onTap: () {
-                  Router.toAppTab(context);
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  margin: EdgeInsets.only(right: 20, bottom: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: Colors.black.withAlpha(100),
-                  ),
-                  child: AnimatedCountdown(
-                    context: context,
-                    animation: StepTween(begin: 3, end: 0)
-                        .animate(_countdownController),
-                  ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            //colorBlendMode 方式在 android 机器上有些延迟,导致有些闪屏,故采用两套图片的方式
+            Image.asset(RESHelper.wrapImage('img_girl.jpg'),
+                colorBlendMode: BlendMode.srcOver,
+                color: Colors.black.withOpacity(
+                    Theme.of(context).brightness == Brightness.light
+                        ? 0
+                        : 0.65),
+                fit: BoxFit.cover),
+            // 模糊
+            BlurCoverWidget(animation: coverAnimation),
+            Positioned(
+              left: 0,
+              bottom: 0,
+              right: 0,
+              child: Container(
+                color: VFColors.white,
+                padding: EdgeInsets.all(VFDimens.d_16),
+                height: VFDimens.d_48 + VFDimens.d_32,
+                child: Stack(
+                  alignment: AlignmentDirectional.centerEnd,
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Image.asset(
+                      RESHelper.wrapImage('img_logo.png'),
+                    ),
+                    Positioned(
+                      right: 0,
+                      child: InkWell(
+                        onTap: () {
+                          Router.toAppTab(context);
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(VFDimens.border_radius_normal),
+                          ),
+                          child: Container(
+                            color: VFColors.black38,
+                            padding: EdgeInsets.all(VFDimens.d_8),
+                            child: SkipWidget(animation: skipAnimation),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          )
-        ]),
+          ],
+        ),
       ),
     );
   }
 }
 
-class AnimatedCountdown extends AnimatedWidget {
+///
+/// 倒计时
+///
+class SkipWidget extends AnimatedWidget {
+  // 动画
   final Animation<int> animation;
-
-  AnimatedCountdown({key, this.animation, context})
-      : super(key: key, listenable: animation) {
-    this.animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        Router.toAppTab(context);
-      }
-    });
-  }
+  SkipWidget({key, this.animation}) : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {
     var value = animation.value + 1;
     return Text(
-      (value == 0 ? '' : '$value | ') + FlutterI18n.translate(context, "skip"),
-      style: TextStyle(color: Colors.white),
-    );
-  }
-}
-
-class AnimatedFlutterLogo extends AnimatedWidget {
-  AnimatedFlutterLogo({
-    Key key,
-    Animation<double> animation,
-  }) : super(key: key, listenable: animation);
-
-  @override
-  Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
-    return AnimatedAlign(
-      duration: Duration(milliseconds: 10),
-      alignment: Alignment(0, 0.2 + animation.value * 0.3),
-      curve: Curves.bounceOut,
-      child: Image.asset(
-        RESHelper.wrapImage('splash_flutter.png'),
-        width: 280,
-        height: 120,
+      FlutterI18n.translate(context, "skip") + (value == 0 ? '' : ' $value'),
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: VFSizes.s_14,
       ),
     );
   }
 }
 
-class AnimatedAndroidLogo extends AnimatedWidget {
-  AnimatedAndroidLogo({
-    Key key,
-    Animation<double> animation,
-  }) : super(key: key, listenable: animation);
+///
+/// 模糊背景
+///
+class BlurCoverWidget extends AnimatedWidget {
+  // 动画
+  final Animation<double> animation;
+  BlurCoverWidget({key, this.animation})
+      : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Image.asset(
-          RESHelper.wrapImage('splash_fun.png'),
-          width: 140 * animation.value,
-          height: 80 * animation.value,
+    return Positioned(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: animation.value * 10,
+          sigmaY: animation.value * 10,
         ),
-        Image.asset(
-          RESHelper.wrapImage('splash_android.png'),
-          width: 200 * (1 - animation.value),
-          height: 80 * (1 - animation.value),
+        child: Container(
+          color: VFColors.white.withOpacity(0.1),
         ),
-      ],
+      ),
     );
   }
 }

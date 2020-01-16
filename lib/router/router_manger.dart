@@ -196,6 +196,11 @@ class Router {
   static void toTest(context) {
     Navigator.pushNamed(context, RouteName.test);
   }
+
+  /// 测试页面
+  static void toSplash(context) {
+    Navigator.pushNamed(context, RouteName.splash);
+  }
 }
 
 /// Pop路由

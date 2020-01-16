@@ -47,6 +47,8 @@ class Store {
     return MultiProvider(
       providers: providers,
       child: Consumer<ThemeModel>(builder: (context, themeModel, child) {
+        // 初始化时检查下状态栏
+        themeModel.checkThemeStatusBar();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           // 主题

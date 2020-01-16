@@ -79,6 +79,16 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin {
               leftIcon: VFIcons.ic_settings,
               rightIcon: VFIcons.ic_arrow_right,
             ),
+            // 测试
+            VFListItem(
+              title: FlutterI18n.translate(context, ' test'),
+              describe: FlutterI18n.translate(context, 'test_desc'),
+              onPressed: () {
+                Router.toTest(context);
+              },
+              leftIcon: VFIcons.ic_settings,
+              rightIcon: VFIcons.ic_arrow_right,
+            ),
           ]),
         ),
       ]),
@@ -116,7 +126,7 @@ class MineHeaderWidget extends StatelessWidget {
                   child: Hero(
                     tag: 'loginLogo',
                     child: ClipOval(
-                      child: Image.asset(RESHelper.wrapImage('img_default.png'),
+                      child: Image.asset(RESHelper.wrapImage('img_logo.png'),
                           fit: BoxFit.cover,
                           width: 80,
                           height: 80,

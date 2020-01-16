@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:vf_girls/common/index.dart';
@@ -48,13 +49,28 @@ class ThemeModel extends ChangeNotifier {
 
   ///
   /// 切换指定色彩
-  /// 没有传 [brightness] 就不改变 brightness,color 同理
+  /// 没有传 [brightness] 就不改变 brightness, color 同理
   ///
   void switchTheme({bool userDarkMode, MaterialColor color}) {
     _userDarkMode = userDarkMode ?? _userDarkMode;
     _themeColor = color ?? _themeColor;
     notifyListeners();
     saveTheme2Storage(_userDarkMode, _themeColor);
+  }
+
+  ///
+  /// 检查主题状态栏
+  ///
+  void checkThemeStatusBar() {
+    if (_userDarkMode) {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: VFColors.transparent,
+      ));
+    } else {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: VFColors.transparent,
+      ));
+    }
   }
 
   ///

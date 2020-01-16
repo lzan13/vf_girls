@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:vf_girls/common/resource_manager.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -78,10 +79,14 @@ class SubjectPageState extends State<SubjectPage>
                         },
                         fit: BoxFit.cover,
                         imageUrl: bean.cover,
-                        placeholder: (context, url) => Padding(
-                          padding: EdgeInsets.all(VFDimens.d_12),
-                          child: VFLoading(),
+                        placeholder: (context, url) => Image.asset(
+                          RESHelper.wrapImage('img_default.png'),
+                          fit: BoxFit.cover,
                         ),
+                        // Padding(
+                        //   padding: EdgeInsets.all(VFDimens.d_12),
+                        //   child: VFLoading(),
+                        // ),
                       ),
                     ),
                   ),

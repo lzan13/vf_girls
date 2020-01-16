@@ -40,20 +40,17 @@ class FallsItem extends StatelessWidget {
                         httpHeaders: {'Referer': bean.cover},
                         fit: BoxFit.cover,
                         imageUrl: bean.cover,
-                        placeholder: (context, url) => Padding(
-                          padding: EdgeInsets.all(VFDimens.d_20),
-                          child: VFLoading(),
+                        placeholder: (context, url) => Image.asset(
+                          RESHelper.wrapImage('img_default_big.png'),
+                          fit: BoxFit.cover,
                         ),
+                        // Padding(
+                        //   padding: EdgeInsets.all(VFDimens.d_20),
+                        //   child: VFLoading(),
+                        // ),
                       ),
                     ),
                   ),
-                  // 模糊
-                  // BackdropFilter(
-                  //   filter: new ImageFilter.blur(sigmaX: 2, sigmaY: 3),
-                  //   child: new Container(
-                  //     color: VFColors.white.withOpacity(0.1),
-                  //   ),
-                  // ),
                   Positioned(
                     left: 0.0,
                     top: 0.0,
