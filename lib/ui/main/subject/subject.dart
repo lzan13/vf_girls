@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:vf_girls/common/resource_manager.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
+import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/request/girls_manager.dart';
 import 'package:vf_girls/request/bean/category_bean.dart';
 import 'package:vf_girls/router/router_manger.dart';

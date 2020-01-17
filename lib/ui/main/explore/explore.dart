@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vf_girls/ui/common/daily_body.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
-import 'package:vf_girls/common/json_manager.dart';
+import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/request/bean/category_bean.dart';
 
 ///

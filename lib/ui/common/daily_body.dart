@@ -4,15 +4,15 @@ import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:vf_girls/common/resource_manager.dart';
-import 'package:vf_girls/request/bean/girl_bean.dart';
-import 'package:vf_girls/router/router_manger.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
+import 'package:vf_girls/common/index.dart';
+import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/bean/category_bean.dart';
 import 'package:vf_girls/request/bean/daily_bean.dart';
 import 'package:vf_girls/request/girls_manager.dart';
+import 'package:vf_girls/router/router_manger.dart';
 
 ///
 /// 日常更新 UI Body 部分

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:vf_girls/common/storage_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/model/user.dart';
 
 class UserModel extends ChangeNotifier {
