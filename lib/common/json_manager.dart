@@ -39,7 +39,7 @@ class JSONHelper {
   ///
   static List<CategoryBean> getHomeTabs() {
     String tabStr =
-        '[{"title":"最热","url":"https://www.mzitu.com/hot/"},{"title":"推荐","url":"https://www.mzitu.com/best/"},{"title":"性感妹子","url":"https://www.mzitu.com/xinggan/"},{"title":"日本妹子","url":"https://www.mzitu.com/japan/"},{"title":"台湾妹子","url":"https://www.mzitu.com/taiwan/"},{"title":"清纯妹子","url":"https://www.mzitu.com/mm/"}]';
+        '[{"title":"最热","url":"https://www.mzitu.com/hot/"},{"title":"推荐","url":"https://www.mzitu.com/best/"},{"title":"性感","url":"https://www.mzitu.com/xinggan/"},{"title":"日本","url":"https://www.mzitu.com/japan/"},{"title":"台湾","url":"https://www.mzitu.com/taiwan/"},{"title":"清纯","url":"https://www.mzitu.com/mm/"}]';
     List jsonList = json.decode(tabStr);
     List<CategoryBean> tabList = [];
     jsonList.forEach((tab) {
@@ -61,7 +61,7 @@ class JSONHelper {
   ///
   static List<CategoryBean> getExploreTabs() {
     String tabStr =
-        '[{"title":"妹子自拍","url":"https://www.mzitu.com/zipai/"},{"title":"街拍美女","url":"https://www.mzitu.com/jiepai/"}]';
+        '[{"title":"自拍","url":"https://www.mzitu.com/zipai/"},{"title":"街拍","url":"https://www.mzitu.com/jiepai/"}]';
     List jsonList = json.decode(tabStr);
     List<CategoryBean> tabList = [];
     jsonList.forEach((tab) {

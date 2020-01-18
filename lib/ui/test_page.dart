@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:provider/provider.dart';
+import 'package:vf_girls/view_model/sign_model.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -17,18 +19,22 @@ class TestPage extends StatefulWidget {
 }
 
 class TestPageState extends State<TestPage> {
-  int mGold;
   @override
   void initState() {
     super.initState();
     // 初始化 ADS
-    ADSManager.instance.initADS((amount) {
-      mGold += amount;
-    });
+    ADSManager.instance.initADS();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    ADSManager.instance.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    SignModel model = Provider.of<SignModel>(context);
     return Scaffold(
       appBar: VFTopBar(
         top: MediaQuery.of(context).padding.top,
@@ -46,15 +52,17 @@ class TestPageState extends State<TestPage> {
               VFListItem(
                 isNewGroup: true,
                 showDivider: false,
-                title: '你当前拥有 $mGold V币',
+                title: model.isSign
+                    ? '你当前拥有 ${model.user.gold} V币'
+                    : '你还没有登录，无法记录金币',
               ),
               // 测试
               VFListItem(
+                isNewGroup: true,
                 title: FlutterI18n.translate(context, 'splash'),
                 onPressed: () {
                   Router.toSplash(context);
                 },
-                leftIcon: VFIcons.ic_settings,
                 rightIcon: VFIcons.ic_arrow_right,
               ),
               VFListItem(

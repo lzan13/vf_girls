@@ -6,17 +6,27 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 
+import 'package:vf_girls/ads/ads_manager.dart';
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/router/router_manger.dart';
+import 'package:vf_girls/view_model/locale_model.dart';
 import 'package:vf_girls/view_model/theme_model.dart';
+import 'package:vf_girls/view_model/sign_model.dart';
 
 class Store {
   /// 全局的上下文对象
   static BuildContext appContext;
 
-  //  我们将会在main.dart中runAPP实例化init
+  // 在 main.dart 中 runAPP 初始化
   static init(BuildContext context) {
     appContext = context;
+
+    // 初始化广告
+    ADSManager.instance.initAdmob((amount) {
+      if (Provider.of<SignModel>(context).isSign) {
+        Provider.of<SignModel>(context).submitReward(amount);
+      }
+    });
 
     SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
       // 设置 EasyRefresh 的默认样式
@@ -46,7 +56,8 @@ class Store {
     // 使用 Provider 需要在外层包括
     return MultiProvider(
       providers: providers,
-      child: Consumer<ThemeModel>(builder: (context, themeModel, child) {
+      child: Consumer2<ThemeModel, LocaleModel>(
+          builder: (context, themeModel, localeModel, child) {
         // 初始化时检查下状态栏
         themeModel.checkThemeStatusBar();
         return MaterialApp(
@@ -55,18 +66,21 @@ class Store {
           theme: themeModel.themeData(),
           darkTheme: themeModel.themeData(platformDarkMode: true),
           // 国际化配置
-          locale: themeModel.locale,
+          locale: localeModel.locale,
           localizationsDelegates: [
             FlutterI18nDelegate(
-                useCountryCode: true, fallbackFile: 'en', path: 'assets/langs'),
+              useCountryCode: true,
+              fallbackFile: 'zh-CN',
+              path: 'assets/langs',
+            ),
             GlobalCupertinoLocalizations.delegate,
             GlobalEasyRefreshLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate
           ],
           supportedLocales: [
-            Locale('en', ''),
             Locale('zh', 'CN'),
+            Locale('en', ''),
           ],
           localeResolutionCallback: (local, supportedLocales) {
             return local;

@@ -16,12 +16,12 @@ class CategoryBean {
     this.url,
   });
 
-  factory CategoryBean.fromJson(Map<String, dynamic> json) {
+  factory CategoryBean.fromJson(Map<String, dynamic> map) {
     return CategoryBean(
-      title: json['title'],
-      desc: json['desc'],
-      cover: json['cover'],
-      url: json['url'],
+      title: map['title'],
+      desc: map['desc'],
+      cover: map['cover'],
+      url: map['url'],
     );
   }
 

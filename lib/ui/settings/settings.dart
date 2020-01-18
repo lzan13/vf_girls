@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
+import 'package:vf_girls/view_model/locale_model.dart';
 import 'package:vf_girls/view_model/theme_model.dart';
+import 'package:vf_girls/view_model/sign_model.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -67,8 +69,8 @@ class SettingBodyState extends State<SettingBody> {
                       Theme.of(context).brightness == Brightness.light);
             },
             leftIcon: Theme.of(context).brightness == Brightness.light
-                ? VFIcons.ic_sun
-                : VFIcons.ic_moon,
+                ? VFIcons.ic_sunny
+                : VFIcons.ic_moonlight,
             rightWidget: Padding(
               padding: EdgeInsets.only(right: VFDimens.d_16),
               child: CupertinoSwitch(
@@ -93,8 +95,8 @@ class SettingBodyState extends State<SettingBody> {
           // 语言切换
           VFListItem(
             title: FlutterI18n.translate(context, 'theme_language'),
-            describe: ThemeModel.localeName(
-                Provider.of<ThemeModel>(context).localeIndex, context),
+            describe: LocaleModel.localeName(
+                Provider.of<LocaleModel>(context).localeIndex, context),
             onPressed: () {
               showChangeLanguage();
             },
@@ -106,6 +108,14 @@ class SettingBodyState extends State<SettingBody> {
             showDivider: false,
             onPressed: () {
               Router.toFeedback(context);
+            },
+            leftIcon: VFIcons.ic_alert,
+          ), // 问题反馈
+          VFListItem(
+            title: FlutterI18n.translate(context, 'sign_out'),
+            showDivider: false,
+            onPressed: () {
+              Provider.of<SignModel>(context).clearUser();
             },
             leftIcon: VFIcons.ic_alert,
           ),
@@ -233,9 +243,9 @@ class SettingBodyState extends State<SettingBody> {
               Center(
                 child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: ThemeModel.localeValueList.length,
+                    itemCount: LocaleModel.localeValueList.length,
                     itemBuilder: (context, index) {
-                      var model = Provider.of<ThemeModel>(context);
+                      var model = Provider.of<LocaleModel>(context);
                       return RadioListTile(
                         value: index,
                         onChanged: (index) {
@@ -243,7 +253,7 @@ class SettingBodyState extends State<SettingBody> {
                           Navigator.pop(context);
                         },
                         groupValue: model.localeIndex,
-                        title: Text(ThemeModel.localeName(index, context)),
+                        title: Text(LocaleModel.localeName(index, context)),
                       );
                     }),
               ),

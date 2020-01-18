@@ -11,8 +11,6 @@ void main() async {
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
   //   statusBarColor: VFColors.transparent,
   // ));
-  FirebaseAdMob.instance
-      .initialize(appId: 'ca-app-pub-3940256099942544~3347511713');
 }
 
 class StartApp extends StatelessWidget {

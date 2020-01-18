@@ -51,72 +51,72 @@ class FallsItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    left: 0.0,
-                    top: 0.0,
-                    right: 0.0,
-                    child: Container(
-                      // 顶部阴影
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            VFColors.black12,
-                            VFColors.grey12,
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.only(
-                          topLeft:
-                              Radius.circular(VFDimens.border_radius_normal),
-                          topRight:
-                              Radius.circular(VFDimens.border_radius_normal),
-                        ),
-                      ),
-                      child: Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            // 收藏图标
-                            Padding(
-                              padding: EdgeInsets.all(VFDimens.padding_small),
-                              child: Icon(
-                                VFIcons.ic_like_fill,
-                                size: VFSizes.title,
-                                color: Colors.white,
-                              ),
-                            ),
-                            // 图片张数
-                            Container(
-                              margin: EdgeInsets.all(VFDimens.margin_small),
-                              decoration: BoxDecoration(
-                                color: VFColors.black38,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(VFDimens.border_radius_large),
-                                ),
-                              ),
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(
-                                  VFDimens.padding_small,
-                                  VFDimens.padding_little,
-                                  VFDimens.padding_small,
-                                  VFDimens.padding_little,
-                                ),
-                                child: Text(
-                                  bean.time,
-                                  style: TextStyle(
-                                    color: VFColors.white87,
-                                    fontSize: VFSizes.s_10,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   left: 0.0,
+                  //   top: 0.0,
+                  //   right: 0.0,
+                  //   child: Container(
+                  //     // 顶部阴影
+                  //     decoration: BoxDecoration(
+                  //       gradient: LinearGradient(
+                  //         colors: [
+                  //           VFColors.black12,
+                  //           VFColors.grey12,
+                  //         ],
+                  //         begin: Alignment.centerLeft,
+                  //         end: Alignment.centerRight,
+                  //       ),
+                  //       borderRadius: BorderRadius.only(
+                  //         topLeft:
+                  //             Radius.circular(VFDimens.border_radius_normal),
+                  //         topRight:
+                  //             Radius.circular(VFDimens.border_radius_normal),
+                  //       ),
+                  //     ),
+                  //     child: Container(
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: <Widget>[
+                  //           // 收藏图标
+                  //           Padding(
+                  //             padding: EdgeInsets.all(VFDimens.padding_small),
+                  //             child: Icon(
+                  //               VFIcons.ic_like_fill,
+                  //               size: VFSizes.title,
+                  //               color: Colors.white,
+                  //             ),
+                  //           ),
+                  //           // 图片张数
+                  //           Container(
+                  //             margin: EdgeInsets.all(VFDimens.margin_small),
+                  //             decoration: BoxDecoration(
+                  //               color: VFColors.black38,
+                  //               borderRadius: BorderRadius.all(
+                  //                 Radius.circular(VFDimens.border_radius_large),
+                  //               ),
+                  //             ),
+                  //             child: Container(
+                  //               padding: EdgeInsets.fromLTRB(
+                  //                 VFDimens.padding_small,
+                  //                 VFDimens.padding_little,
+                  //                 VFDimens.padding_small,
+                  //                 VFDimens.padding_little,
+                  //               ),
+                  //               child: Text(
+                  //                 bean.time,
+                  //                 style: TextStyle(
+                  //                   color: VFColors.white87,
+                  //                   fontSize: VFSizes.s_10,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Positioned(
                     left: 0.0,
                     right: 0.0,

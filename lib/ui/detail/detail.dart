@@ -7,6 +7,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
+import 'package:vf_girls/ads/ads_manager.dart';
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/girls_manager.dart';
@@ -39,12 +40,14 @@ class DetailPageState extends State<DetailPage> {
     super.initState();
     VFLog.d('DetailPage initState');
     linkNotifier = LinkHeaderNotifier();
+    ADSManager.instance.initADS();
   }
 
   @override
   void dispose() {
     super.dispose();
     linkNotifier.dispose();
+    ADSManager.instance.dispose();
   }
 
   ///
@@ -117,7 +120,7 @@ class DetailPageState extends State<DetailPage> {
           left: 0.0,
           right: 0.0,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 3),
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: Container(
               color: VFColors.white.withOpacity(0.1),
               height: VFDimens.d_320,
@@ -271,7 +274,12 @@ class DetailPageState extends State<DetailPage> {
                   countWidget,
                 ],
               ),
-              onTap: () => Router.toDisplayMulti(context, imgList, index),
+              onTap: () {
+                Router.toDisplayMulti(context, imgList, index);
+                if (index == 8) {
+                  ADSManager.instance.showInterstitialADS();
+                }
+              },
             );
           },
           childCount: imgList.length > 9 ? 9 : imgList.length,

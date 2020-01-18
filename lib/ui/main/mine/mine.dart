@@ -10,7 +10,7 @@ import 'package:vf_plugin/vf_plugin.dart';
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/router/router_manger.dart';
 import 'package:vf_girls/ui/widget/bottom_clipper.dart';
-import 'package:vf_girls/view_model/user_model.dart';
+import 'package:vf_girls/view_model/sign_model.dart';
 
 ///
 /// 我的 Tab 页面
@@ -35,15 +35,6 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin {
         SliverList(
           delegate: SliverChildListDelegate([
             MineHeaderWidget(),
-            // 个人信息
-            VFListItem(
-              title: FlutterI18n.translate(context, 'info'),
-//              describe: FlutterI18n.translate(context, 'settings'),
-              onPressed: () {
-                Router.toUser(context);
-              },
-              leftIcon: VFIcons.ic_mine,
-            ),
             // 切换夜间模式
             VFListItem(
               title: FlutterI18n.translate(context, 'theme_dark'),
@@ -54,8 +45,8 @@ class MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin {
                         Theme.of(context).brightness == Brightness.light);
               },
               leftIcon: Theme.of(context).brightness == Brightness.light
-                  ? VFIcons.ic_sun
-                  : VFIcons.ic_moon,
+                  ? VFIcons.ic_sunny
+                  : VFIcons.ic_moonlight,
               rightWidget: Padding(
                 padding: EdgeInsets.only(right: VFDimens.d_16),
                 child: CupertinoSwitch(
@@ -111,12 +102,12 @@ class MineHeaderWidget extends StatelessWidget {
         height: 200 + MediaQuery.of(context).padding.top,
         color: Theme.of(context).primaryColor.withAlpha(225),
         padding: EdgeInsets.only(top: VFDimens.d_16),
-        child: Consumer<UserModel>(
+        child: Consumer<SignModel>(
           builder: (context, model, child) => InkWell(
-            onTap: model.hasUser
+            onTap: model.isSign
                 ? null
                 : () {
-                    Navigator.of(context).pushNamed(RouteName.mineLoft);
+                    Router.toSignIn(context);
                   },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -124,13 +115,13 @@ class MineHeaderWidget extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   child: Hero(
-                    tag: 'loginLogo',
+                    tag: 'sign_logo',
                     child: ClipOval(
                       child: Image.asset(RESHelper.wrapImage('img_logo.png'),
                           fit: BoxFit.cover,
                           width: 80,
                           height: 80,
-                          color: model.hasUser
+                          color: model.isSign
                               ? Theme.of(context).accentColor.withAlpha(200)
                               : Theme.of(context).accentColor.withAlpha(10),
                           // https://api.flutter.dev/flutter/dart-ui/BlendMode-class.html
@@ -144,7 +135,7 @@ class MineHeaderWidget extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     Text(
-                        model.hasUser
+                        model.isSign
                             ? model.user.nickname
                             : FlutterI18n.translate(context, "app_name"),
                         style: Theme.of(context)

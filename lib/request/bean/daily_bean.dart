@@ -17,12 +17,12 @@ class DailyBean {
     this.topGirls,
   });
 
-  factory DailyBean.fromJson(Map<String, dynamic> json) {
-    var list = json['topGirls'];
+  factory DailyBean.fromJson(Map<String, dynamic> map) {
+    var list = map['topGirls'];
     List<GirlBean> topGirls = List<GirlBean>.from(list);
     return DailyBean(
-      next: json['next'],
-      images: json['images'],
+      next: map['next'],
+      images: map['images'],
       topGirls: topGirls,
     );
   }

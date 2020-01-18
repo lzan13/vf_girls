@@ -11,6 +11,8 @@ import 'package:vf_girls/ui/main/app_tab.dart';
 import 'package:vf_girls/ui/main/mine/mine_loft.dart';
 import 'package:vf_girls/ui/settings/feedback.dart';
 import 'package:vf_girls/ui/settings/settings.dart';
+import 'package:vf_girls/ui/sign/sign_in.dart';
+import 'package:vf_girls/ui/sign/sign_up.dart';
 import 'package:vf_girls/ui/splash/splash.dart';
 import 'package:vf_girls/ui/user/user.dart';
 import 'package:vf_girls/ui/widget/not_fount.dart';
@@ -65,6 +67,12 @@ class Router {
     switch (settings.name) {
       case RouteName.splash:
         return NoAnimRouteBuilder(Splash());
+      case RouteName.signIn:
+        return CupertinoPageRoute(
+            fullscreenDialog: true, builder: (_) => SignInPage());
+      case RouteName.signUp:
+        return CupertinoPageRoute(
+            fullscreenDialog: true, builder: (_) => SignUpPage());
       case RouteName.appTab:
         return NoAnimRouteBuilder(AppTab());
       case RouteName.mineLoft:
@@ -129,26 +137,6 @@ class Router {
     Navigator.of(context).pushReplacementNamed(RouteName.appTab);
   }
 
-  /// 阁楼
-  static void toMineLoft(context) {
-    Navigator.of(context).pushReplacementNamed(RouteName.mineLoft);
-  }
-
-  /// 问题反馈
-  static void toFeedback(context) {
-    Navigator.pushNamed(context, RouteName.feedback);
-  }
-
-  /// 设置页面
-  static void toSettings(context) {
-    Navigator.pushNamed(context, RouteName.settings);
-  }
-
-  /// 个人中心
-  static void toUser(context) {
-    Navigator.pushNamed(context, RouteName.user);
-  }
-
   /// 分类
   static void toCategory(context, bean) {
     if (bean != null) {
@@ -185,6 +173,36 @@ class Router {
         'index': index,
       },
     );
+  }
+
+  /// 阁楼
+  static void toMineLoft(context) {
+    Navigator.of(context).pushReplacementNamed(RouteName.mineLoft);
+  }
+
+  /// 登录
+  static void toSignIn(context) {
+    Navigator.of(context).pushNamed(RouteName.signIn);
+  }
+
+  /// 注册
+  static void toSignUp(context) {
+    Navigator.of(context).pushNamed(RouteName.signUp);
+  }
+
+  /// 问题反馈
+  static void toFeedback(context) {
+    Navigator.pushNamed(context, RouteName.feedback);
+  }
+
+  /// 设置页面
+  static void toSettings(context) {
+    Navigator.pushNamed(context, RouteName.settings);
+  }
+
+  /// 个人中心
+  static void toUser(context) {
+    Navigator.pushNamed(context, RouteName.user);
   }
 
   /// 测试找不到的页面跳转

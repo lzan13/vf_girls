@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:vf_girls/ads/ads_manager.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -39,6 +40,7 @@ class DisplayMultiPageState extends State<DisplayMultiPage> {
 
   @override
   Widget build(BuildContext context) {
+    ADSManager.instance.showBannerADS();
     return Scaffold(
       body: Container(
         color: VFColors.black,

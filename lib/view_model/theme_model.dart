@@ -3,20 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:vf_girls/common/config.dart';
 
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
+///
+/// 主题数据共享
+///
 class ThemeModel extends ChangeNotifier {
-  static const KEY_THEME_COLOR_INDEX = 'KEY_THEME_COLOR_INDEX';
-  static const KEY_THEME_DARK_MODE = 'KEY_THEME_DARK_MODE';
-  static const KEY_FONT_INDEX = 'KEY_FONT_INDEX';
-  static const KEY_LOCAL_INDEX = 'KEY_LOCAL_INDEX';
-
   // 字体值
   static const fontValueList = ['system', 'kuaile'];
   // 语言值
-  static const localeValueList = ['', 'zh-CN', 'en'];
+  // static const localeValueList = ['auto', 'zh-CN', 'en'];
 
   /// 用户选择的明暗模式
   bool _userDarkMode;
@@ -28,21 +27,24 @@ class ThemeModel extends ChangeNotifier {
   int _fontIndex;
 
   /// 当前语言索引
-  int _localeIndex;
-  int get localeIndex => _localeIndex;
+  // int _localeIndex;
+  // int get localeIndex => _localeIndex;
 
   ThemeModel() {
     // 用户选择的明暗模式
     _userDarkMode =
-        StorageManager.sharedPreferences.getBool(KEY_THEME_DARK_MODE) ?? false;
+        StorageManager.sharedPreferences.getBool(Configs.KEY_THEME_DARK_MODE) ??
+            false;
     // 获取主题色
-    _themeColor = Colors.primaries[
-        StorageManager.sharedPreferences.getInt(KEY_THEME_COLOR_INDEX) ?? 9];
+    _themeColor = Colors.primaries[StorageManager.sharedPreferences
+            .getInt(Configs.KEY_THEME_COLOR_INDEX) ??
+        9];
     // 获取字体
-    _fontIndex = StorageManager.sharedPreferences.getInt(KEY_FONT_INDEX) ?? 0;
+    _fontIndex =
+        StorageManager.sharedPreferences.getInt(Configs.KEY_FONT_INDEX) ?? 0;
     // 获取语言
-    _localeIndex =
-        StorageManager.sharedPreferences.getInt(KEY_LOCAL_INDEX) ?? 0;
+    // _localeIndex =
+    // StorageManager.sharedPreferences.getInt(Configs.KEY_LOCAL_INDEX) ?? 0;
   }
 
   int get fontIndex => _fontIndex;
@@ -178,9 +180,14 @@ class ThemeModel extends ChangeNotifier {
   saveTheme2Storage(bool userDarkMode, MaterialColor themeColor) async {
     var index = Colors.primaries.indexOf(themeColor);
     await Future.wait([
-      StorageManager.sharedPreferences
-          .setBool(KEY_THEME_DARK_MODE, userDarkMode),
-      StorageManager.sharedPreferences.setInt(KEY_THEME_COLOR_INDEX, index)
+      StorageManager.sharedPreferences.setBool(
+        Configs.KEY_THEME_DARK_MODE,
+        userDarkMode,
+      ),
+      StorageManager.sharedPreferences.setInt(
+        Configs.KEY_THEME_COLOR_INDEX,
+        index,
+      )
     ]);
   }
 
@@ -202,40 +209,46 @@ class ThemeModel extends ChangeNotifier {
   /// 字体选择持久化
   ///
   static saveFontIndex(int index) async {
-    await StorageManager.sharedPreferences.setInt(KEY_FONT_INDEX, index);
+    await StorageManager.sharedPreferences.setInt(
+      Configs.KEY_FONT_INDEX,
+      index,
+    );
   }
 
-  Locale get locale {
-    if (_localeIndex > 0) {
-      var value = localeValueList[_localeIndex].split("-");
-      return Locale(value[0], value.length == 2 ? value[1] : '');
-    }
-    // 跟随系统
-    return null;
-  }
+  // Locale get locale {
+  //   if (_localeIndex > 0) {
+  //     var value = localeValueList[_localeIndex].split("-");
+  //     return Locale(value[0], value.length == 2 ? value[1] : '');
+  //   }
+  //   // 跟随系统
+  //   return null;
+  // }
 
-  ///
-  /// 根据索引获取语言,这里牵涉到国际化
-  ///
-  static String localeName(index, context) {
-    switch (index) {
-      case 0:
-        return FlutterI18n.translate(context, "language_by_sys");
-      case 1:
-        return FlutterI18n.translate(context, "language_en");
-      case 2:
-        return FlutterI18n.translate(context, "language_zh_cn");
-      default:
-        return '';
-    }
-  }
+  // ///
+  // /// 根据索引获取语言,这里牵涉到国际化
+  // ///
+  // static String localeName(index, context) {
+  //   switch (index) {
+  //     case 0:
+  //       return FlutterI18n.translate(context, "language_by_sys");
+  //     case 1:
+  //       return FlutterI18n.translate(context, "language_zh_cn");
+  //     case 2:
+  //       return FlutterI18n.translate(context, "language_en");
+  //     default:
+  //       return FlutterI18n.translate(context, "language_by_sys");
+  //   }
+  // }
 
-  ///
-  /// 修改语言并持久化保存
-  ///
-  switchLocale(int index) {
-    _localeIndex = index;
-    notifyListeners();
-    StorageManager.sharedPreferences.setInt(KEY_LOCAL_INDEX, index);
-  }
+  // ///
+  // /// 修改语言并持久化保存
+  // ///
+  // switchLocale(int index) {
+  //   _localeIndex = index;
+  //   notifyListeners();
+  //   StorageManager.sharedPreferences.setInt(
+  //     Configs.KEY_LOCAL_INDEX,
+  //     _localeIndex,
+  //   );
+  // }
 }

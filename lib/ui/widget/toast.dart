@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:vf_plugin/vf_plugin.dart';
 
 /*
  * 自定义 Flutter Toast 工具类
@@ -27,9 +28,7 @@ class VFToast {
     showToastWidget(
       FTContent(
         content: msg,
-        hideIcon: false,
-        icon: Icons.close,
-        bgColor: Color(0xdddd3636),
+        bgColor: VFColors.red87,
         radius: 6.0,
       ),
       position: ToastPosition.bottom,
@@ -45,9 +44,7 @@ class VFToast {
     showToastWidget(
       FTContent(
         content: msg,
-        hideIcon: false,
-        icon: Icons.done,
-        bgColor: Color(0xdd22aa22),
+        bgColor: VFColors.greenDark87,
         radius: 6.0,
       ),
       position: ToastPosition.bottom,

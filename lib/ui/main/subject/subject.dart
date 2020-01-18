@@ -83,10 +83,6 @@ class SubjectPageState extends State<SubjectPage>
                           RESHelper.wrapImage('img_default.png'),
                           fit: BoxFit.cover,
                         ),
-                        // Padding(
-                        //   padding: EdgeInsets.all(VFDimens.d_12),
-                        //   child: VFLoading(),
-                        // ),
                       ),
                     ),
                   ),
