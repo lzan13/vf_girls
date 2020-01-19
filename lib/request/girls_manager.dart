@@ -2,8 +2,6 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:vf_girls/request/bean/daily_bean.dart';
 
-import 'package:vf_plugin/vf_plugin.dart';
-
 import 'package:vf_girls/request/bean/category_bean.dart';
 import 'package:vf_girls/request/bean/girl_bean.dart';
 import 'package:vf_girls/request/girls_api.dart';
@@ -232,7 +230,6 @@ class GirlsManager {
   /// 统一处理请求
   ///
   static Future _loadData(url) async {
-    VFLog.d('request url: $url');
     var response = await http.get(url);
     var result;
     if (response.statusCode == 200) {

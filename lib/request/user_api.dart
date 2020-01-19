@@ -1,79 +1,85 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:vf_girls/common/index.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
+import 'package:vf_girls/common/config.dart';
 import 'package:vf_girls/request/api.dart';
-import 'package:vf_girls/ui/widget/toast.dart';
+
+export 'package:vf_girls/request/api.dart';
 
 final Http http = Http();
 
 class Http extends BaseHttp {
   @override
   void init() {
-    options.baseUrl = 'http://www.meinvtu.site';
-    interceptors..add(ApiInterceptor());
+    options.baseUrl = Configs.lcBaseUrl;
+    interceptors..add(UserInterceptor());
   }
 }
 
 ///
 /// 请求结果拦截器
-class ApiInterceptor extends InterceptorsWrapper {
+///
+class UserInterceptor extends InterceptorsWrapper {
   @override
   onRequest(RequestOptions options) async {
-    debugPrint(
-        '->api-> ${options.baseUrl}${options.path} ->params->${options.queryParameters}');
+    // 添加所需的请求头
+    options.headers['Content-Type'] = 'application/json';
+    options.headers['X-LC-Id'] = Configs.lcAppId;
+    options.headers['X-LC-Key'] = Configs.lcAppKey;
+    String token = StorageManager.getToken();
+    if (token != null) {
+      options.headers['X-LC-Session'] = token;
+    }
+
+    // 添加公共请求体
+    // options.queryParameters['appKey'] = '7954deb7bce815d3b49a0626ff0b76a7';
+    VFLog.d('api-> ${options.baseUrl}${options.path}');
+    VFLog.d('api->headers-> ${options.headers}');
+    VFLog.d('api->params-> ${options.queryParameters}');
     return options;
   }
 
   @override
   onResponse(Response response) {
-    debugPrint('-api-response-> ${response.data}');
-    // 普通的 json 结果处理
-    Result result = Result.fromJson(response.data);
-    if (result.success) {
-      response.data = result.data;
+    VFLog.d('api-response-> ${response.data}');
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       return http.resolve(response);
     } else {
-      throw FailException.fromRespData(result);
+      throw FException.fromJson(response.data);
     }
+    // // 普通的 json 结果处理
+    // Result result = Result.fromJson(response.data);
+    // if (result.success) {
+    //   response.data = result.data;
+    //   return http.resolve(response);
+    // } else {
+    //   throw FailException.fromJson(response.data);
+    // }
   }
 }
 
 ///
-/// error统一处理
+/// Post 请求
 ///
-void formatError(DioError e) {
-  String error = '';
-  if (e.type == DioErrorType.CONNECT_TIMEOUT) {
-    // It occurs when url is opened timeout.
-    error = '连接超时 ${e.error}';
-  } else if (e.type == DioErrorType.SEND_TIMEOUT) {
-    // It occurs when url is sent timeout.
-    error = '请求超时 ${e.error}';
-  } else if (e.type == DioErrorType.RECEIVE_TIMEOUT) {
-    //It occurs when receiving timeout
-    error = '响应超时 ${e.error}';
-  } else if (e.type == DioErrorType.RESPONSE) {
-    // When the server response, but with a incorrect status, such as 404, 503...
-    error = '响应错误 ${e.error}';
-  } else if (e.type == DioErrorType.CANCEL) {
-    // When the request is cancelled, dio will throw a error with this type.
-    error = '请求取消 ${e.error}';
-  } else {
-    //DEFAULT Default error type, Some other Error. In this case, you can read the DioError.error if it is not null.
-    error = '未知错误 ${e.error}';
+dynamic postRequest(path, params) async {
+  try {
+    var response = await http.post<Map>(path, queryParameters: params);
+    return response.data;
+  } catch (dioErr) {
+    return formatError(dioErr);
   }
-  VFLog.e('请求失败: $error');
-  VFToast.error(error);
 }
 
-class Result extends BaseResult {
-  bool get success => 0 == code;
-
-  Result.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    message = json['message'];
-    data = json['data'];
+///
+/// Get 请求，参数直接拼接在路径中
+///
+dynamic getRequest(path) async {
+  try {
+    var response = await http.get(path);
+    return response.data;
+  } catch (dioErr) {
+    return formatError(dioErr);
   }
 }

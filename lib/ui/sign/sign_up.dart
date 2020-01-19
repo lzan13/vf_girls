@@ -4,7 +4,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/ui/sign/sign_widget.dart';
-import 'package:vf_girls/ui/widget/toast.dart';
 import 'package:vf_girls/view_model/sign_model.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
@@ -50,6 +49,9 @@ class SignUpPageState extends State<SignUpPage> {
                       SignLogo(),
                       SignFormContainer(
                         child: Form(
+                          onWillPop: () async {
+                            return !model.isBusy;
+                          },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
@@ -117,17 +119,14 @@ class SignUpButton extends StatelessWidget {
               ),
         onPressed: model.isBusy
             ? null
-            : () {
+            : () async {
                 if (Form.of(context).validate()) {
-                  model
-                      .signUp(nameController.text, passwordController.text)
-                      .then((value) {
-                    if (value) {
-                      Navigator.of(context).pop(true);
-                    } else {
-                      VFToast.error('注册失败');
-                    }
-                  });
+                  bool result = await model.signUp(
+                      nameController.text, passwordController.text);
+                  if (result) {
+                    model.updateUserInfo();
+                    Navigator.of(context).pop(true);
+                  }
                 }
               },
       ),

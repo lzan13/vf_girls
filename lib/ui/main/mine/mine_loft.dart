@@ -37,9 +37,9 @@ class MineLoftOuter extends StatelessWidget {
   }
 }
 
-/**
- * 我的阁楼界面
- */
+///
+/// 我的阁楼界面
+///
 class MineLoft extends StatefulWidget {
   @override
   MineLoftState createState() => MineLoftState();

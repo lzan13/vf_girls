@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:vf_girls/common/config.dart';
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/request/bean/user_bean.dart';
 import 'package:vf_girls/request/user_manager.dart';
-import 'package:vf_plugin/vf_plugin.dart';
 
 /// 状态类型
 enum StateType {
@@ -25,12 +23,12 @@ class SignModel extends ChangeNotifier {
   bool get isBusy => _stateType == StateType.busy;
 
   SignModel() {
-    var userMap = StorageManager.localStorage.getItem(Configs.KEY_USER_INFO);
+    var userMap = StorageManager.getSignInfo();
     _user = userMap != null ? UserBean.fromJson(userMap) : null;
   }
 
   String getUsername() {
-    return StorageManager.sharedPreferences.getString(Configs.KEY_USER_NAME);
+    return StorageManager.getUsername();
   }
 
   ///
@@ -41,20 +39,19 @@ class SignModel extends ChangeNotifier {
       return false;
     }
     _user.gold += amount;
-    dynamic result = await UserManager.submitReward(_user.gold);
+    await UserManager.submitReward(_user.gold);
 
     saveUser(_user);
     return true;
   }
 
   ///
-  /// 登录
+  /// 注册
   ///
-  Future<bool> signIn(loginName, password) async {
+  Future<bool> signUp(username, password) async {
     setBusy();
-    dynamic result = await UserManager.signIn(loginName, password);
-    VFLog.d('signIn result $result');
-    if (result != null && result is UserBean) {
+    dynamic result = await UserManager.signUp(username, password);
+    if (result is UserBean) {
       saveUser(result);
       return true;
     } else {
@@ -64,13 +61,12 @@ class SignModel extends ChangeNotifier {
   }
 
   ///
-  /// 注册
+  /// 登录
   ///
-  Future<bool> signUp(loginName, password) async {
+  Future<bool> signIn(username, password) async {
     setBusy();
-    dynamic result = await UserManager.signUp(loginName, password);
-    VFLog.d('signIn result $result');
-    if (result != null && result is UserBean) {
+    dynamic result = await UserManager.signIn(username, password);
+    if (result is UserBean) {
       saveUser(result);
       return true;
     } else {
@@ -91,6 +87,18 @@ class SignModel extends ChangeNotifier {
     bool result = await UserManager.signOut();
     clearUser();
     return result;
+  }
+
+  ///
+  /// 更新自己的用户信息
+  ///
+  void updateUserInfo() async {
+    dynamic result = await UserManager.getUserInfo();
+    if (result is UserBean) {
+      saveUser(result);
+    } else {
+      setIdle();
+    }
   }
 
   ///
@@ -123,9 +131,7 @@ class SignModel extends ChangeNotifier {
   saveUser(UserBean user) {
     _user = user;
     setIdle();
-    StorageManager.sharedPreferences
-        .setString(Configs.KEY_USER_NAME, user.username);
-    StorageManager.localStorage.setItem(Configs.KEY_USER_INFO, user);
+    StorageManager.saveSignInfo(_user);
   }
 
   ///
@@ -134,6 +140,6 @@ class SignModel extends ChangeNotifier {
   clearUser() {
     _user = null;
     setIdle();
-    StorageManager.localStorage.deleteItem(Configs.KEY_USER_INFO);
+    StorageManager.clearSignInfo();
   }
 }

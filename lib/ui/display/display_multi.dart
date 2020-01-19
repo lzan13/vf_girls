@@ -13,7 +13,7 @@ import 'package:vf_girls/common/index.dart';
 ///
 class DisplayMultiPage extends StatefulWidget {
   // 参数集合，因为当前页需要参数比较多，路由直接透传
-  Map<String, dynamic> params;
+  final Map<String, dynamic> params;
 
   List<String> imgList;
   int index = 0;

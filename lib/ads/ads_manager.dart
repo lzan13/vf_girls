@@ -6,7 +6,7 @@ import 'package:vf_girls/common/config.dart';
 class ADSManager {
   // 广告配置信息
   final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    testDevices: <String>[Configs.ADMOB_TEST_DEVICES],
+    testDevices: <String>[Configs.admobTestDevices],
     keywords: <String>['girl', 'beautiful apps'],
     contentUrl: 'https://flutter.io',
     childDirected: true,
@@ -41,7 +41,7 @@ class ADSManager {
   void initAdmob(ADSRewardedListener listener) {
     mListener = listener;
 
-    FirebaseAdMob.instance.initialize(appId: Configs.ADMOB_APP_ID);
+    FirebaseAdMob.instance.initialize(appId: Configs.admobAppId);
   }
 
   ///
@@ -71,7 +71,7 @@ class ADSManager {
   // 创建 Banner 广告
   BannerAd createBannerAd() {
     return BannerAd(
-      adUnitId: Configs.ADMOB_BANNER_ID,
+      adUnitId: Configs.admobBannerId,
       size: AdSize.banner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
@@ -83,7 +83,7 @@ class ADSManager {
   // 创建插屏广告
   InterstitialAd createInterstitialAd() {
     return InterstitialAd(
-      adUnitId: Configs.ADMOB_INTERSTITIAL_ID,
+      adUnitId: Configs.admobInterstitialId,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
         VFLog.d("插屏广告监听 $event");
@@ -98,7 +98,7 @@ class ADSManager {
   // 加载奖励视频广告
   void loadVideoADS() {
     RewardedVideoAd.instance.load(
-      adUnitId: Configs.ADMOB_VIDEO_ID,
+      adUnitId: Configs.admobVideoId,
       targetingInfo: targetingInfo,
     );
   }

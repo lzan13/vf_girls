@@ -17,7 +17,7 @@ import 'package:vf_girls/router/router_manger.dart';
 /// 详情页面
 ///
 class DetailPage extends StatefulWidget {
-  GirlBean girl;
+  final GirlBean girl;
 
   DetailPage(this.girl);
 

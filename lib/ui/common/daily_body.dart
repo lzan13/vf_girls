@@ -18,7 +18,7 @@ import 'package:vf_girls/router/router_manger.dart';
 /// 日常更新 UI Body 部分
 ///
 class DailyBody extends StatefulWidget {
-  CategoryBean category;
+  final CategoryBean category;
 
   DailyBody(this.category);
 

@@ -10,7 +10,7 @@ import 'package:vf_plugin/vf_plugin.dart';
 /// 空视图页面
 ///
 class NotFoundPage extends StatefulWidget {
-  String pageName;
+  final String pageName;
 
   NotFoundPage(this.pageName);
 

@@ -154,7 +154,7 @@ class SubjectPageState extends State<SubjectPage>
         firstRefreshWidget: VFDialogLoading(),
         header: BallPulseHeader(color: Theme.of(context).accentColor),
         onRefresh: () async {
-          await loadData();
+          loadData();
         },
         onLoad: null,
         slivers: <Widget>[

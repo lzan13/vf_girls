@@ -58,11 +58,11 @@ class VFToast {
  * 弹出 Toast 自定义布局内容
  */
 class FTContent extends StatelessWidget {
-  String content;
-  bool hideIcon;
-  IconData icon;
-  Color bgColor;
-  double radius;
+  final String content;
+  final bool hideIcon;
+  final IconData icon;
+  final Color bgColor;
+  final double radius;
 
   FTContent({
     Key key,

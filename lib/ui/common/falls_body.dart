@@ -16,7 +16,7 @@ import 'package:vf_girls/ui/widget/falls_item.dart';
 /// 瀑布流 UI Body 部分
 ///
 class FallsBody extends StatefulWidget {
-  CategoryBean category;
+  final CategoryBean category;
 
   FallsBody(this.category);
 

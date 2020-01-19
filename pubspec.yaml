@@ -17,10 +17,7 @@ dependencies:
   # 图标库
   cupertino_icons: ^0.1.2
   # 国际化
-  flutter_i18n: ^0.8.2         
-  # 获取设备信息
-  device_info: ^0.4.0+4
-  package_info: ^0.4.0+12
+  flutter_i18n: ^0.8.2
   # 状态管理
   provider: ^3.1.0+1
 

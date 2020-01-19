@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:vf_girls/common/config.dart';
 
 import 'package:vf_girls/common/index.dart';
 
@@ -24,17 +23,13 @@ class LocaleModel extends ChangeNotifier {
   }
 
   LocaleModel() {
-    _localeIndex =
-        StorageManager.sharedPreferences.getInt(Configs.KEY_LOCAL_INDEX) ?? 0;
+    _localeIndex = StorageManager.getLanguageIndex();
   }
 
   switchLocale(int index) {
     _localeIndex = index;
     notifyListeners();
-    StorageManager.sharedPreferences.setInt(
-      Configs.KEY_LOCAL_INDEX,
-      _localeIndex,
-    );
+    StorageManager.setLanguageIndex(_localeIndex);
   }
 
   static String localeName(index, context) {

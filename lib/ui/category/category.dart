@@ -9,7 +9,7 @@ import 'package:vf_girls/ui/common/falls_body.dart';
 /// 分类页面
 ///
 class CategoryPage extends StatefulWidget {
-  CategoryBean category;
+  final CategoryBean category;
 
   CategoryPage(this.category);
 

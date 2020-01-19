@@ -1,6 +1,8 @@
 {
   "app_name": "VFGirls",
   "back_again": "再次点击退出",
+  "btn_cancel": "取消",
+  "btn_confirm": "确认",
   "comment": "评论",
   "font_by_sys": "跟随系统",
   "font_kuai_le": "站酷快乐体",
@@ -28,6 +30,7 @@
   "sign_in": "登录",
   "sign_up": "注册",
   "sign_out": "退出登录",
+  "sign_out_msg": "退出登录后将无法使用一键保存以及评论功能，是否确认？",
   "sign_username": "用户名",
   "sign_password": "密码",
   "sign_no_account": "还没账号？",

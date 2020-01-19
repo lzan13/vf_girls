@@ -1,46 +1,68 @@
 import 'dart:convert';
 
+import 'package:vf_girls/request/bean/file_bean.dart';
+
 ///
 /// 用户信息数据实体
 ///
 class UserBean {
-  int id;
+  String objectId;
   String username;
   String password;
   String nickname;
+  String signature;
+  FileBean avatar;
+  FileBean cover;
   String email;
-  String avatar;
-  String cover;
+  bool emailVerified;
+  String phone;
+  bool mobilePhoneVerified;
   int gold;
-  String token;
+  String sessionToken;
+  String createdAt;
+  String updatedAt;
   bool admin;
   List<Object> collectIds;
 
   UserBean({
-    this.id,
+    this.objectId,
     this.username,
-    this.email,
+    this.password,
+    this.nickname,
+    this.signature,
     this.avatar,
     this.cover,
-    this.nickname,
-    this.password,
+    this.email,
+    this.emailVerified,
+    this.phone,
+    this.mobilePhoneVerified,
     this.gold,
-    this.token,
+    this.sessionToken,
+    this.createdAt,
+    this.updatedAt,
     this.admin,
     this.collectIds,
   });
 
   factory UserBean.fromJson(Map<String, dynamic> map) {
+    FileBean avatar = FileBean.fromJson(map['avatar']);
+    FileBean cover = FileBean.fromJson(map['cover']);
     return UserBean(
-      id: map['id'],
+      objectId: map['objectId'],
       username: map['username'],
-      email: map['email'],
-      avatar: map['avatar'],
-      cover: map['cover'],
-      nickname: map['nickname'],
       password: map['password'],
+      nickname: map['nickname'],
+      signature: map['signature'],
+      avatar: avatar,
+      cover: cover,
+      email: map['email'],
+      emailVerified: map['emailVerified'],
+      phone: map['phone'],
+      mobilePhoneVerified: map['mobilePhoneVerified'],
       gold: map['gold'],
-      token: map['token'],
+      sessionToken: map['sessionToken'],
+      createdAt: map['createdAt'],
+      updatedAt: map['updatedAt'],
       admin: map['admin'],
       collectIds: map['collectIds'],
     );
@@ -48,15 +70,21 @@ class UserBean {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'objectId': objectId,
       'username': username,
-      'email': email,
+      'password': password,
+      'nickname': nickname,
+      'signature': signature,
       'avatar': avatar,
       'cover': cover,
-      'nickname': nickname,
-      'password': password,
+      'email': email,
+      'emailVerified': emailVerified,
+      'phone': phone,
+      'mobilePhoneVerified': mobilePhoneVerified,
       'gold': gold,
-      'token': token,
+      'sessionToken': sessionToken,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
       'admin': admin,
       'collectIds': collectIds,
     };

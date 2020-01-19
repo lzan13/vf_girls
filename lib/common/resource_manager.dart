@@ -72,6 +72,9 @@ class VFIcons {
   static const IconData ic_dingwei = IconData(0xe667, fontFamily: fontFamily);
   static const IconData ic_thumb = IconData(0xe668, fontFamily: fontFamily);
   static const IconData ic_warning = IconData(0xe66f, fontFamily: fontFamily);
+  static const IconData ic_password = IconData(0xe989, fontFamily: fontFamily);
+  static const IconData ic_password_open =
+      IconData(0xe98a, fontFamily: fontFamily);
   static const IconData ic_picture = IconData(0xe67c, fontFamily: fontFamily);
   static const IconData ic_mine = IconData(0xe67d, fontFamily: fontFamily);
   static const IconData ic_zhinanzhen =
@@ -149,6 +152,7 @@ class VFIcons {
   static const IconData ic_delete = IconData(0xe677, fontFamily: fontFamily);
   static const IconData ic_info = IconData(0xe68b, fontFamily: fontFamily);
   static const IconData ic_shield = IconData(0xe69a, fontFamily: fontFamily);
+  static const IconData ic_sign_out = IconData(0xe85f, fontFamily: fontFamily);
   static const IconData ic_earth = IconData(0xe622, fontFamily: fontFamily);
   static const IconData ic_done = IconData(0xed3d, fontFamily: fontFamily);
   static const IconData ic_font = IconData(0xed5d, fontFamily: fontFamily);

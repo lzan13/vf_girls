@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -117,15 +118,23 @@ class MineHeaderWidget extends StatelessWidget {
                   child: Hero(
                     tag: 'sign_logo',
                     child: ClipOval(
-                      child: Image.asset(RESHelper.wrapImage('img_logo.png'),
-                          fit: BoxFit.cover,
-                          width: 80,
-                          height: 80,
-                          color: model.isSign
-                              ? Theme.of(context).accentColor.withAlpha(200)
-                              : Theme.of(context).accentColor.withAlpha(10),
-                          // https://api.flutter.dev/flutter/dart-ui/BlendMode-class.html
-                          colorBlendMode: BlendMode.colorDodge),
+                      child: Container(
+                        width: VFDimens.d_96,
+                        height: VFDimens.d_96,
+                        child: model.isSign && model.user.avatar != null
+                            ? CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: model.user.avatar.url,
+                                placeholder: (context, url) => Image.asset(
+                                  RESHelper.wrapImage('img_logo.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Image.asset(
+                                RESHelper.wrapImage('img_logo.png'),
+                                fit: BoxFit.cover,
+                              ),
+                      ),
                     ),
                   ),
                 ),

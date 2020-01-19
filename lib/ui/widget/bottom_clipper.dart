@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
 class BottomClipper extends CustomClipper<Path> {
-  final double clipperHeight = VFDimens.d_36;
+  final double clipperHeight = VFDimens.d_48;
   @override
   getClip(Size size) {
     var path = Path();

@@ -45,83 +45,88 @@ class SettingBody extends StatefulWidget {
 class SettingBodyState extends State<SettingBody> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: EasyRefresh(
-        child: ListView(children: <Widget>[
-          // 设置字体
-          VFListItem(
-            title: FlutterI18n.translate(context, 'theme_font'),
-            describe: ThemeModel.fontName(
-                Provider.of<ThemeModel>(context).fontIndex, context),
-            isNewGroup: true,
-            onPressed: () {
-              showChangeFont();
-            },
-            leftIcon: VFIcons.ic_font,
-          ),
-          // 切换夜间模式
-          VFListItem(
-            title: FlutterI18n.translate(context, 'theme_dark'),
-            titleColor: Theme.of(context).textTheme.title.color,
-            onPressed: () {
-              Provider.of<ThemeModel>(context).switchTheme(
-                  userDarkMode:
-                      Theme.of(context).brightness == Brightness.light);
-            },
-            leftIcon: Theme.of(context).brightness == Brightness.light
-                ? VFIcons.ic_sunny
-                : VFIcons.ic_moonlight,
-            rightWidget: Padding(
-              padding: EdgeInsets.only(right: VFDimens.d_16),
-              child: CupertinoSwitch(
-                activeColor: Theme.of(context).accentColor,
-                value: Theme.of(context).brightness == Brightness.dark,
-                onChanged: (value) {
-                  Provider.of<ThemeModel>(context).switchTheme(
-                      userDarkMode:
-                          Theme.of(context).brightness == Brightness.light);
-                },
+    return Consumer3<ThemeModel, LocaleModel, SignModel>(
+        builder: (context, themeModel, localModel, signModel, child) {
+      return Container(
+        child: EasyRefresh(
+          child: ListView(children: <Widget>[
+            // 设置字体
+            VFListItem(
+              title: FlutterI18n.translate(context, 'theme_font'),
+              describe: ThemeModel.fontName(
+                  Provider.of<ThemeModel>(context).fontIndex, context),
+              isNewGroup: true,
+              onPressed: () {
+                showChangeFont();
+              },
+              leftIcon: VFIcons.ic_font,
+            ),
+            // 切换夜间模式
+            VFListItem(
+              title: FlutterI18n.translate(context, 'theme_dark'),
+              titleColor: Theme.of(context).textTheme.title.color,
+              onPressed: () {
+                themeModel.switchTheme(
+                    userDarkMode:
+                        Theme.of(context).brightness == Brightness.light);
+              },
+              leftIcon: Theme.of(context).brightness == Brightness.light
+                  ? VFIcons.ic_sunny
+                  : VFIcons.ic_moonlight,
+              rightWidget: Padding(
+                padding: EdgeInsets.only(right: VFDimens.d_16),
+                child: CupertinoSwitch(
+                  activeColor: Theme.of(context).accentColor,
+                  value: Theme.of(context).brightness == Brightness.dark,
+                  onChanged: (value) {
+                    themeModel.switchTheme(
+                        userDarkMode:
+                            Theme.of(context).brightness == Brightness.light);
+                  },
+                ),
               ),
             ),
-          ),
-          // 设置主题
-          VFListItem(
-            title: FlutterI18n.translate(context, 'theme_color'),
-            onPressed: () {
-              showChangeTheme();
-            },
-            leftIcon: VFIcons.ic_palette,
-          ),
-          // 语言切换
-          VFListItem(
-            title: FlutterI18n.translate(context, 'theme_language'),
-            describe: LocaleModel.localeName(
-                Provider.of<LocaleModel>(context).localeIndex, context),
-            onPressed: () {
-              showChangeLanguage();
-            },
-            leftIcon: VFIcons.ic_earth,
-          ),
-          // 问题反馈
-          VFListItem(
-            title: FlutterI18n.translate(context, 'feedback'),
-            showDivider: false,
-            onPressed: () {
-              Router.toFeedback(context);
-            },
-            leftIcon: VFIcons.ic_alert,
-          ), // 问题反馈
-          VFListItem(
-            title: FlutterI18n.translate(context, 'sign_out'),
-            showDivider: false,
-            onPressed: () {
-              Provider.of<SignModel>(context).clearUser();
-            },
-            leftIcon: VFIcons.ic_alert,
-          ),
-        ]),
-      ),
-    );
+            // 设置主题
+            VFListItem(
+              title: FlutterI18n.translate(context, 'theme_color'),
+              onPressed: () {
+                showChangeTheme();
+              },
+              leftIcon: VFIcons.ic_palette,
+            ),
+            // 语言切换
+            VFListItem(
+              title: FlutterI18n.translate(context, 'theme_language'),
+              describe: LocaleModel.localeName(localModel.localeIndex, context),
+              onPressed: () {
+                showChangeLanguage();
+              },
+              leftIcon: VFIcons.ic_earth,
+            ),
+            // 问题反馈
+            VFListItem(
+              title: FlutterI18n.translate(context, 'feedback'),
+              showDivider: false,
+              onPressed: () {
+                Router.toFeedback(context);
+              },
+              leftIcon: VFIcons.ic_alert,
+            ),
+            // 退出登录
+            signModel.isSign
+                ? VFListItem(
+                    title: FlutterI18n.translate(context, 'sign_out'),
+                    showDivider: false,
+                    onPressed: () {
+                      affirmSignOut(signModel);
+                    },
+                    leftIcon: VFIcons.ic_sign_out,
+                  )
+                : Container(),
+          ]),
+        ),
+      );
+    });
   }
 
   ///
@@ -222,7 +227,7 @@ class SettingBodyState extends State<SettingBody> {
   }
 
   ///
-  /// 显示设置语言对话框
+  /// 设置语言对话框
   ///
   void showChangeLanguage() {
     showDialog(
@@ -260,5 +265,35 @@ class SettingBodyState extends State<SettingBody> {
             ],
           );
         });
+  }
+
+  ///
+  /// 退出登录确认弹框
+  ///
+  void affirmSignOut(SignModel model) {
+    showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(FlutterI18n.translate(context, 'sign_out_msg')),
+          content: Text(FlutterI18n.translate(context, 'sign_out_msg')),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(FlutterI18n.translate(context, 'btn_cancel')),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text(FlutterI18n.translate(context, 'btn_cancel')),
+              onPressed: () {
+                model.signOut();
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

@@ -1,6 +1,8 @@
 {
   "app_name": "VFGirls",
   "back_again": "Tap back again to exit",
+  "btn_cancel": "Cancel",
+  "btn_confirm": "Confirm",
   "comment": "Comment",
   "font_by_sys": "By system",
   "font_kuai_le": "ZCool kuai le",
@@ -28,6 +30,7 @@
   "sign_in": "Sign in",
   "sign_up": "Sign up",
   "sign_out": "Sign out",
+  "sign_out_msg": "After logging out, you will not be able to use the one-key save and comment function. Do you confirm?",
   "sign_username": "Username",
   "sign_password": "Password",
   "sign_no_account": "Haven't account?",

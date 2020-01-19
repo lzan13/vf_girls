@@ -5,14 +5,12 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:provider/provider.dart';
-import 'package:vf_girls/request/bean/user_bean.dart';
 
 import 'package:vf_plugin/vf_plugin.dart';
 
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/router/router_manger.dart';
 import 'package:vf_girls/ui/sign/sign_widget.dart';
-import 'package:vf_girls/ui/widget/toast.dart';
 import 'package:vf_girls/view_model/sign_model.dart';
 
 ///
@@ -70,7 +68,7 @@ class SignInPageState extends State<SignInPage> {
                               SignInput(
                                 label: FlutterI18n.translate(
                                     context, 'sign_username'),
-                                icon: Icons.perm_identity,
+                                icon: VFIcons.ic_mine,
                                 controller: _nameController,
                                 textInputAction: TextInputAction.next,
                                 onFieldSubmitted: (text) {
@@ -82,7 +80,7 @@ class SignInPageState extends State<SignInPage> {
                                 controller: _passwordController,
                                 label: FlutterI18n.translate(
                                     context, 'sign_password'),
-                                icon: Icons.lock_outline,
+                                icon: VFIcons.ic_password,
                                 obscureText: true,
                                 focusNode: _pwdFocus,
                                 textInputAction: TextInputAction.done,
@@ -137,6 +135,7 @@ class SignInButton extends StatelessWidget {
                   bool result = await model.signIn(
                       nameController.text, passwordController.text);
                   if (result) {
+                    model.updateUserInfo();
                     Navigator.of(context).pop(true);
                   }
                 }

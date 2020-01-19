@@ -3,49 +3,32 @@ import 'package:vf_girls/request/user_api.dart';
 
 class UserManager {
   ///
-  /// 提交奖励
-  ///
-  static Future submitReward(amount) async {
-    try {
-      var response = await http.post<Map>('/user/reward', queryParameters: {
-        'amount': amount,
-      });
-      return UserBean.fromJson(response.data);
-    } catch (e, s) {
-      formatError(e);
-      return null;
-    }
-  }
-
-  ///
-  ///  登录
-  ///
-  static Future signIn(username, password) async {
-    try {
-      var response = await http.post<Map>('/user/signIn', queryParameters: {
-        'username': username,
-        'password': password,
-      });
-      return UserBean.fromJson(response.data);
-    } catch (e, s) {
-      formatError(e);
-      return null;
-    }
-  }
-
-  ///
   /// 注册
   ///
   static Future signUp(username, password) async {
-    try {
-      var response = await http.post<Map>('/user/signUp', queryParameters: {
-        'username': username,
-        'password': password,
-      });
-      return UserBean.fromJson(response.data);
-    } catch (e, s) {
-      formatError(e);
-      return null;
+    dynamic data = await postRequest('/users', {
+      'username': username,
+      'password': password,
+    });
+    if (data is FException) {
+      return data;
+    } else {
+      return UserBean.fromJson(data);
+    }
+  }
+
+  ///
+  /// 登录
+  ///
+  static Future signIn(username, password) async {
+    dynamic data = await postRequest('/login', {
+      'username': username,
+      'password': password,
+    });
+    if (data is FException) {
+      return data;
+    } else {
+      return UserBean.fromJson(data);
     }
   }
 
@@ -53,12 +36,37 @@ class UserManager {
   /// 注销
   ///
   static Future<bool> signOut() async {
-    try {
-      await http.get('user/signOut');
-      return true;
-    } catch (e, s) {
-      formatError(e);
+    dynamic result = await getRequest('/users');
+    if (result is FException) {
       return false;
+    } else {
+      return true;
+    }
+  }
+
+  ///
+  /// 获取用户信息
+  ///
+  static Future getUserInfo() async {
+    dynamic data = await getRequest('/users/me');
+    if (data is FException) {
+      return data;
+    } else {
+      return UserBean.fromJson(data);
+    }
+  }
+
+  ///
+  /// 提交奖励
+  ///
+  static Future submitReward(amount) async {
+    dynamic data = await postRequest('/user/reward', {
+      'amount': amount,
+    });
+    if (data is FException) {
+      return data;
+    } else {
+      return UserBean.fromJson(data);
     }
   }
 }
