@@ -16,13 +16,12 @@ class UserBean {
   String email;
   bool emailVerified;
   String phone;
-  bool mobilePhoneVerified;
+  bool phoneVerified;
   int gold;
   String sessionToken;
   String createdAt;
   String updatedAt;
   bool admin;
-  List<Object> collectIds;
 
   UserBean({
     this.objectId,
@@ -35,13 +34,12 @@ class UserBean {
     this.email,
     this.emailVerified,
     this.phone,
-    this.mobilePhoneVerified,
+    this.phoneVerified,
     this.gold,
     this.sessionToken,
     this.createdAt,
     this.updatedAt,
     this.admin,
-    this.collectIds,
   });
 
   factory UserBean.fromJson(Map<String, dynamic> map) {
@@ -58,13 +56,12 @@ class UserBean {
       email: map['email'],
       emailVerified: map['emailVerified'],
       phone: map['phone'],
-      mobilePhoneVerified: map['mobilePhoneVerified'],
+      phoneVerified: map['phoneVerified'],
       gold: map['gold'],
       sessionToken: map['sessionToken'],
       createdAt: map['createdAt'],
       updatedAt: map['updatedAt'],
       admin: map['admin'],
-      collectIds: map['collectIds'],
     );
   }
 
@@ -80,13 +77,12 @@ class UserBean {
       'email': email,
       'emailVerified': emailVerified,
       'phone': phone,
-      'mobilePhoneVerified': mobilePhoneVerified,
+      'phoneVerified': phoneVerified,
       'gold': gold,
       'sessionToken': sessionToken,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'admin': admin,
-      'collectIds': collectIds,
     };
   }
 

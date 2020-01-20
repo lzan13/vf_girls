@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:vf_girls/common/index.dart';
@@ -34,8 +35,7 @@ class SignUpPageState extends State<SignUpPage> {
         titleColor: VFColors.white,
         leftIcon: VFIcons.ic_arrow_left,
       ),
-      body: CustomScrollView(
-        physics: ClampingScrollPhysics(),
+      body: EasyRefresh.custom(
         slivers: <Widget>[
           SliverToBoxAdapter(
             child: Stack(
@@ -58,7 +58,7 @@ class SignUpPageState extends State<SignUpPage> {
                               SignInput(
                                 label: FlutterI18n.translate(
                                     context, 'sign_username'),
-                                icon: Icons.perm_identity,
+                                icon: VFIcons.ic_mine,
                                 controller: _nameController,
                                 textInputAction: TextInputAction.next,
                                 onFieldSubmitted: (text) {
@@ -70,7 +70,7 @@ class SignUpPageState extends State<SignUpPage> {
                                 controller: _passwordController,
                                 label: FlutterI18n.translate(
                                     context, 'sign_password'),
-                                icon: Icons.lock_outline,
+                                icon: VFIcons.ic_password,
                                 obscureText: true,
                                 focusNode: _pwdFocus,
                                 textInputAction: TextInputAction.done,
@@ -109,7 +109,7 @@ class SignUpButton extends StatelessWidget {
       padding: EdgeInsets.only(top: VFDimens.d_24),
       child: SignButton(
         child: model.isBusy
-            ? VFLoading()
+            ? VFLoading(color: Theme.of(context).primaryColorLight)
             : Text(
                 FlutterI18n.translate(context, 'sign_up'),
                 style: Theme.of(context).accentTextTheme.title.copyWith(

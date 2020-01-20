@@ -56,4 +56,9 @@ class Configs {
   static final String lcBaseUrl = 'https://j1agx1iu.lc-cn-n1-shared.com/1.1';
   static final String lcAppId = 'j1AGx1iU48PGjyv1RcuQr0OX-gzGzoHsz';
   static final String lcAppKey = 'jwYileaj7c4FCU7L1SuAzUWR';
+
+  static final String bmobAppId = '904f703bf4e3f469b63f396419099948';
+  static final String bmobAppKey = '32843d34de3ba8ae';
+  static final String bmobAppRestKey = '7b8e801c2b55d0d11f90db85eeeb63f5';
+  static final String bmobAppMasterKey = '';
 }

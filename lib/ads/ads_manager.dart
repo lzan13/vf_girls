@@ -19,6 +19,7 @@ class ADSManager {
   InterstitialAd mInterstitialAds;
   // 奖励回调接口
   ADSRewardedListener mListener;
+
   // 工厂模式
   factory ADSManager() => _generateInstance();
   // 单例类实例公开访问点

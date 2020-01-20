@@ -14,7 +14,7 @@ class SignTopPanel extends StatelessWidget {
     return ClipPath(
       clipper: BottomClipper(),
       child: Container(
-        height: 220,
+        height: VFDimens.d_220,
         color: Theme.of(context).primaryColor,
       ),
     );

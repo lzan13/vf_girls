@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vf_girls/common/callback.dart';
 
 import 'package:vf_girls/common/index.dart';
+import 'package:vf_girls/request/bean/bmob_manager.dart';
 import 'package:vf_girls/request/bean/user_bean.dart';
-import 'package:vf_girls/request/user_manager.dart';
+import 'package:vf_girls/request/sign_manager.dart';
 
 /// 状态类型
 enum StateType {
@@ -32,31 +34,18 @@ class SignModel extends ChangeNotifier {
   }
 
   ///
-  /// 提较奖励
-  ///
-  Future<bool> submitReward(amount) async {
-    if (!isSign) {
-      return false;
-    }
-    _user.gold += amount;
-    await UserManager.submitReward(_user.gold);
-
-    saveUser(_user);
-    return true;
-  }
-
-  ///
   /// 注册
   ///
   Future<bool> signUp(username, password) async {
     setBusy();
-    dynamic result = await UserManager.signUp(username, password);
-    if (result is UserBean) {
-      saveUser(result);
-      return true;
-    } else {
+    dynamic result = await BMobManager.instance.signUp(username, password);
+    // dynamic result = await SignManager.signUp(username, password);
+    if (result is FError) {
       setIdle();
       return false;
+    } else {
+      saveUser(result);
+      return true;
     }
   }
 
@@ -65,7 +54,8 @@ class SignModel extends ChangeNotifier {
   ///
   Future<bool> signIn(username, password) async {
     setBusy();
-    dynamic result = await UserManager.signIn(username, password);
+    BMobManager.instance.signIn(username, password);
+    dynamic result = await SignManager.signIn(username, password);
     if (result is UserBean) {
       saveUser(result);
       return true;
@@ -84,7 +74,7 @@ class SignModel extends ChangeNotifier {
       return false;
     }
     setBusy();
-    bool result = await UserManager.signOut();
+    bool result = await SignManager.signOut();
     clearUser();
     return result;
   }
@@ -93,12 +83,26 @@ class SignModel extends ChangeNotifier {
   /// 更新自己的用户信息
   ///
   void updateUserInfo() async {
-    dynamic result = await UserManager.getUserInfo();
+    dynamic result = await SignManager.getUserInfo();
     if (result is UserBean) {
       saveUser(result);
     } else {
       setIdle();
     }
+  }
+
+  ///
+  /// 提较奖励
+  ///
+  Future<bool> submitReward(amount) async {
+    if (!isSign) {
+      return false;
+    }
+    _user.gold += amount;
+    await SignManager.submitReward(_user.gold);
+
+    saveUser(_user);
+    return true;
   }
 
   ///

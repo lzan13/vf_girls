@@ -23,6 +23,7 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 28
@@ -54,4 +55,5 @@ flutter {
 }
 
 dependencies {
+    provided rootProject.findProject(":mobsms")
 }

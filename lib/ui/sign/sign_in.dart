@@ -71,6 +71,12 @@ class SignInPageState extends State<SignInPage> {
                                 icon: VFIcons.ic_mine,
                                 controller: _nameController,
                                 textInputAction: TextInputAction.next,
+                                validator: (value) {
+                                  return VFReg.isMobileExact(
+                                          _nameController.text)
+                                      ? FlutterI18n.translate(context, '')
+                                      : null;
+                                },
                                 onFieldSubmitted: (text) {
                                   FocusScope.of(context)
                                       .requestFocus(_pwdFocus);
@@ -120,7 +126,7 @@ class SignInButton extends StatelessWidget {
       padding: EdgeInsets.only(top: VFDimens.d_24),
       child: SignButton(
         child: model.isBusy
-            ? VFLoading(color: Theme.of(context).accentColor.withAlpha(10))
+            ? VFLoading(color: Theme.of(context).primaryColorLight)
             : Text(
                 FlutterI18n.translate(context, 'sign_in'),
                 style: Theme.of(context).accentTextTheme.title.copyWith(

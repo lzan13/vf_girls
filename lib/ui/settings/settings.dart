@@ -275,7 +275,7 @@ class SettingBodyState extends State<SettingBody> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(FlutterI18n.translate(context, 'sign_out_msg')),
+          title: Text(FlutterI18n.translate(context, 'sign_out')),
           content: Text(FlutterI18n.translate(context, 'sign_out_msg')),
           actions: <Widget>[
             FlatButton(
@@ -285,7 +285,7 @@ class SettingBodyState extends State<SettingBody> {
               },
             ),
             FlatButton(
-              child: Text(FlutterI18n.translate(context, 'btn_cancel')),
+              child: Text(FlutterI18n.translate(context, 'btn_confirm')),
               onPressed: () {
                 model.signOut();
                 Navigator.of(context).pop(true);

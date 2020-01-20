@@ -13,9 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-    
-  # 图标库
-  cupertino_icons: ^0.1.2
+  
   # 国际化
   flutter_i18n: ^0.8.2
   # 状态管理
@@ -36,8 +34,6 @@ dependencies:
   # 加载网页
   webview_flutter: ^0.3.16
 
-  # 接入 Google Admob 广告
-  firebase_admob: ^0.9.0+1
 
   ### 
   ### 数据存储
@@ -63,6 +59,18 @@ dependencies:
   # 图片缩放
   photo_view: ^0.7.0
 
+  ###
+  ### 三方服务库
+  ###
+  # 接入 Google Admob 广告
+  firebase_admob: ^0.9.0+1
+  # MobSMS 短信验证
+  mobsms: ^1.1.0
+  # BMob 后端云
+  # data_plugin: ^0.0.14
+  data_plugin:
+    path: ../bmob_sdk/data_plugin
+  
   ### 源码依赖，可以引用 git 上的源码以及本地源码
   # vf_plugin:
   #   git:

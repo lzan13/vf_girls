@@ -14,14 +14,14 @@ class Http extends BaseHttp {
   @override
   void init() {
     options.baseUrl = Configs.lcBaseUrl;
-    interceptors..add(UserInterceptor());
+    interceptors..add(SignInterceptor());
   }
 }
 
 ///
-/// 请求结果拦截器
+/// 请求拦截器
 ///
-class UserInterceptor extends InterceptorsWrapper {
+class SignInterceptor extends InterceptorsWrapper {
   @override
   onRequest(RequestOptions options) async {
     // 添加所需的请求头

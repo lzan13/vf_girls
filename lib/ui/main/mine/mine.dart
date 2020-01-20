@@ -100,7 +100,7 @@ class MineHeaderWidget extends StatelessWidget {
     return ClipPath(
       clipper: BottomClipper(),
       child: Container(
-        height: 200 + MediaQuery.of(context).padding.top,
+        height: VFDimens.d_320 + MediaQuery.of(context).padding.top,
         color: Theme.of(context).primaryColor.withAlpha(225),
         padding: EdgeInsets.only(top: VFDimens.d_16),
         child: Consumer<SignModel>(
@@ -146,7 +146,7 @@ class MineHeaderWidget extends StatelessWidget {
                     Text(
                         model.isSign
                             ? model.user.nickname
-                            : FlutterI18n.translate(context, "app_name"),
+                            : FlutterI18n.translate(context, "sign_go_in"),
                         style: Theme.of(context)
                             .textTheme
                             .title

@@ -1,7 +1,7 @@
 import 'package:vf_girls/request/bean/user_bean.dart';
-import 'package:vf_girls/request/user_api.dart';
+import 'package:vf_girls/request/sign_api.dart';
 
-class UserManager {
+class SignManager {
   ///
   /// 注册
   ///
