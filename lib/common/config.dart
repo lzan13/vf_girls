@@ -1,6 +1,11 @@
 import 'dart:io';
 
 class Configs {
+  // 时间
+  static const int TIME_HOUR = 60 * 60 * 1000;
+  static const int TIME_MINUTE = 60 * 1000;
+  static const int TIME_SECOND = 1000;
+
   // 保存数据 key
   static const String KEY_THEME_COLOR_INDEX = 'key_theme_color_index';
   static const String KEY_THEME_DARK_MODE = 'key_theme_dark_mode';

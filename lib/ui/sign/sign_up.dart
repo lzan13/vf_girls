@@ -3,24 +3,44 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
+import 'package:vf_girls/common/config.dart';
 import 'package:vf_girls/common/index.dart';
 import 'package:vf_girls/ui/sign/sign_widget.dart';
 import 'package:vf_girls/view_model/sign_model.dart';
 import 'package:vf_plugin/vf_plugin.dart';
 
+///
+/// 注册界面
+///
 class SignUpPage extends StatefulWidget {
   @override
   SignUpPageState createState() => SignUpPageState();
 }
 
 class SignUpPageState extends State<SignUpPage> {
+  // 输入控制器
   final _nameController = TextEditingController();
+  final _codeController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _pwdFocus = FocusNode();
+  // 倒计时器
+  final VFTimer mTimer = VFTimer(totalTime: Configs.TIME_MINUTE);
+  String timerStr;
+
+  @override
+  void initState() {
+    super.initState();
+    mTimer.setOnTimerCallback((int time) {
+      double _tick = time / 1000;
+      setState(() {
+        timerStr = '${_tick}s';
+      });
+    });
+  }
 
   @override
   void dispose() {
     _nameController.dispose();
+    _codeController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -60,11 +80,41 @@ class SignUpPageState extends State<SignUpPage> {
                                     context, 'sign_username'),
                                 icon: VFIcons.ic_mine,
                                 controller: _nameController,
-                                textInputAction: TextInputAction.next,
-                                onFieldSubmitted: (text) {
-                                  FocusScope.of(context)
-                                      .requestFocus(_pwdFocus);
+                                validator: (value) {
+                                  return VFReg.isMobileExact(
+                                          _nameController.text)
+                                      ? null
+                                      : FlutterI18n.translate(
+                                          context, 'sign_username_verify');
                                 },
+                                textInputAction: TextInputAction.next,
+                              ),
+                              Stack(
+                                children: <Widget>[
+                                  SignInput(
+                                    controller: _codeController,
+                                    label: FlutterI18n.translate(
+                                        context, 'sign_sms_code'),
+                                    icon: VFIcons.ic_shield,
+                                    textInputAction: TextInputAction.next,
+                                  ),
+                                  Positioned(
+                                    right: 0.0,
+                                    child: FlatButton(
+                                      child: Text(
+                                        mTimer.isActive()
+                                            ? timerStr
+                                            : FlutterI18n.translate(
+                                                context, 'sign_sms_code'),
+                                      ),
+                                      onPressed: mTimer.isActive()
+                                          ? null
+                                          : () {
+                                              mTimer.startCountDown();
+                                            },
+                                    ),
+                                  ),
+                                ],
                               ),
                               SignInput(
                                 controller: _passwordController,
@@ -72,7 +122,6 @@ class SignUpPageState extends State<SignUpPage> {
                                     context, 'sign_password'),
                                 icon: VFIcons.ic_password,
                                 obscureText: true,
-                                focusNode: _pwdFocus,
                                 textInputAction: TextInputAction.done,
                               ),
                               SignUpButton(

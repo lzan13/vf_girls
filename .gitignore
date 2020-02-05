@@ -40,6 +40,8 @@ pubspec.lock
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
+**/android/config.gradle
+**/android/vmloft.app.jks
 
 # iOS/XCode related
 **/ios/**/*.mode1v3

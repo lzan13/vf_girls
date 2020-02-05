@@ -1,0 +1,17 @@
+ext {
+    // 默认配置
+    defaults = [
+        applicationId: "com.vmloft.develop.app.flutter.vf_girls",
+        minSdkVersion: 16,
+        targetSdkVersion: 28,
+        versionCode: 1,
+        versionName: "1.0.0",
+    ]
+    // 签名配置，记得将签名文件复制到项目中
+    signings = [
+        keyAlias: "签名别名",
+        keyPassword: "签名密码",
+        storeFile: "签名文件路径",
+        storePassword: "签名文件密码",
+    ]
+}

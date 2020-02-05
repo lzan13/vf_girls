@@ -8,7 +8,7 @@ import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 
 import 'package:vf_girls/ads/ads_manager.dart';
 import 'package:vf_girls/common/index.dart';
-import 'package:vf_girls/request/bean/bmob_manager.dart';
+import 'package:vf_girls/request/bmob_manager.dart';
 import 'package:vf_girls/router/router_manger.dart';
 import 'package:vf_girls/view_model/locale_model.dart';
 import 'package:vf_girls/view_model/theme_model.dart';

@@ -49,31 +49,40 @@ class BMobManager {
     } catch (e) {
       return commonError(e);
     }
-    // then((BmobRegistered data) {
-    //   user.objectId = data.objectId;
-    //   user.sessionToken = data.sessionToken;
-    //   if (callback != null) {
-    //     callback(user, null);
-    //   }
-    // }).catchError((e) {
-    //   commonError(e, callback);
-    // });
   }
 
   ///
   /// 登录
   ///
-  void signIn(username, password, {CommonCallback callback}) {
+  Future signIn(username, password) async {
     BmobUser user = BmobUser();
     user.username = username;
     user.password = password;
-    user.login().then((BmobUser user) {
-      if (callback != null) {
-        callback(user, null);
-      }
-    }).catchError((e) {
-      commonError(e);
-    });
+    try {
+      BmobUser data = await user.login();
+      user.objectId = data.objectId;
+      user.sessionToken = data.sessionToken;
+      return user;
+    } catch (e) {
+      return commonError(e);
+    }
+  }
+
+  ///
+  /// 评论
+  ///
+  Future comment(url, content) async {
+    BmobUser user = BmobUser();
+    user.username = url;
+    user.password = content;
+    try {
+      BmobUser data = await user.login();
+      user.objectId = data.objectId;
+      user.sessionToken = data.sessionToken;
+      return user;
+    } catch (e) {
+      return commonError(e);
+    }
   }
 
   ///

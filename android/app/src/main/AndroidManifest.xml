@@ -32,10 +32,5 @@
             </intent-filter>
         </activity>
         
-        <!-- 重点！要作为application的属性添加，位置错了无效！ -->
-        <!-- 配置接入 Google Admob 广告 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8752747601683918~8734153723"/>
     </application>
 </manifest>

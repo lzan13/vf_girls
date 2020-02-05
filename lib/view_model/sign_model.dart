@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vf_girls/common/callback.dart';
 
 import 'package:vf_girls/common/index.dart';
-import 'package:vf_girls/request/bean/bmob_manager.dart';
+import 'package:vf_girls/request/bmob_manager.dart';
 import 'package:vf_girls/request/bean/user_bean.dart';
 import 'package:vf_girls/request/sign_manager.dart';
+import 'package:vf_girls/request/sms_manager.dart';
 
 /// 状态类型
 enum StateType {
@@ -34,14 +35,29 @@ class SignModel extends ChangeNotifier {
   }
 
   ///
+  ///  发送验证码
+  ///
+  Future<bool> sendCode(phone) async {
+    setBusy();
+    dynamic result = await SMSManager.instance.getTextCode(phone);
+    setIdle();
+    if (result is FError) {
+      return false;
+    } else {
+      saveUser(result);
+      return true;
+    }
+  }
+
+  ///
   /// 注册
   ///
   Future<bool> signUp(username, password) async {
     setBusy();
     dynamic result = await BMobManager.instance.signUp(username, password);
     // dynamic result = await SignManager.signUp(username, password);
+    setIdle();
     if (result is FError) {
-      setIdle();
       return false;
     } else {
       saveUser(result);
@@ -54,14 +70,14 @@ class SignModel extends ChangeNotifier {
   ///
   Future<bool> signIn(username, password) async {
     setBusy();
-    BMobManager.instance.signIn(username, password);
-    dynamic result = await SignManager.signIn(username, password);
-    if (result is UserBean) {
+    dynamic result = await BMobManager.instance.signIn(username, password);
+    // dynamic result = await SignManager.signIn(username, password);
+    setIdle();
+    if (result is FError) {
+      return false;
+    } else {
       saveUser(result);
       return true;
-    } else {
-      setIdle();
-      return false;
     }
   }
 
@@ -134,7 +150,6 @@ class SignModel extends ChangeNotifier {
   ///
   saveUser(UserBean user) {
     _user = user;
-    setIdle();
     StorageManager.saveSignInfo(_user);
   }
 
@@ -143,7 +158,6 @@ class SignModel extends ChangeNotifier {
   ///
   clearUser() {
     _user = null;
-    setIdle();
     StorageManager.clearSignInfo();
   }
 }

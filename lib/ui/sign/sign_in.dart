@@ -74,8 +74,9 @@ class SignInPageState extends State<SignInPage> {
                                 validator: (value) {
                                   return VFReg.isMobileExact(
                                           _nameController.text)
-                                      ? FlutterI18n.translate(context, '')
-                                      : null;
+                                      ? null
+                                      : FlutterI18n.translate(
+                                          context, 'sign_username_verify');
                                 },
                                 onFieldSubmitted: (text) {
                                   FocusScope.of(context)
